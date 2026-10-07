@@ -33,7 +33,7 @@ function addBuild(name, label) {
   fs.copyFileSync(path.join(bin, js), path.join(OUT, 'engine', js));
   const parts = [];
   for (let i = 0, offset = 0; offset < wasm.length; i++, offset += PART_BYTES) {
-    const file = `sf${v}-${name}.part${i}.bin`;
+    const file = `sf${v}-${name}.part${i}.wasm`;
     fs.writeFileSync(path.join(OUT, 'engine', file), wasm.subarray(offset, offset + PART_BYTES));
     parts.push(`engine/${file}`);
   }
