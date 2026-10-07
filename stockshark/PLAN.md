@@ -1,6 +1,6 @@
 # Stockshark: the plan
 
-Claude as the strategist, Stockfish as the calculator, on the Stockshark Bot board.
+Claude as the strategist, Stockfish as the calculator, on the Stockshark Bot board. Together they are the board's one bot, **Stockshark 1**; Stockfish 19 can also play alone.
 
 This document is the design: what we're building, how the pieces talk, how a move gets chosen, how strong it is, and what comes next. Phases 1 and 2 are built and tested in this folder; later phases are proposals.
 
@@ -70,11 +70,13 @@ flowchart LR
   CC <--> M
 ```
 
-**The board owns the game.** The page keeps its own rules engine, history, take-backs and saving. On every change it sends the bridge a `sync` (game id, moves in UCI, mode, Claude's colour, think time, veto). The bridge replays the moves with chess.js and keeps a validated mirror; anything that doesn't replay is ignored.
+**The board owns the game.** The page keeps its own rules engine, history, take-backs and saving. On every change it sends the bridge a `sync` (game id, moves in UCI, who sits on each side, think time, veto). The bridge replays the moves with chess.js and keeps a validated mirror; anything that doesn't replay is ignored.
 
 **The bridge owns the engine.** One Stockfish process, one search at a time. Searches from the board, from Claude's tools and from the veto queue up; a *ponder* search (the engine thinking on the human's time) gives way to anything else at once, but its work stays in the hash table.
 
 **Claude talks only through MCP tools.** It never sees the WebSocket. Its moves reach the board as `bot_move` messages, which the board checks against its own rules before playing.
+
+**Seats.** Each side is You, Stockshark 1 or Stockfish 19. Claude plays every side set to Stockshark 1 (both, if the human seats it twice, with a separate plan per side); Stockfish 19 seats are searched by the board through the same engine; take-backs, draw offers and resignations belong to the people at the board, so a bot-against-bot game has none.
 
 ### Two surfaces, one page
 
@@ -92,7 +94,7 @@ The page decides at load: if `api/health` answers as Stockshark, it connects to 
 
 | Path | Role |
 | --- | --- |
-| `web/index.html` | The board. Original rules engine and UI, plus: async bot turns with cancellation, an engine abstraction over the bridge and WebAssembly, the Claude panel, an evaluation bar, think time, veto and ponder settings. |
+| `web/index.html` | The board. Original rules engine and UI, plus: White and Black player pickers, async bot turns with cancellation, an engine abstraction over the bridge and WebAssembly, the Stockshark's plan panel (with Hide), an evaluation bar, think time, veto and ponder settings. |
 | `web/engine/sf-loader.js` | Worker shim: receives the engine bytes from the page and serves them to stockfish.js in place of a network fetch, so the artifact never needs `blob:` fetches. |
 | `server/index.mjs` | Entry point. HTTP mode (`npm start`) or stdio mode (`--stdio`); a stdio launch that finds a running bridge forwards MCP to it instead of starting a second board. |
 | `server/http.mjs` | One port for the page, the WebSocket and Streamable HTTP MCP. Host and Origin checks against DNS rebinding and cross-site use. |
@@ -110,7 +112,7 @@ The page decides at load: if `api/health` answers as Stockshark, it connects to 
 | From the board | Meaning |
 | --- | --- |
 | `hello` | This tab is the board (a newer tab takes over; the old one is told `superseded`). |
-| `sync {game}` | The whole game: id, start FEN, UCI moves, mode, Claude's colour, think time, veto, outcome, plan. |
+| `sync {game}` | The whole game: id, start FEN, UCI moves, players per side, think time, veto, outcome, each side's plan. |
 | `search {id, fen, moves, movetime, multipv, searchmoves}` / `stop {id}` | Stockfish for the board's own use. |
 | `ponder {fen, moves}` / `ponder_stop` | Think on the human's time. |
 | `draw_offer {gameId}` | The human offers Claude a draw. |
@@ -120,7 +122,7 @@ The page decides at load: if `api/health` answers as Stockshark, it connects to 
 | `welcome`, `claude` | Engine status; Claude connected / waiting / analysing, plan, comment. |
 | `search_info`, `search_done`, `search_error`, `ponder_info` | Engine output for the board. |
 | `claude_analysis`, `claude_veto`, `plan` | What Stockfish is computing for Claude; a vetoed pick; a new plan. |
-| `bot_move {gameId, ply, uci, plan, comment, eval}` | Claude's move. The board plays it only if the game id and ply still match. |
+| `bot_move {gameId, ply, color, uci, plan, comment, eval}` | Stockshark's move. The board plays it only if the game id and ply still match. |
 | `draw_answer {accept, message}` | Claude's answer to a draw offer. |
 
 ### MCP tools
@@ -186,7 +188,7 @@ One deliberate trade: MultiPV 5 spends search effort on five lines instead of on
 
 Done while building:
 
-- `npm test`: unit tests (UCI parsing, score order, veto with mates and tablebases, SAN/UCI reading, downloader helpers) and an integration test that starts a bridge, plays Claude's side through a real MCP client against a simulated board (wait, analyse, veto, move, take-back, draw offer, the board's own searches) and checks that a second stdio launch forwards to the running bridge. 19 tests, all passing.
+- `npm test`: unit tests (UCI parsing, score order, veto with mates and tablebases, SAN/UCI reading, downloader helpers) and an integration test that starts a bridge, plays Claude's side through a real MCP client against a simulated board (wait, analyse, veto, move, take-back, draw offer, the board's own searches) and checks that a second stdio launch forwards to the running bridge, plus Stockshark on both sides and against Stockfish 19. 21 tests, all passing.
 - Chromium, against the bridge: Stockfish replies and ponders; a real MCP client plays a turn while the board shows the analysis, the plan and the comment; draw offer round trip; no console errors; no horizontal scroll at phone width in dark mode.
 - Chromium, as the artifact build: lite and full engines load from parts (full: about 8 s the first time, about 3 s from IndexedDB); Claude's turn with a stand-in for `sample` (prompt, tool call, plan, veto replacing a bad pick).
 - `get-stockfish` against a stand-in release archive (the sandbox couldn't reach GitHub): download, unpack, test-run, registration, and the bridge picking it up first.
@@ -198,6 +200,8 @@ Not verifiable from the build sandbox, to check on first real use: the official 
 **Phase 1, built:** bridge, native engine at full strength, MCP tools and prompt, board integration, veto, draw offers, pondering, tablebase.
 
 **Phase 2, built:** artifact build with in-page WebAssembly Stockfish (split, cached), Claude through the `sample` capability with an in-page Stockfish tool.
+
+**Phase 2.1, built:** one bot named Stockshark (the greedy and random bots retired), White and Black seats with You, Stockshark 1 or Stockfish 19, per-side plans, and a Hide button on the plan panel.
 
 **Phase 3, next:**
 

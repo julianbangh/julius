@@ -8,10 +8,9 @@ import { formatScore, formatWdl, negate } from './uci.mjs';
 import { TB_CATEGORY_TEXT } from './tablebase.mjs';
 import { SERVER_INSTRUCTIONS, playPrompt } from './prompt.mjs';
 
-const MODE_NAME = {
-  stockshark: 'Stockshark (greedy)', monkey: 'Monkey (random moves)', human: 'A friend (same screen)',
-  stockfish: 'Stockfish (max strength)', claude: 'Claude + Stockfish',
-};
+// How each seat reads from Claude's side of the board.
+const SEAT_NAME = { you: 'the human', stockshark: 'you (Stockshark 1)', stockfish: 'Stockfish 19 on its own' };
+const SEAT_OWNER = { you: "the human's", stockshark: 'yours', stockfish: "Stockfish 19's" };
 
 const text = body => ({ content: [{ type: 'text', text: body }] });
 const fail = body => ({ content: [{ type: 'text', text: body }], isError: true });
@@ -41,18 +40,18 @@ function engineLine(status) {
 
 function describeState(s, { board = true, legal = true } = {}) {
   const out = [];
-  if (!s.boardOpen) out.push(`The board is not open. Ask the human to open ${s.boardUrl || 'the Stockshark page'} in a browser and choose "Claude + Stockfish" as the opponent.`);
-  else if (s.mode !== 'claude') out.push(`The board's opponent is set to "${MODE_NAME[s.mode] || s.mode}", so you are not playing. Ask the human to choose "Claude + Stockfish".`);
+  if (!s.boardOpen) out.push(`The board is not open. Ask the human to open ${s.boardUrl || 'the Stockshark page'} in a browser and pick Stockshark 1 for White or Black.`);
+  else if (!s.claudeColors.length) out.push('Neither side on the board is set to Stockshark 1, so you are not playing. Ask the human to pick Stockshark 1 for White or Black.');
   const status = s.outcome
     ? `Game over: ${s.outcome.result} by ${s.outcome.reason}.`
-    : `${COLOR_NAME[s.turn]} to move${s.inCheck ? ' (in check)' : ''}${s.yourTurn ? ' — that is you' : ''}.`;
-  out.push(`You play ${COLOR_NAME[s.claudeColor]}. ${status} Ply ${s.ply}.`);
-  if (s.lastMove) out.push(`Last move: ${s.lastMove.san} (${s.lastMove.by === 'you' ? 'yours' : "the human's"}).`);
+    : `${COLOR_NAME[s.turn]} to move${s.inCheck ? ' (in check)' : ''}${s.yourTurn ? ': that is you' : ''}.`;
+  out.push(`White: ${SEAT_NAME[s.players.w]}. Black: ${SEAT_NAME[s.players.b]}. ${status} Ply ${s.ply}.`);
+  if (s.lastMove) out.push(`Last move: ${s.lastMove.san} (${SEAT_OWNER[s.lastMove.by] || 'unknown'}).`);
   out.push(`Moves: ${s.movetext || '(none yet)'}`);
   out.push(`FEN: ${s.fen}`);
   if (board) out.push('Board (White at the bottom; uppercase is White):', s.ascii.trimEnd());
   if (legal && s.legal.length) out.push(`Legal moves (${s.legal.length}): ${s.legal.join(' ')}`);
-  if (s.plan) out.push(`Your plan so far: ${s.plan}`);
+  if (s.plan) out.push(`Your plan so far${s.claudeColors.length === 2 ? ` as ${COLOR_NAME[s.planColor]}` : ''}: ${s.plan}`);
   if (s.drawOffer) out.push('The human has offered a draw. Answer with respond_to_draw_offer; making a move also declines it.');
   out.push(`Board settings: ${Math.round(s.thinkMs / 1000)} s think time; veto: ${vetoText(s.veto)}.`);
   return out.join('\n');
@@ -74,8 +73,10 @@ function describeEvent(event, s) {
 }
 
 function describeAnalysis(a, s, status) {
-  const viewer = s.gameId ? s.claudeColor : a.chess.turn();
   const mover = a.chess.turn();
+  // "You" is the colour Claude plays; when it plays both, the one to move in the live game.
+  const mine = s.claudeColors;
+  const viewer = mine.length === 1 ? mine[0] : mine.length === 2 && a.live ? s.turn : mover;
   const out = [];
   const where = a.played.length ? `after ${a.played.join(' ')} (${a.played.length} move${a.played.length === 1 ? '' : 's'} beyond ${a.live ? 'the live game' : 'the given FEN'})` : a.live ? 'in the live game' : 'from the given FEN';
   if (a.outcome) {
@@ -84,7 +85,7 @@ function describeAnalysis(a, s, status) {
   }
   const top = a.lines[0] || {};
   out.push(`${engineLine(status)} · ${((top.time || a.movetime || 0) / 1000).toFixed(1)} s · depth ${top.depth ?? '?'}/${top.seldepth ?? '?'} · ${big(top.nodes || 0)}nodes · ${big(top.nps || 0)}n/s`);
-  out.push(`Position ${where}: ${COLOR_NAME[mover]} to move. Scores are from ${COLOR_NAME[viewer]}'s side${viewer === s.claudeColor && s.gameId ? ' (yours)' : ''}: + is good for ${COLOR_NAME[viewer]}.`);
+  out.push(`Position ${where}: ${COLOR_NAME[mover]} to move. Scores are from ${COLOR_NAME[viewer]}'s side${mine.includes(viewer) ? ' (yours)' : ''}: + is good for ${COLOR_NAME[viewer]}.`);
   a.lines.forEach((line, i) => {
     const { score, wdl } = forViewer(line, mover, viewer);
     const first = sanOf(a.fen, line.pv[0]);
@@ -115,7 +116,7 @@ function describeVerdict(r, s) {
   else out.push(`Played ${r.san} (the veto is off, so Stockfish did not score it).`);
   out.push('The board shows your plan and comment.');
   if (s.outcome) out.push(`That ends the game: ${s.outcome.result} by ${s.outcome.reason}. Summarise it for the human, then call wait_for_my_turn for the next game.`);
-  else out.push(`${COLOR_NAME[s.turn]} (the human) is to move. Call wait_for_my_turn.`);
+  else out.push(`${COLOR_NAME[s.turn]} (${SEAT_NAME[s.players[s.turn]]}) is to move. Call wait_for_my_turn.`);
   return out.join('\n');
 }
 
@@ -135,7 +136,7 @@ export function createMcpServer(bridge, { transport = 'http' } = {}) {
 
   server.registerTool('get_game', {
     title: 'Get the game',
-    description: 'The live game on the Stockshark board: whether the board is open and set to play you, your colour, whose turn it is, the move list, FEN, an ASCII board, legal moves when it is your turn, your saved plan, and the board\'s think time and veto setting.',
+    description: 'The live game on the Stockshark board: whether the board is open, who plays White and Black (you are Stockshark 1), whose turn it is, the move list, FEN, an ASCII board, legal moves when it is your turn, your saved plan, and the board\'s think time and veto setting.',
     inputSchema: {},
     annotations: { readOnlyHint: true, openWorldHint: false },
   }, async () => {
@@ -193,7 +194,7 @@ export function createMcpServer(bridge, { transport = 'http' } = {}) {
 
   server.registerTool('make_move', {
     title: 'Make my move',
-    description: "Play your move on the board. Stockfish first checks it: a move that scores too far below Stockfish's best (see the board's veto setting) is rejected with the moves that would pass. Include your updated plan and a comment; both are shown to the human.",
+    description: "Play your move on the board. Stockfish first checks it: a move that scores too far below Stockfish's best (see the board's veto setting) is rejected with the moves that would pass. Include your updated plan and a comment; both are shown on the board as Stockshark's plan.",
     inputSchema: {
       move: z.string().min(2).max(12).describe('Your move in SAN (Nf3, exd5, O-O, e8=Q) or UCI (g1f3).'),
       plan: z.string().max(1500).optional().describe('Your strategic plan in two to four sentences: the goal, the route, what to watch for. Shown on the board and handed back to you next turn.'),
@@ -240,7 +241,7 @@ export function createMcpServer(bridge, { transport = 'http' } = {}) {
 
   server.registerPrompt('play', {
     title: 'Play chess on the Stockshark board',
-    description: 'Play a full game against the human: you plan, Stockfish 19 calculates and vetoes blunders.',
+    description: 'Play as Stockshark 1 on the board: you plan, Stockfish 19 calculates and vetoes blunders.',
     argsSchema: {
       style: z.string().max(200).optional().describe('Optional playing style for your plans, e.g. "aggressive kingside attacks".'),
     },

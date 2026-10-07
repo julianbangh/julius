@@ -33,7 +33,7 @@ const call = async (name, args = {}) => {
   return { text: res.content.map(c => c.text).join('\n'), isError: !!res.isError };
 };
 
-const game = { id: 'g1', startFen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1', moves: [], mode: 'claude', botColor: 'b', thinkMs: 1500, veto: 20, outcome: null };
+const game = { id: 'g1', startFen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1', moves: [], players: { w: 'you', b: 'stockshark' }, thinkMs: 1500, veto: 20, outcome: null };
 const sync = () => page.send(JSON.stringify({ t: 'sync', game }));
 
 before(async () => {
@@ -162,6 +162,46 @@ test('a second stdio launch forwards to the running bridge', async () => {
   });
   await stdioClient.connect(transport);
   const res = await stdioClient.callTool({ name: 'get_game', arguments: {} });
-  assert.match(res.content[0].text, /You play Black/);
+  assert.match(res.content[0].text, /White: the human\. Black: you \(Stockshark 1\)/);
   await stdioClient.close();
+});
+
+test('Stockshark can play both sides, keeping a plan for each', async () => {
+  Object.assign(game, { id: 'g2', moves: [], players: { w: 'stockshark', b: 'stockshark' } });
+  sync();
+  const white = await call('wait_for_my_turn', { timeout_seconds: 10 });
+  assert.match(white.text, /White: you \(Stockshark 1\)\. Black: you \(Stockshark 1\)/);
+  assert.match(white.text, /White to move: that is you/);
+  const w = await call('make_move', { move: 'e4', ply: 0, plan: 'White plan.', comment: 'One.' });
+  assert.equal(w.isError, false, w.text);
+  assert.match(w.text, /Black \(you \(Stockshark 1\)\) is to move/);
+  const wMsg = await nextMessage('bot_move');
+  assert.equal(wMsg.color, 'w');
+  game.moves.push(wMsg.uci);
+  sync();
+  const black = await call('wait_for_my_turn', { timeout_seconds: 10 });
+  assert.match(black.text, /ply=1/);
+  assert.doesNotMatch(black.text, /White plan/);
+  const b = await call('make_move', { move: 'e5', ply: 1, plan: 'Black plan.' });
+  assert.equal(b.isError, false, b.text);
+  const bMsg = await nextMessage('bot_move');
+  assert.equal(bMsg.color, 'b');
+  assert.equal(bMsg.plan, 'Black plan.');
+  game.moves.push(bMsg.uci);
+  sync();
+  const again = await call('wait_for_my_turn', { timeout_seconds: 10 });
+  assert.match(again.text, /Your plan so far as White: White plan\./);
+});
+
+test('says so when Stockshark is not seated, and names a Stockfish opponent', async () => {
+  Object.assign(game, { id: 'g3', moves: [], players: { w: 'you', b: 'you' } });
+  sync();
+  const none = await call('make_move', { move: 'e4' });
+  assert.equal(none.isError, true);
+  assert.match(none.text, /Neither side on the board is set to Stockshark 1/);
+  Object.assign(game, { id: 'g4', moves: ['e2e4'], players: { w: 'stockfish', b: 'stockshark' } });
+  sync();
+  const vsEngine = await call('wait_for_my_turn', { timeout_seconds: 10 });
+  assert.match(vsEngine.text, /White: Stockfish 19 on its own\. Black: you \(Stockshark 1\)/);
+  assert.match(vsEngine.text, /Last move: e4 \(Stockfish 19's\)/);
 });

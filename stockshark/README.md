@@ -1,6 +1,6 @@
 # Stockshark Bot
 
-A chess board where Stockfish 19 at full strength does the calculating and Claude does the planning. Claude picks each move from Stockfish's best candidates, writes a plan you can read on the board, and Stockfish vetoes anything that would throw the game away.
+A chess board with one bot, **Stockshark**: Stockfish 19 at full strength does the calculating and Claude does the planning. Stockshark picks each move from Stockfish's best candidates, writes a plan you can read on the board, and Stockfish vetoes anything that would throw the game away. Stockfish 19 can also take a seat on its own.
 
 You can play it two ways:
 
@@ -24,11 +24,15 @@ In Claude Code:
 
 1. Pick the model with `/model` (Opus 5.5 is the strongest planner).
 2. Run `/mcp__stockshark__play`. You can add a one-word playing style, for example `/mcp__stockshark__play aggressive`.
-3. Open <http://127.0.0.1:8787>, choose **Claude + Stockfish (MCP)** as the opponent and your colour, and move.
+3. Open <http://127.0.0.1:8787>. By default White is **You** and Black is **Stockshark 1**; change either side with the **White** and **Black** pickers. Then move.
 
-Claude waits for your moves, analyses each position with Stockfish, and plays. Its plan and a comment on each move appear in the "Claude's plan" panel; the engine readout shows what Stockfish is looking at while Claude thinks. The project's `.claude/settings.json` pre-approves the `stockshark` tools so a game doesn't stop for a permission prompt on every move.
+Stockshark waits for your moves, analyses each position with Stockfish, and plays. Its plan and a comment on each move appear in the **Stockshark's plan** panel (**Hide** folds it down to its header, and the page remembers); the engine readout shows what Stockfish is looking at while Stockshark thinks. The project's `.claude/settings.json` pre-approves the `stockshark` tools so a game doesn't stop for a permission prompt on every move.
 
 If Claude Code isn't connected yet, the panel says so, and **Let Stockfish move** plays the engine's move for that turn.
+
+## Who plays
+
+Each side can be **You**, **Stockshark 1** or **Stockfish 19**, in any combination: you against either bot, two people sharing the screen, or bot against bot (set White to Stockfish 19 and Black to Stockshark 1 and watch). Players can change mid-game; setting a side to You takes it over from the bot. When Stockshark sits on both sides, Claude plays both and keeps a separate plan for each.
 
 ## Without Claude: Stockfish alone
 
@@ -36,7 +40,7 @@ If Claude Code isn't connected yet, the panel says so, and **Let Stockfish move*
 npm start        # or: npm start -- --open
 ```
 
-Open <http://127.0.0.1:8787> and pick **Stockfish 19 (max strength)**. Think time goes up to 10 minutes a move, and with **Stockfish thinks on your time too** it keeps searching while you think, so its hash table is warm when your move comes in.
+Open <http://127.0.0.1:8787> and set a side to **Stockfish 19**. Think time goes up to 10 minutes a move, and with **Stockfish thinks on your time too** it keeps searching while you think, so its hash table is warm when your move comes in.
 
 ## Other ways to connect Claude
 
@@ -57,20 +61,20 @@ The MCP tools are `get_game`, `wait_for_my_turn`, `analyze_position`, `make_move
 npm run build:artifact
 ```
 
-This writes `dist/artifact/`: the page, the pieces, and Stockfish 19's 99 MB full-network WebAssembly build split into 14 MB parts (artifact hosting takes files up to 15 MB). The page downloads the parts once, keeps the engine in IndexedDB, and runs it in a worker. Choosing **Claude + Stockfish** there asks claude.ai for permission to use your Claude account on Claude's first move.
+This writes `dist/artifact/`: the page, the pieces, and Stockfish 19's 99 MB full-network WebAssembly build split into 14 MB parts (artifact hosting takes files up to 15 MB). The page downloads the parts once, keeps the engine in IndexedDB, and runs it in a worker. Seating **Stockshark 1** there asks claude.ai for permission to use your Claude account on Stockshark's first move.
 
 ## How the team plays
 
 1. Stockfish searches the position for the board's think time and returns its five best moves with scores, win/draw/loss odds and main lines.
-2. Claude reads them against its plan from the previous move, can test a line or two with Stockfish, then picks a move and writes an updated plan and a comment for you.
+2. Claude, as Stockshark, reads them against its plan from the previous move, can test a line or two with Stockfish, then picks a move and writes an updated plan and a comment.
 3. Stockfish checks the pick against its best move. The **Stockfish veto** setting decides how close it must be:
 
-| Veto | Claude's move must score | Strength |
+| Veto | Stockshark's move must score | Strength |
 | --- | --- | --- |
 | Best move only | the same as Stockfish's best | Stockfish's own play; Claude plans and explains |
 | Within 0.20 (default) | no more than 0.20 pawns below the best | effectively full strength |
 | Within 0.50 | no more than 0.50 pawns below the best | still far beyond human strength |
-| Off: Claude decides | anything legal | Claude's judgement, with Stockfish as advisor |
+| Off: no veto | anything legal | Claude's judgement, with Stockfish as advisor |
 
 In a forced mate only an equally fast mate passes, and in endings with seven pieces or fewer the Lichess tablebase decides: the move must keep the exact result (and, in a won ending, be the quickest win).
 

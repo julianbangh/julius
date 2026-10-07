@@ -9,14 +9,16 @@ import { judgeMove, passingCandidates } from './guard.mjs';
 import { Chess, START_FEN, COLOR_NAME, checkFen, replay, findMove, sanLine, movetext, outcomeOf } from './game.mjs';
 import { negate, UCI_MOVE } from './uci.mjs';
 
-const MODES = new Set(['stockshark', 'monkey', 'human', 'stockfish', 'claude']);
+// Who sits on each side of the board: a person, Stockshark 1 (Claude, through these MCP
+// tools, with Stockfish), or Stockfish 19 on its own (searched for the board).
+const SEATS = new Set(['you', 'stockshark', 'stockfish']);
 const MAX_ANALYSIS_MS = 10 * 60 * 1000;
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 
 function blankGame() {
   return {
     id: '', startFen: START_FEN, moves: [], sans: [], chess: new Chess(START_FEN), fen: START_FEN,
-    ply: 0, turn: 'w', mode: 'stockfish', botColor: 'b', thinkMs: 60000, veto: 20, outcome: null,
+    ply: 0, turn: 'w', players: { w: 'you', b: 'stockshark' }, thinkMs: 60000, veto: 20, outcome: null,
   };
 }
 
@@ -55,7 +57,7 @@ export class Bridge extends EventEmitter {
     this.engine.on('status', () => this.sendWelcome());
     this.page = null;
     this.game = blankGame();
-    this.claude = { plan: '', comment: '', sessions: 0, lastSeen: 0, busy: 0 };
+    this.claude = { plans: { w: '', b: '' }, comments: { w: '', b: '' }, sessions: 0, lastSeen: 0, busy: 0 };
     this.waiters = new Set();
     this.drawOffer = null;
     this.reportedEnd = '';
@@ -100,8 +102,7 @@ export class Bridge extends EventEmitter {
       connected: this.claude.sessions > 0 || recent,
       waiting: this.waiters.size > 0,
       busy: this.claude.busy > 0,
-      plan: this.claude.plan,
-      comment: this.claude.comment,
+      plans: { ...this.claude.plans },
     };
   }
 
@@ -150,8 +151,10 @@ export class Bridge extends EventEmitter {
       fen: chess.fen(),
       ply: g.moves.length,
       turn: chess.turn(),
-      mode: MODES.has(g.mode) ? g.mode : 'human',
-      botColor: g.botColor === 'w' ? 'w' : 'b',
+      players: {
+        w: g.players && SEATS.has(g.players.w) ? g.players.w : 'you',
+        b: g.players && SEATS.has(g.players.b) ? g.players.b : 'you',
+      },
       thinkMs: clamp(Number(g.thinkMs) || 60000, 1000, MAX_ANALYSIS_MS),
       veto: g.veto === null ? null : clamp(Number(g.veto ?? 20), 0, 1000),
       outcome: g.outcome && typeof g.outcome === 'object' ? {
@@ -162,9 +165,12 @@ export class Bridge extends EventEmitter {
     this.game = next;
     if (next.id !== prev.id) {
       this.drawOffer = null;
-      // A reloaded tab keeps its game and hands back the plan it was showing.
-      this.claude.plan = typeof g.plan === 'string' ? g.plan.slice(0, 1500) : '';
-      this.claude.comment = '';
+      // A reloaded tab keeps its game and hands back the plans it was showing.
+      const plans = g.plans && typeof g.plans === 'object' ? g.plans : {};
+      for (const c of ['w', 'b']) {
+        this.claude.plans[c] = typeof plans[c] === 'string' ? plans[c].slice(0, 1500) : '';
+        this.claude.comments[c] = '';
+      }
       if (prev.id) this.engine.newGame();
       this.emitClaude();
     } else if (this.drawOffer && this.drawOffer.ply !== next.ply) {
@@ -222,12 +228,17 @@ export class Bridge extends EventEmitter {
 
   offerDraw({ gameId }) {
     const g = this.game;
-    if (gameId !== g.id || g.mode !== 'claude' || g.outcome) return;
+    if (gameId !== g.id || g.outcome || !this.sharks().length) return;
     this.drawOffer = { gameId: g.id, ply: g.ply, seen: false };
     this.notify();
   }
 
   // ---- Claude's side: the MCP tools call these ------------------------------------------
+
+  // The colours Claude plays: every side set to Stockshark 1.
+  sharks() {
+    return ['w', 'b'].filter(c => this.game.players[c] === 'stockshark');
+  }
 
   touch() {
     this.claude.lastSeen = Date.now();
@@ -247,19 +258,21 @@ export class Bridge extends EventEmitter {
   state() {
     const g = this.game;
     const chess = g.chess;
-    const yourTurn = !!this.page && g.mode === 'claude' && !g.outcome && g.turn === g.botColor;
+    const sharks = this.sharks();
+    const yourTurn = !!this.page && !g.outcome && g.players[g.turn] === 'stockshark';
+    const planColor = sharks.includes(g.turn) ? g.turn : sharks[0] || g.turn;
     const last = g.sans.length ? g.sans[g.sans.length - 1] : '';
     return {
       boardOpen: !!this.page,
       boardUrl: this.url,
-      mode: g.mode,
+      players: { ...g.players },
       gameId: g.id,
       ply: g.ply,
       fen: g.fen,
       turn: g.turn,
-      claudeColor: g.botColor,
+      claudeColors: sharks,
       yourTurn,
-      lastMove: last ? { san: last, by: g.turn === g.botColor ? 'opponent' : 'you' } : null,
+      lastMove: last ? { san: last, by: g.players[g.turn === 'w' ? 'b' : 'w'] } : null,
       movetext: movetext(g.startFen, g.sans),
       inCheck: chess.inCheck(),
       legal: yourTurn ? chess.moves() : [],
@@ -268,7 +281,8 @@ export class Bridge extends EventEmitter {
       thinkMs: g.thinkMs,
       veto: g.veto,
       drawOffer: !!(this.drawOffer && this.drawOffer.gameId === g.id),
-      plan: this.claude.plan,
+      plan: this.claude.plans[planColor],
+      planColor,
       engine: this.engine.status(),
     };
   }
@@ -276,10 +290,10 @@ export class Bridge extends EventEmitter {
   // What Claude should hear about right now, if anything.
   pendingEvent() {
     const g = this.game;
-    if (!this.page || g.mode !== 'claude' || !g.id) return null;
+    if (!this.page || !g.id || !this.sharks().length) return null;
     if (g.outcome) return this.reportedEnd === g.id ? null : 'game_over';
     if (this.drawOffer && this.drawOffer.gameId === g.id && !this.drawOffer.seen) return 'draw_offered';
-    if (g.turn === g.botColor) return 'your_turn';
+    if (g.players[g.turn] === 'stockshark') return 'your_turn';
     return null;
   }
 
@@ -419,9 +433,11 @@ export class Bridge extends EventEmitter {
   moveBlocker() {
     const g = this.game;
     if (!this.page) return `The board is not open. Ask the human to open ${this.url || 'the Stockshark page'}.`;
-    if (g.mode !== 'claude') return 'The board is not set to "Claude + Stockfish". Ask the human to pick that opponent.';
+    if (!this.sharks().length) return 'Neither side on the board is set to Stockshark 1. Ask the human to pick Stockshark 1 for White or Black.';
     if (g.outcome || outcomeOf(g.chess)) return 'The game is over.';
-    if (g.turn !== g.botColor) return `It is not your turn: ${COLOR_NAME[g.turn]} (the human) is to move. Call wait_for_my_turn.`;
+    if (g.players[g.turn] !== 'stockshark') {
+      return `It is not your turn: ${COLOR_NAME[g.turn]} (${g.players[g.turn] === 'you' ? 'the human' : 'Stockfish 19'}) is to move. Call wait_for_my_turn.`;
+    }
     return null;
   }
 
@@ -446,12 +462,13 @@ export class Bridge extends EventEmitter {
       this.sendPage({ t: 'claude_veto', san: m.san, reason: verdict.reason });
       return { ok: false, vetoed: true, san: m.san, verdict };
     }
-    if (typeof plan === 'string' && plan.trim()) this.claude.plan = plan.trim().slice(0, 1500);
-    this.claude.comment = typeof comment === 'string' ? comment.trim().slice(0, 400) : '';
-    const evalWhite = verdict.chosen.score ? (g.botColor === 'w' ? verdict.chosen.score : negate(verdict.chosen.score)) : null;
+    const mover = g.turn;
+    if (typeof plan === 'string' && plan.trim()) this.claude.plans[mover] = plan.trim().slice(0, 1500);
+    this.claude.comments[mover] = typeof comment === 'string' ? comment.trim().slice(0, 400) : '';
+    const evalWhite = verdict.chosen.score ? (mover === 'w' ? verdict.chosen.score : negate(verdict.chosen.score)) : null;
     this.sendPage({
       t: 'bot_move', gameId: g.id, ply: g.ply, uci: m.lan, san: m.san,
-      plan: this.claude.plan, comment: this.claude.comment, eval: evalWhite, loss: verdict.loss,
+      color: mover, plan: this.claude.plans[mover], comment: this.claude.comments[mover], eval: evalWhite, loss: verdict.loss,
       best: verdict.best && verdict.best.uci !== m.lan ? sanLine(g.fen, [verdict.best.uci], 1) : null,
     });
     // Mirror the move right away so an immediate wait_for_my_turn sees the human to move;
@@ -476,9 +493,11 @@ export class Bridge extends EventEmitter {
 
   setPlan({ plan, comment }) {
     this.touch();
-    if (typeof plan === 'string' && plan.trim()) this.claude.plan = plan.trim().slice(0, 1500);
-    if (typeof comment === 'string') this.claude.comment = comment.trim().slice(0, 400);
-    this.sendPage({ t: 'plan', plan: this.claude.plan, comment: this.claude.comment });
+    const g = this.game, sharks = this.sharks();
+    const c = sharks.includes(g.turn) ? g.turn : sharks[0] || g.turn;
+    if (typeof plan === 'string' && plan.trim()) this.claude.plans[c] = plan.trim().slice(0, 1500);
+    if (typeof comment === 'string') this.claude.comments[c] = comment.trim().slice(0, 400);
+    this.sendPage({ t: 'plan', color: c, plan: this.claude.plans[c], comment: this.claude.comments[c] });
     return { ok: true };
   }
 

@@ -4,7 +4,7 @@ A chess project: the board page (`web/index.html`), a Node bridge (`server/`) th
 
 ## Playing chess
 
-When the human wants to play, use the `stockshark` MCP tools. The `/mcp__stockshark__play` prompt has the full routine: `get_game`, then loop `wait_for_my_turn` → `analyze_position` → `make_move` (always with `plan` and `comment`). Keep chat output to one short line per move; the board shows the plan.
+When the human wants to play, use the `stockshark` MCP tools. On the board you are **Stockshark 1**: you play whichever side (or both) the human seats as Stockshark 1. The `/mcp__stockshark__play` prompt has the full routine: `get_game`, then loop `wait_for_my_turn` → `analyze_position` → `make_move` (always with `plan` and `comment`). Keep chat output to one short line per move; the board shows the plan.
 
 ## Working on the code
 

@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&display=swap">
 <style>
 /* Layout: the board owns the left and sets the scale, with a thin evaluation bar on its
-   edge; a scoresheet column on the right carries the status, the engine readout, Claude's
+   edge; a scoresheet column on the right carries the status, the engine readout, Stockshark's
    plan, the notation and the controls, and drops under the board on phones. */
 :root {
   --bg: #e7eaee;
@@ -207,15 +207,22 @@ body {
 .meter { height: 3px; border-radius: 2px; background: var(--line); overflow: hidden; }
 .meter-fill { height: 100%; width: 0; background: var(--brass); transition: width .25s linear; }
 
-/* Claude's plan: the strategist's notebook */
+/* Stockshark's plan: the strategist's notebook. Collapsible to just its header. */
 .claude {
   display: flex; flex-direction: column; gap: 8px; min-width: 0;
   padding: 12px 14px; border: 1px solid var(--line); border-left: 3px solid var(--brass); border-radius: 6px; background: var(--surface);
 }
-.claude-head { display: flex; align-items: center; gap: 8px; }
-.claude-head h2 { margin: 0 auto 0 0; font: 650 15px/1.2 var(--font-display); }
+.claude-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.claude-head h2 { margin: 0 auto 0 0; white-space: nowrap; font: 650 15px/1.2 var(--font-display); }
+.claude-head .side-tag { color: var(--muted); font-weight: 500; }
+.toggle {
+  flex: none; padding: 3px 9px; border: 1px solid var(--line); border-radius: 999px; background: none;
+  color: var(--ink); font: 600 11.5px/1.2 var(--font-body); cursor: pointer;
+}
+.toggle:hover { border-color: var(--muted); }
+.claude-body { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
 .plan { margin: 0; font-size: 14px; line-height: 1.5; text-wrap: pretty; overflow-wrap: anywhere; }
-.plan:empty::before { content: "No plan yet. It appears here as soon as Claude makes its first move."; color: var(--muted); }
+.plan:empty::before { content: "No plan yet. It appears here as soon as Stockshark makes its first move."; color: var(--muted); }
 .remark { margin: 0; color: var(--muted); font-size: 13.5px; font-style: italic; overflow-wrap: anywhere; }
 .remark:empty { display: none; }
 .veto { margin: 0; padding: 6px 8px; border-radius: 4px; background: var(--brass-tint); font-size: 13px; overflow-wrap: anywhere; }
@@ -307,7 +314,7 @@ body {
   <aside class="side">
     <header class="mast">
       <h1>Stockshark Bot</h1>
-      <p>Every rule of the game, and opponents from a greedy shark to full-strength Stockfish with Claude as its strategist.</p>
+      <p>Every rule of the game, and an opponent that plans like Claude and calculates like Stockfish 19.</p>
     </header>
     <div class="sheet">
       <div class="status" role="status" aria-live="polite">
@@ -322,17 +329,23 @@ body {
         <div class="meter" id="engine-meter" hidden><div class="meter-fill" id="engine-meter-fill"></div></div>
       </div>
 
-      <section class="claude" id="claude" hidden aria-label="Claude's plan">
-        <div class="claude-head"><h2>Claude's plan</h2><span class="pill" id="claude-state"></span></div>
-        <p class="plan" id="claude-plan"></p>
-        <p class="remark" id="claude-comment"></p>
-        <p class="veto" id="claude-veto" hidden></p>
-        <p class="connect" id="claude-connect" hidden></p>
-        <div class="claude-actions" id="claude-actions" hidden>
-          <button class="btn" id="claude-copy" type="button" hidden>Copy command</button>
-          <button class="btn" id="claude-retry" type="button" hidden>Ask Claude again</button>
-          <button class="btn" id="claude-stop" type="button" hidden>Stop</button>
-          <button class="btn" id="claude-fallback" type="button" hidden>Let Stockfish move</button>
+      <section class="claude" id="claude" hidden aria-labelledby="claude-title">
+        <div class="claude-head">
+          <h2 id="claude-title">Stockshark's plan<span class="side-tag" id="claude-side"></span></h2>
+          <span class="pill" id="claude-state"></span>
+          <button class="toggle" id="plan-toggle" type="button" aria-expanded="true" aria-controls="claude-body">Hide</button>
+        </div>
+        <div class="claude-body" id="claude-body">
+          <p class="plan" id="claude-plan"></p>
+          <p class="remark" id="claude-comment"></p>
+          <p class="veto" id="claude-veto" hidden></p>
+          <p class="connect" id="claude-connect" hidden></p>
+          <div class="claude-actions" id="claude-actions" hidden>
+            <button class="btn" id="claude-copy" type="button" hidden>Copy command</button>
+            <button class="btn" id="claude-retry" type="button" hidden>Ask Stockshark again</button>
+            <button class="btn" id="claude-stop" type="button" hidden>Stop</button>
+            <button class="btn" id="claude-fallback" type="button" hidden>Let Stockfish move</button>
+          </div>
         </div>
       </section>
 
@@ -348,21 +361,20 @@ body {
         <button class="btn" id="resign" type="button">Resign</button>
       </div>
       <div class="setup">
-        <div class="field wide">
-          <label for="opponent">Opponent</label>
-          <select id="opponent">
-            <option value="stockfish">Stockfish 19 (max strength)</option>
-            <option value="claude">Claude + Stockfish</option>
-            <option value="stockshark">Stockshark (greedy)</option>
-            <option value="monkey">Monkey (random moves)</option>
-            <option value="human">A friend (same screen)</option>
+        <div class="field">
+          <label for="player-w">White</label>
+          <select id="player-w">
+            <option value="you">You</option>
+            <option value="stockshark">Stockshark 1</option>
+            <option value="stockfish">Stockfish 19</option>
           </select>
         </div>
         <div class="field">
-          <label for="side">You play</label>
-          <select id="side">
-            <option value="w">White</option>
-            <option value="b">Black</option>
+          <label for="player-b">Black</label>
+          <select id="player-b">
+            <option value="you">You</option>
+            <option value="stockshark">Stockshark 1</option>
+            <option value="stockfish">Stockfish 19</option>
           </select>
         </div>
         <div class="field" id="think-field">
@@ -383,7 +395,7 @@ body {
             <option value="strict">Best move only</option>
             <option value="tight">Within 0.20</option>
             <option value="loose">Within 0.50</option>
-            <option value="off">Off: Claude decides</option>
+            <option value="off">Off: no veto</option>
           </select>
         </div>
         <div class="field" id="build-field" hidden>
@@ -625,27 +637,7 @@ const Chess = (() => {
     return text;
   }
 
-  // The simple bots. "monkey" moves at random. "stockshark" looks exactly one move ahead: it
-  // mates if it can, otherwise grabs the biggest piece on offer, likes giving check, and never
-  // asks what happens next.
-  function chooseMove(s, level) {
-    const legal = legalMoves(s);
-    if (!legal.length) return null;
-    const pick = list => list[Math.floor(Math.random() * list.length)];
-    if (level === 'monkey') return pick(legal);
-    let best = [], top = -Infinity;
-    for (const m of legal) {
-      const next = applyMove(s, m);
-      let score;
-      if (!legalMoves(next).length) score = inCheck(next, next.turn) ? 1000 : -50;
-      else score = (m.captured ? VALUE[m.captured[1]] : 0) + (m.promo ? VALUE[m.promo] - 1 : 0) + (inCheck(next, next.turn) ? 0.5 : 0);
-      if (score > top) { top = score; best = [m]; }
-      else if (score === top) best.push(m);
-    }
-    return pick(best);
-  }
-
-  return { START, VALUE, other, sqName, uci, fromFEN, toFEN, inCheck, legalMoves, applyMove, positionKey, insufficient, outcome, san, chooseMove };
+  return { START, VALUE, other, sqName, uci, fromFEN, toFEN, inCheck, legalMoves, applyMove, positionKey, insufficient, outcome, san };
 })();
 </script>
 
@@ -721,26 +713,32 @@ const Uci = (() => {
   const $ = id => document.getElementById(id);
   const boardEl = $('board'), promoEl = $('promo'), promoCol = $('promo-col'), resultEl = $('result');
   const PIECE_NAMES = { K: 'king', Q: 'queen', R: 'rook', B: 'bishop', N: 'knight', P: 'pawn' };
-  const BOTS = { stockfish: 'Stockfish', claude: 'Claude + Stockfish', stockshark: 'Stockshark', monkey: 'Monkey' };
-  const ENGINE_BOTS = new Set(['stockfish', 'claude']);
+  // Who can sit on each side of the board. Stockshark 1 is Claude planning with Stockfish
+  // calculating; Stockfish 19 plays on its own.
+  const PLAYERS = { you: 'You', stockshark: 'Stockshark 1', stockfish: 'Stockfish 19' };
   const VETO = { strict: 0, tight: 20, loose: 50, off: null };
   const THINK = [5, 15, 30, 60, 120, 300, 600];
   const STORE = 'stockshark-bot';
-  const BOT_DELAY = 450;
   const MCP_COMMAND = '/mcp__stockshark__play';
 
   const phone = matchMedia('(pointer: coarse)').matches;
-  const prefs = { opponent: 'stockfish', side: 'w', think: 60, veto: 'tight', ponder: true, build: phone ? 'lite' : 'full' };
+  const prefs = {
+    players: { w: 'you', b: 'stockshark' },
+    think: 60, veto: 'tight', ponder: true, build: phone ? 'lite' : 'full', planHidden: false,
+  };
   const game = { id: '', state: null, legal: [], history: [], keys: [], manual: null, outcome: null };
+  const blankPlans = () => ({ w: { plan: '', comment: '' }, b: { plan: '', comment: '' } });
   const ui = {
     selected: -1, targets: [], flipped: false, promo: null, drag: null, dismissed: false, note: '', armed: false,
     eval: null,            // latest evaluation, White's point of view
     live: null,            // { kind: 'bot' | 'ponder' | 'claude', info, started, ms, fen }
     engineError: '',
-    claude: { plan: '', comment: '', veto: '', phase: '', error: '', draft: '', tier: '', asked: '' },
+    claude: { veto: '', phase: '', error: '', draft: '', tier: '', asked: '' },   // Stockshark's turn in progress
+    plans: blankPlans(),   // each Stockshark side's plan and latest comment
+    planColor: '',         // the Stockshark side that planned last
     drawPending: false,
   };
-  let botTimer = 0, armTimer = 0, botSeq = 0, botAbort = null;
+  let armTimer = 0, botSeq = 0, botAbort = null;
 
   const pieceSrc = p => `pieces/${p}.svg`;
   const pieceAlt = p => `${p[0] === 'w' ? 'White' : 'Black'} ${PIECE_NAMES[p[1]]}`;
@@ -752,11 +750,17 @@ const Uci = (() => {
     img.alt = alt;
     return img;
   };
-  const vsBot = () => prefs.opponent !== 'human';
-  const botColor = () => Chess.other(prefs.side);
-  const botTurn = () => vsBot() && !game.outcome && game.state.turn !== prefs.side;
-  const humanTurn = () => !game.outcome && (!vsBot() || game.state.turn === prefs.side);
-  const nameOf = c => (vsBot() ? (c === prefs.side ? 'You' : BOTS[prefs.opponent]) : c === 'w' ? 'White' : 'Black');
+  const playerOf = c => prefs.players[c];
+  const isBot = c => playerOf(c) !== 'you';
+  const humans = () => ['w', 'b'].filter(c => !isBot(c));
+  const sharks = () => ['w', 'b'].filter(c => playerOf(c) === 'stockshark');
+  const anyBot = () => isBot('w') || isBot('b');
+  const botTurn = () => !game.outcome && isBot(game.state.turn);
+  const humanTurn = () => !game.outcome && !isBot(game.state.turn);
+  // Two people sharing the screen are White and Black; one person is You.
+  const nameOf = c => (isBot(c) ? PLAYERS[playerOf(c)] : humans().length === 2 ? (c === 'w' ? 'White' : 'Black') : 'You');
+  // The board shows a person their own pieces at the bottom.
+  const defaultFlip = () => humans().length === 1 && humans()[0] === 'b';
   const uciList = () => game.history.map(h => Chess.uci(h.move));
   const newId = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
   const findLegal = text => game.legal.find(m => Chess.uci(m) === text) || null;
@@ -877,7 +881,9 @@ const Uci = (() => {
       case 'welcome':
         link.engine = msg.engine;
         link.claude = msg.claude;
-        if (msg.claude && msg.claude.plan && !ui.claude.plan) ui.claude.plan = msg.claude.plan;
+        if (msg.claude && msg.claude.plans) {
+          for (const c of ['w', 'b']) if (msg.claude.plans[c] && !ui.plans[c].plan) ui.plans[c].plan = msg.claude.plans[c];
+        }
         return render();
       case 'superseded':
         link.wanted = false;
@@ -906,7 +912,7 @@ const Uci = (() => {
         link.claude = msg;
         return renderClaude(), renderStatus();
       case 'claude_analysis': {
-        // Show what Stockfish is computing for Claude: the live position, or a line it tests.
+        // Show what Stockfish is computing for Stockshark: the live position, or a line it tests.
         const testing = msg.played && msg.played.length;
         let st = game.state;
         if (testing) {
@@ -918,18 +924,20 @@ const Uci = (() => {
       case 'claude_veto':
         ui.claude.veto = `Stockfish vetoed ${msg.san}: ${msg.reason}`;
         return renderClaude();
-      case 'plan':
-        ui.claude.plan = msg.plan || ui.claude.plan;
-        ui.claude.comment = msg.comment || '';
+      case 'plan': {
+        const c = msg.color === 'w' || msg.color === 'b' ? msg.color : game.state.turn;
+        ui.plans[c] = { plan: msg.plan || ui.plans[c].plan, comment: msg.comment || '' };
+        ui.planColor = c;
         save();
         return renderClaude();
+      }
       case 'bot_move':
         return onClaudeMove(msg);
       case 'draw_answer':
         if (msg.gameId !== game.id || !ui.drawPending) return;
         ui.drawPending = false;
         if (msg.accept) return end({ result: '½–½', reason: 'agreement' });
-        ui.note = msg.message ? `Claude declines: “${msg.message}”` : 'Claude declines the draw.';
+        ui.note = msg.message ? `Stockshark declines: “${msg.message}”` : 'Stockshark declines the draw.';
         return render();
       default:
     }
@@ -1229,7 +1237,9 @@ const Uci = (() => {
     game.manual = null;
     ui.eval = null;
     ui.live = null;
-    ui.claude = { plan: '', comment: '', veto: '', phase: '', error: '', draft: '', tier: '', asked: '' };
+    ui.claude = { veto: '', phase: '', error: '', draft: '', tier: '', asked: '' };
+    ui.plans = blankPlans();
+    ui.planColor = '';
     ui.drawPending = false;
     settle();
     clearTransient();
@@ -1282,7 +1292,6 @@ const Uci = (() => {
   // ---- The bot's turn ----------------------------------------------------------------------
 
   function cancelBot() {
-    clearTimeout(botTimer);
     botSeq++;
     if (botAbort) botAbort.abort();
     botAbort = null;
@@ -1294,20 +1303,11 @@ const Uci = (() => {
     if (!botTurn()) return maybePonder();
     const seq = botSeq, ply = game.history.length;
     const still = () => seq === botSeq && botTurn() && game.history.length === ply;
-    const op = prefs.opponent;
-    if (op === 'stockshark' || op === 'monkey') {
-      botTimer = setTimeout(() => {
-        if (!still()) return;
-        const move = Chess.chooseMove(game.state, op);
-        if (move) play(move);
-      }, BOT_DELAY);
-    } else if (op === 'stockfish') engineTurn(still);
-    else if (op === 'claude') {
-      const backend = claudeBackend();
-      if (backend === 'sample') claudeSampleTurn(still);
-      else if (backend === 'mcp') claudeMcpTurn();
-      else render();
-    }
+    if (playerOf(game.state.turn) === 'stockfish') return engineTurn(still);
+    const backend = claudeBackend();
+    if (backend === 'sample') claudeSampleTurn(still);
+    else if (backend === 'mcp') claudeMcpTurn();
+    else render();
   }
 
   // Stockfish alone: think for the set time at full strength and play its best move.
@@ -1339,8 +1339,9 @@ const Uci = (() => {
     }
   }
 
-  // Claude through MCP: tell the bridge it is Claude's turn (the sync does that) and wait for
-  // the move to come back. Stockfish warms its hash table on the position meanwhile.
+  // Stockshark through MCP: Claude Code does the planning. The sync tells the bridge it is
+  // Stockshark's turn; the move comes back as a message. Stockfish warms its hash table on
+  // the position meanwhile.
   function claudeMcpTurn() {
     ui.claude.phase = 'mcp';
     maybePonder();
@@ -1348,11 +1349,12 @@ const Uci = (() => {
   }
 
   function onClaudeMove(msg) {
-    if (prefs.opponent !== 'claude' || msg.gameId !== game.id || msg.ply !== game.history.length || !botTurn()) return;
+    const mover = game.state.turn;
+    if (playerOf(mover) !== 'stockshark' || msg.gameId !== game.id || msg.ply !== game.history.length || !botTurn()) return;
     const move = findLegal(msg.uci);
     if (!move) return;
-    ui.claude.plan = msg.plan || ui.claude.plan;
-    ui.claude.comment = msg.comment || '';
+    ui.plans[mover] = { plan: msg.plan || ui.plans[mover].plan, comment: msg.comment || '' };
+    ui.planColor = mover;
     ui.claude.veto = '';
     ui.claude.asked = '';
     if (msg.eval) setEval(msg.eval, 'w');
@@ -1360,8 +1362,9 @@ const Uci = (() => {
     play(move);
   }
 
-  // Claude in the artifact: Stockfish scouts the candidates, Claude picks one that fits its
-  // plan (testing lines with Stockfish if it likes), Stockfish checks the pick.
+  // Stockshark in the artifact: Stockfish scouts the candidates, Claude (through claude.ai)
+  // picks the one that fits its plan, testing lines with Stockfish if it likes, and
+  // Stockfish checks the pick.
   async function claudeSampleTurn(still) {
     if (!Engine.backend && boot.probing) return render();
     const ctl = new AbortController();
@@ -1431,10 +1434,10 @@ const Uci = (() => {
       }
     } else {
       move = findLegal(lines[0].pv[0]);
-      c.veto = `Claude's answer named no legal move${parsed.move ? ` (“${parsed.move}”)` : ''}, so Stockfish played its best.`;
+      c.veto = `Stockshark's answer named no legal move${parsed.move ? ` (“${parsed.move}”)` : ''}, so Stockfish played its best.`;
     }
-    c.plan = parsed.plan || c.plan;
-    c.comment = parsed.comment || '';
+    ui.plans[mover] = { plan: parsed.plan || ui.plans[mover].plan, comment: parsed.comment || '' };
+    ui.planColor = mover;
     c.phase = '';
     c.draft = '';
     if (move) play(move);
@@ -1489,6 +1492,7 @@ const Uci = (() => {
 
   function samplePrompt(lines) {
     const s = game.state, me = s.turn, colour = me === 'w' ? 'White' : 'Black';
+    const opponent = { you: 'a human', stockfish: 'Stockfish 19 playing on its own', stockshark: 'another Stockshark' }[playerOf(Chess.other(me))];
     const margin = VETO[prefs.veto];
     const cands = lines.map((l, i) => {
       const wdl = l.wdl ? ` (win ${Math.round(l.wdl[0] / 10)}%, draw ${Math.round(l.wdl[1] / 10)}%, loss ${Math.round(l.wdl[2] / 10)}%)` : '';
@@ -1499,7 +1503,7 @@ const Uci = (() => {
       : margin === 0
         ? "Stockfish will replace any move that is not its best, so you mostly explain and plan."
         : `Stockfish will replace any move scoring more than ${(margin / 100).toFixed(2)} pawns below its best.`;
-    return `You are the strategist of a chess team called Stockshark, playing ${colour} against a human. Stockfish 19, the strongest engine there is, does the calculating; you choose the plan and the move that serves it, and you talk to the human about it.
+    return `You are the strategist of a chess team called Stockshark, playing ${colour} against ${opponent}. Stockfish 19, the strongest engine there is, does the calculating; you choose the plan and the move that serves it, and you explain it to the person at the board.
 
 How to choose:
 - Pick one of Stockfish's candidates below, preferring the one that fits a coherent long-term plan. ${rule}
@@ -1510,14 +1514,14 @@ Position (${colour} to move), FEN: ${Chess.toFEN(s)}
 ${boardText(s)}
 (White's pieces are uppercase.)
 Moves so far: ${movetext() || '(none)'}
-Your plan from last move: ${ui.claude.plan || '(none yet)'}
+Your plan from last move: ${ui.plans[me].plan || '(none yet)'}
 
 Stockfish's candidates for ${colour}, scores from your side (+ is good for you):
 ${cands}
 
 Reply in exactly this format and nothing else:
 PLAN: <two to four sentences: the goal, the route, what to watch for>
-COMMENT: <one short, friendly sentence to your opponent about this move>
+COMMENT: <one short, friendly sentence about this move for the person at the board>
 MOVE: <your move in SAN, for example Nf3>`;
   }
 
@@ -1590,7 +1594,7 @@ MOVE: <your move in SAN, for example Nf3>`;
       case 'session_expired': return 'Your claude.ai session expired. Sign in again, then ask again.';
       case 'sampling_disabled': return 'Claude is not available for this account.';
       case 'tools_unavailable': return 'This view cannot lend Claude the Stockfish tool.';
-      default: return 'Claude did not answer this time. Ask again, or let Stockfish move.';
+      default: return 'Stockshark got no answer from Claude this time. Ask again, or let Stockfish move.';
     }
   }
 
@@ -1598,12 +1602,12 @@ MOVE: <your move in SAN, for example Nf3>`;
 
   function maybePonder() {
     // Start the in-page engine download early, while the human thinks about a move.
-    if (ENGINE_BOTS.has(prefs.opponent) && Engine.backend === 'wasm' && wasm.status === 'off' && !wasm.loading) {
+    if (anyBot() && Engine.backend === 'wasm' && wasm.status === 'off' && !wasm.loading) {
       wasm.ensure().then(() => { if (!botTurn()) maybePonder(); }, () => render());
     }
-    const on = prefs.ponder && ENGINE_BOTS.has(prefs.opponent) && !game.outcome && Engine.backend;
-    const claudeWaiting = prefs.opponent === 'claude' && botTurn() && claudeBackend() === 'mcp';
-    if (on && (humanTurn() || claudeWaiting) && (Engine.backend === 'bridge' || wasm.status === 'ready')) {
+    const on = prefs.ponder && anyBot() && !game.outcome && Engine.backend;
+    const sharkWaiting = botTurn() && playerOf(game.state.turn) === 'stockshark' && claudeBackend() === 'mcp';
+    if (on && (humanTurn() || sharkWaiting) && (Engine.backend === 'bridge' || wasm.status === 'ready')) {
       ui.live = { kind: 'ponder', info: null, started: Date.now(), ms: 0, fen: Chess.toFEN(game.state) };
       Engine.ponder({ startFen: Chess.START, moves: uciList() });
     } else {
@@ -1640,25 +1644,34 @@ MOVE: <your move in SAN, for example Nf3>`;
     link.send({
       t: 'sync',
       game: {
-        id: game.id, startFen: Chess.START, moves: uciList(), mode: prefs.opponent, botColor: botColor(),
-        thinkMs: prefs.think * 1000, veto: VETO[prefs.veto], outcome: game.outcome, plan: ui.claude.plan,
+        id: game.id, startFen: Chess.START, moves: uciList(), players: { w: playerOf('w'), b: playerOf('b') },
+        thinkMs: prefs.think * 1000, veto: VETO[prefs.veto], outcome: game.outcome,
+        plans: { w: ui.plans.w.plan, b: ui.plans.b.plan },
       },
     });
   }
 
   // ---- Undo, draws, resignation ---------------------------------------------------------------
 
-  const canUndo = () => !!game.manual || (vsBot() ? game.history.some(h => h.move.piece[0] === prefs.side) : game.history.length > 0);
+  // A resignation or agreed draw is taken back on its own. Two people take back one move;
+  // one person goes back to their own previous move so it is their turn again. A game
+  // between two bots has nobody to take a move back.
+  const canUndo = () => {
+    if (game.manual) return true;
+    const hs = humans();
+    if (hs.length === 2) return game.history.length > 0;
+    return hs.length === 1 && game.history.some(h => h.move.piece[0] === hs[0]);
+  };
 
-  // A resignation or agreed draw is taken back on its own. Otherwise, against a bot, go back
-  // to your own previous move so it is your turn again.
   function undo() {
     if (!canUndo()) return;
     cancelBot();
+    const hs = humans();
     if (game.manual) game.manual = null;
+    else if (hs.length === 2) pop();
     else {
       let move;
-      do move = pop(); while (vsBot() && move.piece[0] !== prefs.side);
+      do move = pop(); while (move.piece[0] !== hs[0]);
     }
     ui.live = null;
     settle();
@@ -1669,29 +1682,25 @@ MOVE: <your move in SAN, for example Nf3>`;
   function offerDraw() {
     if (game.outcome) return;
     const agreed = { result: '½–½', reason: 'agreement' };
-    if (!vsBot()) return end(agreed);
-    if (prefs.opponent === 'claude' && claudeBackend() === 'mcp' && link.claude && link.claude.connected) {
+    const hs = humans();
+    if (hs.length === 2) return end(agreed);
+    if (hs.length !== 1) return;
+    const bot = Chess.other(hs[0]), name = PLAYERS[playerOf(bot)];
+    if (playerOf(bot) === 'stockshark' && claudeBackend() === 'mcp' && link.claude && link.claude.connected) {
       ui.drawPending = true;
-      ui.note = 'Draw offered. Claude will answer when it has thought about it; moving withdraws the offer.';
+      ui.note = 'Draw offered. Stockshark will answer when it has thought about it; moving withdraws the offer.';
       link.send({ t: 'draw_offer', gameId: game.id });
       return render();
     }
-    if (ENGINE_BOTS.has(prefs.opponent)) {
-      // Stockfish takes a draw when it is not better.
-      if (!ui.eval) {
-        ui.note = `${BOTS[prefs.opponent]} declines. It has not evaluated the position yet.`;
-        return render();
-      }
-      const mine = botColor() === 'w' ? ui.eval : Uci.negate(ui.eval);
-      const v = Uci.value(mine);
-      if (v <= -50 || (Math.abs(v) <= 15 && game.history.length >= 60)) return end(agreed);
-      ui.note = `${BOTS[prefs.opponent]} declines. It rates its side at ${Uci.format(mine)}.`;
+    // Otherwise the engine's evaluation decides: a draw is taken when the bot is not better.
+    if (!ui.eval) {
+      ui.note = `${name} declines. It has not evaluated the position yet.`;
       return render();
     }
-    const material = { w: 0, b: 0 };
-    for (const p of game.state.board) if (p) material[p[0]] += Chess.VALUE[p[1]];
-    if (material[Chess.other(prefs.side)] < material[prefs.side]) return end(agreed);
-    ui.note = `${BOTS[prefs.opponent]} declines. It only takes a draw when it is behind on material.`;
+    const mine = bot === 'w' ? ui.eval : Uci.negate(ui.eval);
+    const v = Uci.value(mine);
+    if (v <= -50 || (Math.abs(v) <= 15 && game.history.length >= 60)) return end(agreed);
+    ui.note = `${name} declines. It rates its side at ${Uci.format(mine)}.`;
     render();
   }
 
@@ -1703,20 +1712,21 @@ MOVE: <your move in SAN, for example Nf3>`;
       armTimer = setTimeout(() => { ui.armed = false; renderControls(); }, 3000);
       return renderControls();
     }
-    const loser = vsBot() ? prefs.side : game.state.turn;
+    const hs = humans();
+    if (!hs.length) return;
+    const loser = hs.length === 1 ? hs[0] : game.state.turn;
     end({ result: loser === 'w' ? '0–1' : '1–0', reason: 'resignation', winner: Chess.other(loser) });
   }
 
   // ---- Saving -----------------------------------------------------------------------------
 
   const snapshot = () => ({
-    prefs: Object.assign({}, prefs),
+    prefs: Object.assign({}, prefs, { players: Object.assign({}, prefs.players) }),
     id: game.id,
     moves: game.history.map(h => Chess.uci(h.move)),
     manual: game.manual,
     flipped: ui.flipped,
-    plan: ui.claude.plan,
-    comment: ui.claude.comment,
+    plans: { w: Object.assign({}, ui.plans.w), b: Object.assign({}, ui.plans.b) },
   });
 
   function save() {
@@ -1726,14 +1736,22 @@ MOVE: <your move in SAN, for example Nf3>`;
   function restore(data) {
     if (!data || typeof data !== 'object') return;
     const p = data.prefs || {};
-    if (p.opponent in BOTS || p.opponent === 'human') prefs.opponent = p.opponent;
-    if (p.side === 'w' || p.side === 'b') prefs.side = p.side;
+    if (p.players && p.players.w in PLAYERS && p.players.b in PLAYERS) prefs.players = { w: p.players.w, b: p.players.b };
+    else if (typeof p.opponent === 'string') {
+      // Saved before players were chosen per side: one person against one bot (the greedy and
+      // random bots are gone, so Stockshark takes their seat).
+      const side = p.side === 'b' ? 'b' : 'w';
+      prefs.players = p.opponent === 'human'
+        ? { w: 'you', b: 'you' }
+        : { [side]: 'you', [Chess.other(side)]: p.opponent === 'stockfish' ? 'stockfish' : 'stockshark' };
+    }
     if (THINK.includes(Number(p.think))) prefs.think = Number(p.think);
     if (p.veto in VETO) prefs.veto = p.veto;
     if (typeof p.ponder === 'boolean') prefs.ponder = p.ponder;
     if (p.build === 'full' || p.build === 'lite') prefs.build = p.build;
+    if (typeof p.planHidden === 'boolean') prefs.planHidden = p.planHidden;
     if (typeof data.id === 'string' && data.id) game.id = data.id.slice(0, 40);
-    ui.flipped = 'flipped' in data ? !!data.flipped : vsBot() && prefs.side === 'b';
+    ui.flipped = 'flipped' in data ? !!data.flipped : defaultFlip();
     for (const text of Array.isArray(data.moves) ? data.moves : []) {
       const move = game.legal.find(m => Chess.uci(m) === text);
       if (!move || game.outcome) break;
@@ -1744,8 +1762,15 @@ MOVE: <your move in SAN, for example Nf3>`;
       game.manual = { result: m.result, reason: m.reason, winner: m.winner === 'w' || m.winner === 'b' ? m.winner : undefined };
       settle();
     }
-    if (typeof data.plan === 'string') ui.claude.plan = data.plan.slice(0, 1500);
-    if (typeof data.comment === 'string') ui.claude.comment = data.comment.slice(0, 400);
+    const text = (v, n) => (typeof v === 'string' ? v.slice(0, n) : '');
+    if (data.plans && typeof data.plans === 'object') {
+      for (const c of ['w', 'b']) {
+        const saved = data.plans[c];
+        if (saved && typeof saved === 'object') ui.plans[c] = { plan: text(saved.plan, 1500), comment: text(saved.comment, 400) };
+      }
+    } else if (typeof data.plan === 'string') {
+      ui.plans[sharks()[0] || 'b'] = { plan: text(data.plan, 1500), comment: text(data.comment, 400) };
+    }
   }
 
   // ---- Rendering --------------------------------------------------------------------------
@@ -1839,7 +1864,7 @@ MOVE: <your move in SAN, for example Nf3>`;
   }
 
   function renderEngine() {
-    const show = ENGINE_BOTS.has(prefs.opponent);
+    const show = anyBot();
     $('engine').hidden = !show;
     if (!show) return;
     $('engine-name').textContent = engineLabel();
@@ -1851,7 +1876,7 @@ MOVE: <your move in SAN, for example Nf3>`;
     else if (Engine.backend === 'wasm' && wasm.status === 'off') { state = 'Not loaded'; cls = ''; }
     else if (Engine.backend === 'bridge' && link.engine && link.engine.error && !link.engine.ready) { state = 'Error'; cls = 'bad'; }
     else if (Engine.backend === 'bridge' && link.engine && !link.engine.ready) { state = 'Starting'; cls = 'busy'; }
-    else if (ui.live && ui.live.kind === 'ponder' && ui.live.info) { state = 'On your time'; cls = 'busy'; }
+    else if (ui.live && ui.live.kind === 'ponder' && ui.live.info) { state = humanTurn() ? 'On your time' : 'Thinking ahead'; cls = 'busy'; }
     else if (ui.live && ui.live.kind !== 'ponder') { state = 'Thinking'; cls = 'busy'; }
     pill.textContent = state;
     pill.className = 'pill ' + cls;
@@ -1873,7 +1898,7 @@ MOVE: <your move in SAN, for example Nf3>`;
   function renderEval() {
     const bar = $('evalbar');
     const e = ui.eval;
-    bar.classList.toggle('idle', !e || !ENGINE_BOTS.has(prefs.opponent));
+    bar.classList.toggle('idle', !e || !anyBot());
     bar.classList.toggle('flipped', ui.flipped);
     let pct = 50;
     if (e && e.mate !== undefined) pct = e.mate > 0 ? 100 : e.mate < 0 ? 0 : 50;
@@ -1883,11 +1908,29 @@ MOVE: <your move in SAN, for example Nf3>`;
     bar.setAttribute('aria-label', e ? `Evaluation ${Uci.format(e)} for White` : 'No evaluation yet');
   }
 
+  // Whose plan the panel shows: the one Stockshark, or with Stockshark on both sides, the side
+  // thinking now or the one that moved last.
+  function planSide() {
+    const ss = sharks();
+    if (ss.length === 1) return ss[0];
+    if (botTurn() && playerOf(game.state.turn) === 'stockshark') return game.state.turn;
+    return ui.planColor || 'w';
+  }
+
   function renderClaude() {
-    const show = prefs.opponent === 'claude';
+    const show = sharks().length > 0;
     $('claude').hidden = !show;
     if (!show) return;
-    const c = ui.claude, backend = claudeBackend();
+    const c = ui.claude, backend = claudeBackend(), side = planSide();
+    const sharkTurn = botTurn() && playerOf(game.state.turn) === 'stockshark';
+    $('claude-side').textContent = sharks().length === 2 ? ` · ${side === 'w' ? 'White' : 'Black'}` : '';
+    const collapsed = prefs.planHidden;
+    $('claude-body').hidden = collapsed;
+    const toggle = $('plan-toggle');
+    toggle.textContent = collapsed ? 'Show' : 'Hide';
+    toggle.setAttribute('aria-expanded', String(!collapsed));
+    toggle.setAttribute('aria-label', collapsed ? "Show Stockshark's plan" : "Hide Stockshark's plan");
+
     const pill = $('claude-state');
     let state = '', cls = '';
     const connect = $('claude-connect');
@@ -1895,46 +1938,46 @@ MOVE: <your move in SAN, for example Nf3>`;
     const buttons = { copy: false, retry: false, stop: false, fallback: false };
     if (backend === 'mcp') {
       const lc = link.claude || {};
-      if (!lc.connected) { state = 'Not connected'; cls = 'bad'; }
+      if (!lc.connected) { state = 'Offline'; cls = 'bad'; }
       else if (lc.busy) { state = 'Analysing'; cls = 'busy'; }
-      else if (botTurn()) { state = 'Thinking'; cls = 'busy'; }
-      else if (lc.waiting) { state = 'Waiting for you'; cls = 'ok'; }
+      else if (sharkTurn) { state = 'Thinking'; cls = 'busy'; }
+      else if (lc.waiting) { state = humans().length ? 'Your move' : 'Waiting'; cls = 'ok'; }
       else { state = 'Connected'; cls = 'ok'; }
       if (!lc.connected) {
-        connect.innerHTML = 'Claude plays through Claude Code. In the <code>stockshark</code> folder run <code>claude</code>, then <code>' + MCP_COMMAND + '</code>.';
+        connect.innerHTML = 'Stockshark plans with Claude Code. In the <code>stockshark</code> folder run <code>claude</code>, then <code>' + MCP_COMMAND + '</code>.';
         connectText = 'x';
         buttons.copy = true;
       }
-      buttons.fallback = botTurn();
+      buttons.fallback = sharkTurn;
     } else if (backend === 'sample') {
-      if (c.phase === 'scouting') { state = 'Stockfish scouting'; cls = 'busy'; }
-      else if (c.phase === 'asking') { state = 'Claude thinking'; cls = 'busy'; }
+      if (c.phase === 'scouting') { state = 'Scouting'; cls = 'busy'; }
+      else if (c.phase === 'asking') { state = 'Planning'; cls = 'busy'; }
       else if (c.phase === 'checking') { state = 'Checking'; cls = 'busy'; }
       else if (c.phase === 'error') { state = 'No answer'; cls = 'bad'; }
       else { state = 'Ready'; cls = 'ok'; }
-      buttons.stop = c.phase === 'asking' || c.phase === 'scouting';
-      buttons.retry = c.phase === 'error' && botTurn();
-      buttons.fallback = botTurn() && c.phase !== 'checking';
+      buttons.stop = sharkTurn && (c.phase === 'asking' || c.phase === 'scouting');
+      buttons.retry = sharkTurn && c.phase === 'error';
+      buttons.fallback = sharkTurn && c.phase !== 'checking';
       if (c.error) { connect.textContent = c.error; connectText = 'x'; }
     } else {
       state = 'Unavailable';
       cls = 'bad';
       connect.innerHTML = claudeApi.checked
-        ? 'Claude needs either the Stockshark bridge (run <code>npm start</code> and open <code>http://127.0.0.1:8787</code>) or this page opened on claude.ai.'
+        ? 'Stockshark plans with Claude. Run the Stockshark bridge (<code>npm start</code>, then open <code>http://127.0.0.1:8787</code>) with Claude Code, or open this page on claude.ai.'
         : 'Looking for Claude…';
       connectText = 'x';
-      buttons.fallback = botTurn() && !!Engine.backend;
+      buttons.fallback = sharkTurn && !!Engine.backend;
     }
     pill.textContent = state;
     pill.className = 'pill ' + cls;
     connect.hidden = !connectText;
 
-    const drafting = c.phase === 'asking' && c.draft;
+    const drafting = backend === 'sample' && c.phase === 'asking' && c.draft && side === game.state.turn;
     const draft = drafting ? parseReply(c.draft) : null;
-    $('claude-plan').textContent = drafting && draft.plan ? draft.plan : c.plan;
-    $('claude-comment').textContent = drafting ? (draft.comment || '') : c.comment;
+    $('claude-plan').textContent = drafting && draft.plan ? draft.plan : ui.plans[side].plan;
+    $('claude-comment').textContent = drafting ? (draft.comment || '') : ui.plans[side].comment;
     const veto = $('claude-veto');
-    const asked = c.asked && (c.phase === 'asking' || backend === 'mcp') && botTurn() ? `Testing ${c.asked} with Stockfish…` : '';
+    const asked = c.asked && (c.phase === 'asking' || backend === 'mcp') && sharkTurn ? `Testing ${c.asked} with Stockfish…` : '';
     veto.textContent = c.veto || asked;
     veto.hidden = !(c.veto || asked);
     $('claude-copy').hidden = !buttons.copy;
@@ -1953,29 +1996,27 @@ MOVE: <your move in SAN, for example Nf3>`;
     } else {
       const check = Chess.inCheck(s, s.turn);
       if (botTurn()) {
-        const op = prefs.opponent;
-        line = `${BOTS[op]} is thinking…`;
-        if (op === 'stockfish' || op === 'claude') {
-          if (!Engine.backend && boot.probing) note = note || 'Looking for Stockfish…';
-          else if (Engine.backend === 'wasm' && wasm.status === 'loading') note = note || `Loading Stockfish 19: ${Math.round(wasm.progress * 100)}% of ${Math.round(wasm.manifest.builds[prefs.build].bytes / 1048576)} MB. It stays saved for next time.`;
-          else if (ui.engineError) note = note || ui.engineError;
-          else if (!Engine.backend && op === 'stockfish') note = note || 'No Stockfish is available here. Run the Stockshark bridge (npm start) and open http://127.0.0.1:8787.';
-        }
-        if (op === 'claude') {
+        const p = playerOf(s.turn);
+        line = `${PLAYERS[p]} is thinking…`;
+        if (!Engine.backend && boot.probing) note = note || 'Looking for Stockfish…';
+        else if (Engine.backend === 'wasm' && wasm.status === 'loading') note = note || `Loading Stockfish 19: ${Math.round(wasm.progress * 100)}% of ${Math.round(wasm.manifest.builds[prefs.build].bytes / 1048576)} MB. It stays saved for next time.`;
+        else if (ui.engineError) note = note || ui.engineError;
+        else if (!Engine.backend && p === 'stockfish') note = note || 'No Stockfish is available here. Run the Stockshark bridge (npm start) and open http://127.0.0.1:8787.';
+        if (p === 'stockshark') {
           const backend = claudeBackend(), c = ui.claude;
           if (backend === 'mcp') {
-            line = 'Claude is planning…';
+            line = 'Stockshark is planning…';
             if (!(link.claude && link.claude.connected)) note = note || 'Waiting for Claude Code to connect.';
           } else if (backend === 'sample') {
             line = c.phase === 'scouting' ? 'Stockfish is scouting candidates…'
-              : c.phase === 'asking' ? 'Claude is choosing a plan…'
-                : c.phase === 'checking' ? 'Stockfish is checking Claude’s pick…'
-                  : c.phase === 'error' ? 'Claude did not answer.' : 'Claude is planning…';
+              : c.phase === 'asking' ? 'Stockshark is choosing a plan…'
+                : c.phase === 'checking' ? 'Stockfish is checking the pick…'
+                  : c.phase === 'error' ? 'Stockshark did not answer.' : 'Stockshark is planning…';
           } else {
-            line = 'Claude is not available here.';
+            line = 'Stockshark can’t reach Claude here.';
           }
         }
-      } else if (vsBot()) line = check ? 'Your move. You are in check.' : 'Your move';
+      } else if (humans().length === 1) line = check ? 'Your move. You are in check.' : 'Your move';
       else line = `${nameOf(s.turn)} to move` + (check ? '. Check.' : '');
       if (!note && !game.history.length && !botTurn()) note = 'Tap a piece to see where it can go, or drag it there.';
     }
@@ -2009,25 +2050,22 @@ MOVE: <your move in SAN, for example Nf3>`;
   }
 
   function renderControls() {
+    const people = humans().length, bots = anyBot();
     $('undo').disabled = !canUndo();
-    $('draw').disabled = !!game.outcome || ui.drawPending;
-    $('resign').disabled = !!game.outcome;
+    $('draw').disabled = !!game.outcome || ui.drawPending || !people;
+    $('resign').disabled = !!game.outcome || !people;
     $('resign').textContent = ui.armed ? 'Confirm resign' : 'Resign';
     $('resign').classList.toggle('armed', ui.armed);
-    $('opponent').value = prefs.opponent;
-    $('side').value = prefs.side;
-    $('side').disabled = !vsBot();
+    $('player-w').value = playerOf('w');
+    $('player-b').value = playerOf('b');
     $('think').value = String(prefs.think);
     $('veto').value = prefs.veto;
     $('build').value = prefs.build;
     $('ponder').checked = prefs.ponder;
-    const engineOn = ENGINE_BOTS.has(prefs.opponent);
-    $('think-field').hidden = !engineOn;
-    $('veto-field').hidden = prefs.opponent !== 'claude';
-    $('ponder-field').hidden = !engineOn;
-    $('build-field').hidden = !(engineOn && Engine.backend === 'wasm' && Object.keys(wasm.manifest.builds).length > 1);
-    const claudeOpt = $('opponent').querySelector('option[value="claude"]');
-    claudeOpt.textContent = link.open ? 'Claude + Stockfish (MCP)' : 'Claude + Stockfish';
+    $('think-field').hidden = !bots;
+    $('veto-field').hidden = !sharks().length;
+    $('ponder-field').hidden = !(bots && people);
+    $('build-field').hidden = !(bots && Engine.backend === 'wasm' && Object.keys(wasm.manifest.builds).length > 1);
   }
 
   function renderOverlays() {
@@ -2155,7 +2193,7 @@ MOVE: <your move in SAN, for example Nf3>`;
 
   function newGame() {
     reset();
-    ui.flipped = vsBot() && prefs.side === 'b';
+    ui.flipped = defaultFlip();
     commit();
   }
 
@@ -2167,10 +2205,11 @@ MOVE: <your move in SAN, for example Nf3>`;
   $('resign').addEventListener('click', resign);
   $('flip').addEventListener('click', () => { ui.flipped = !ui.flipped; save(); render(); });
 
+  // Players can change mid-game: pick "You" for a side to take it over from a bot.
   function changeSetup() {
-    const before = prefs.opponent;
-    prefs.opponent = $('opponent').value;
-    prefs.side = $('side').value;
+    const before = playerOf('w') + playerOf('b');
+    const pick = v => (v in PLAYERS ? v : 'you');
+    prefs.players = { w: pick($('player-w').value), b: pick($('player-b').value) };
     prefs.think = Number($('think').value) || 60;
     prefs.veto = $('veto').value in VETO ? $('veto').value : 'tight';
     prefs.ponder = $('ponder').checked;
@@ -2179,8 +2218,11 @@ MOVE: <your move in SAN, for example Nf3>`;
       prefs.build = build;
       wasm.terminate();
     }
-    if (vsBot()) ui.flipped = prefs.side === 'b';
-    if (before !== prefs.opponent) ui.live = null;
+    if (before !== playerOf('w') + playerOf('b')) {
+      ui.flipped = defaultFlip();
+      ui.live = null;
+      ui.drawPending = false;
+    }
     ui.selected = -1;
     ui.targets = [];
     ui.promo = null;
@@ -2188,7 +2230,13 @@ MOVE: <your move in SAN, for example Nf3>`;
     ui.engineError = '';
     commit();
   }
-  for (const id of ['opponent', 'side', 'think', 'veto', 'ponder', 'build']) $(id).addEventListener('change', changeSetup);
+  for (const id of ['player-w', 'player-b', 'think', 'veto', 'ponder', 'build']) $(id).addEventListener('change', changeSetup);
+
+  $('plan-toggle').addEventListener('click', () => {
+    prefs.planHidden = !prefs.planHidden;
+    save();
+    renderClaude();
+  });
 
   $('claude-copy').addEventListener('click', () => {
     const btn = $('claude-copy');
@@ -2199,7 +2247,7 @@ MOVE: <your move in SAN, for example Nf3>`;
   $('claude-stop').addEventListener('click', () => {
     cancelBot();
     ui.claude.phase = 'error';
-    ui.claude.error = 'Stopped. Ask Claude again, or let Stockfish move.';
+    ui.claude.error = 'Stopped. Ask Stockshark again, or let Stockfish move.';
     ui.live = null;
     render();
   });
