@@ -1,0 +1,2233 @@
+<title>Stockshark Bot</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: the board owns the left and sets the scale, with a thin evaluation bar on its
+   edge; a scoresheet column on the right carries the status, the engine readout, Claude's
+   plan, the notation and the controls, and drops under the board on phones. */
+:root {
+  --bg: #e7eaee;
+  --surface: #f5f6f8;
+  --ink: #18212b;
+  --muted: #5a6877;
+  --line: #c7ced6;
+  --brass: #8f5d0b;
+  --brass-wash: rgba(226, 164, 40, .58);
+  --brass-solid: rgba(226, 164, 40, .9);
+  --brass-tint: rgba(226, 164, 40, .14);
+  --sq-light: #e2e6ea;
+  --sq-dark: #8195a9;
+  --hint: rgba(18, 28, 40, .26);
+  --check-core: rgba(214, 48, 36, .95);
+  --check-mid: rgba(214, 48, 36, .55);
+  --danger: #b93a2b;
+  --on-danger: #fff7f5;
+  --ok: #2c7655;
+  --piece-white: #fbfbf9;
+  --piece-black: #1d2329;
+  --scrim: rgba(231, 234, 238, .64);
+  --shade: rgba(10, 16, 24, .3);
+  --shadow: 0 1px 2px rgba(24, 33, 43, .08), 0 12px 32px rgba(24, 33, 43, .13);
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Instrument Sans", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --side: 320px;
+  --bar: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11151a; --surface: #192027; --ink: #e7ebef; --muted: #93a0ad; --line: #2d3743;
+    --brass: #e3ab45; --brass-wash: rgba(226, 164, 40, .5); --brass-solid: rgba(226, 164, 40, .85); --brass-tint: rgba(226, 164, 40, .12);
+    --sq-light: #cdd4db; --sq-dark: #6d8196; --hint: rgba(18, 28, 40, .3);
+    --danger: #d9513f; --on-danger: #fff7f5; --ok: #5cc196; --scrim: rgba(17, 21, 26, .66); --shade: rgba(0, 0, 0, .5);
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 12px 32px rgba(0, 0, 0, .45);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11151a; --surface: #192027; --ink: #e7ebef; --muted: #93a0ad; --line: #2d3743;
+  --brass: #e3ab45; --brass-wash: rgba(226, 164, 40, .5); --brass-solid: rgba(226, 164, 40, .85); --brass-tint: rgba(226, 164, 40, .12);
+  --sq-light: #cdd4db; --sq-dark: #6d8196; --hint: rgba(18, 28, 40, .3);
+  --danger: #d9513f; --on-danger: #fff7f5; --ok: #5cc196; --scrim: rgba(17, 21, 26, .66); --shade: rgba(0, 0, 0, .5);
+  --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 12px 32px rgba(0, 0, 0, .45);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 15px/1.45 var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+:focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
+
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 28px;
+  max-width: 1160px;
+  margin-inline: auto;
+  padding-inline: 16px;
+  padding-block: 20px;
+}
+.table {
+  flex: 0 1 auto;
+  min-width: 0;
+  width: max(280px, min(740px, calc(100vh - 128px)));
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.side {
+  flex: 0 0 var(--side);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.sheet {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Player strips line up with the board, not the evaluation bar */
+.player { display: flex; align-items: center; gap: 9px; min-height: 28px; padding-left: calc(var(--bar) + 8px); }
+.chip { flex: none; width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid var(--muted); }
+.chip.w { background: var(--piece-white); }
+.chip.b { background: var(--piece-black); }
+.who { margin-right: auto; font: 600 15px/1.2 var(--font-display); }
+.player.turn .who::after {
+  content: ""; display: inline-block; width: 7px; height: 7px; margin-left: 8px;
+  border-radius: 50%; background: var(--brass); vertical-align: 1px;
+}
+.taken {
+  display: flex; flex-wrap: wrap; justify-content: flex-end; min-width: 0;
+  padding: 1px 5px 1px 11px; border-radius: 4px; background: var(--sq-light);
+}
+.taken:empty { display: none; }
+.taken img { width: 20px; height: 20px; margin-left: -7px; }
+.plus { min-width: 3ch; text-align: right; color: var(--muted); font: 500 12px/1 var(--font-mono); font-variant-numeric: tabular-nums; }
+.plus:empty { display: none; }
+
+/* Board and evaluation bar */
+.board-row { display: grid; grid-template-columns: var(--bar) minmax(0, 1fr); gap: 8px; }
+.evalbar {
+  position: relative; border-radius: 3px; overflow: hidden;
+  background: var(--piece-black); box-shadow: inset 0 0 0 1px var(--line);
+}
+.evalbar.idle { opacity: .35; }
+.evalfill {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 50%;
+  background: var(--piece-white); transition: height .5s ease;
+}
+.evalbar.flipped .evalfill { top: 0; bottom: auto; }
+.board {
+  position: relative;
+  display: grid;
+  grid-template: repeat(8, 1fr) / repeat(8, 1fr);
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 1;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+.sq { position: relative; }
+.sq.light { background: var(--sq-light); color: var(--sq-dark); }
+.sq.dark { background: var(--sq-dark); color: var(--sq-light); }
+.sq.grab { cursor: grab; }
+.sq.hint { cursor: pointer; }
+.sq::before { content: ""; position: absolute; inset: 0; }
+.sq.last::before { background: var(--brass-wash); }
+.sq.sel::before { background: var(--brass-solid); }
+.sq.check::before { background: radial-gradient(circle at center, var(--check-core) 0%, var(--check-mid) 42%, transparent 74%); }
+.sq.hint::after { content: ""; position: absolute; inset: 36%; border-radius: 50%; background: var(--hint); }
+.sq.hint.cap::after { inset: 4%; background: none; border: max(3px, .55vmin) solid var(--hint); }
+.coord { position: absolute; font: 600 10px/1 var(--font-mono); pointer-events: none; }
+.coord.rank { top: 3px; left: 3px; }
+.coord.file { right: 4px; bottom: 3px; }
+.piece { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.sq.lift .piece { opacity: .25; }
+.ghost {
+  position: fixed; left: 0; top: 0; z-index: 20; max-width: none;
+  pointer-events: none; filter: drop-shadow(0 5px 5px var(--shade));
+}
+
+/* Promotion picker and result card sit on top of the board */
+.promo { position: absolute; inset: 0; z-index: 5; background: var(--scrim); }
+.promo-col { position: absolute; top: 0; width: 12.5%; height: 50%; display: flex; flex-direction: column; box-shadow: var(--shadow); }
+.promo-col.up { flex-direction: column-reverse; }
+.promo-col button { flex: 1; padding: 0; border: 0; border-radius: 0; background: var(--sq-light); cursor: pointer; }
+.promo-col button:hover, .promo-col button:focus-visible { background: var(--brass-solid); outline-offset: -2px; }
+.promo-col img { display: block; width: 100%; height: 100%; }
+
+.result { position: absolute; inset: 0; z-index: 6; display: grid; place-items: center; padding: 16px; background: var(--scrim); }
+.card {
+  max-width: min(320px, 100%); padding: 22px 26px; border-radius: 10px;
+  background: var(--surface); color: var(--ink); text-align: center; box-shadow: var(--shadow);
+}
+.score { font: 700 clamp(40px, 9vmin, 64px)/1 var(--font-display); letter-spacing: -.02em; }
+.card p { margin: 8px 0 16px; color: var(--muted); text-wrap: balance; }
+.card .row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+
+/* Side column */
+.mast h1 { margin: 0; font: 700 30px/1.05 var(--font-display); letter-spacing: -.02em; text-wrap: balance; }
+.mast p { margin: 6px 0 0; color: var(--muted); font-size: 14px; text-wrap: pretty; }
+
+.status { min-height: 62px; padding-top: 10px; border-top: 2px solid var(--ink); }
+.status .line { font: 600 19px/1.2 var(--font-display); text-wrap: balance; }
+.status .note { margin-top: 3px; color: var(--muted); font-size: 13.5px; }
+
+.pill {
+  flex: none; padding: 3px 8px; border-radius: 999px; border: 1px solid var(--line);
+  color: var(--muted); font: 600 10.5px/1.2 var(--font-body); text-transform: uppercase; letter-spacing: .07em; white-space: nowrap;
+}
+.pill.ok { color: var(--ok); border-color: currentColor; }
+.pill.busy { color: var(--brass); border-color: currentColor; background: var(--brass-tint); }
+.pill.bad { color: var(--danger); border-color: currentColor; }
+
+/* Engine readout: what Stockfish is looking at right now */
+.engine { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.engine-head { display: flex; align-items: flex-start; gap: 8px; min-width: 0; }
+.engine-name { min-width: 0; margin-right: auto; color: var(--muted); font: 600 11px/1.45 var(--font-body); text-transform: uppercase; letter-spacing: .08em; }
+.engine-eval { font: 600 22px/1 var(--font-mono); font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+.engine-stats { color: var(--muted); font: 500 12px/1.4 var(--font-mono); font-variant-numeric: tabular-nums; }
+.engine-pv { min-width: 0; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font: 500 12.5px/1.45 var(--font-mono); }
+.engine-main { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
+.meter { height: 3px; border-radius: 2px; background: var(--line); overflow: hidden; }
+.meter-fill { height: 100%; width: 0; background: var(--brass); transition: width .25s linear; }
+
+/* Claude's plan: the strategist's notebook */
+.claude {
+  display: flex; flex-direction: column; gap: 8px; min-width: 0;
+  padding: 12px 14px; border: 1px solid var(--line); border-left: 3px solid var(--brass); border-radius: 6px; background: var(--surface);
+}
+.claude-head { display: flex; align-items: center; gap: 8px; }
+.claude-head h2 { margin: 0 auto 0 0; font: 650 15px/1.2 var(--font-display); }
+.plan { margin: 0; font-size: 14px; line-height: 1.5; text-wrap: pretty; overflow-wrap: anywhere; }
+.plan:empty::before { content: "No plan yet. It appears here as soon as Claude makes its first move."; color: var(--muted); }
+.remark { margin: 0; color: var(--muted); font-size: 13.5px; font-style: italic; overflow-wrap: anywhere; }
+.remark:empty { display: none; }
+.veto { margin: 0; padding: 6px 8px; border-radius: 4px; background: var(--brass-tint); font-size: 13px; overflow-wrap: anywhere; }
+.connect { margin: 0; font-size: 13.5px; color: var(--muted); }
+.connect code { padding: 1px 5px; border-radius: 4px; background: var(--bg); color: var(--ink); font: 500 12.5px/1.4 var(--font-mono); overflow-wrap: anywhere; }
+.claude-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.claude-actions .btn { padding: 7px 10px; font-size: 13px; }
+
+.scoresheet {
+  flex: 1 1 141px; min-height: 141px;
+  display: flex; flex-direction: column;
+  border: 1px solid var(--line); border-radius: 6px; background: var(--surface); overflow: hidden;
+}
+.scoresheet .head, .moves li { display: grid; grid-template-columns: 4ch 1fr 1fr; column-gap: 8px; padding-inline: 12px; }
+.scoresheet .head {
+  color: var(--muted); border-bottom: 1px solid var(--line);
+  font: 600 11px/28px var(--font-body); text-transform: uppercase; letter-spacing: .08em;
+}
+.moves {
+  flex: 1; min-height: 0; margin: 0; padding: 0; list-style: none; overflow-y: auto;
+  font: 500 14px/27px var(--font-mono); font-variant-numeric: tabular-nums;
+  background: repeating-linear-gradient(to bottom, transparent 0 27px, var(--line) 27px 28px) local;
+}
+.moves li { height: 28px; }
+.moves .n { color: var(--muted); }
+.moves .cur { color: var(--brass); font-weight: 600; }
+.moves .final .m { font-weight: 600; }
+
+.actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.actions .wide { grid-column: 1 / -1; }
+.btn {
+  padding: 10px 12px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--surface); color: var(--ink); font: 500 14px/1 var(--font-body); cursor: pointer;
+}
+.btn:hover:not(:disabled) { border-color: var(--muted); }
+.btn:disabled { opacity: .45; cursor: default; }
+.btn.primary { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.btn.armed { background: var(--danger); border-color: var(--danger); color: var(--on-danger); }
+
+.setup { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; }
+.setup .wide { grid-column: 1 / -1; }
+.field { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.field label { color: var(--muted); font: 600 11px/1.2 var(--font-body); text-transform: uppercase; letter-spacing: .08em; }
+.field select {
+  width: 100%; min-width: 0; padding: 8px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--surface); color: var(--ink); font: 500 14px/1.2 var(--font-body);
+}
+.check { display: flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; }
+.check input { width: 16px; height: 16px; margin: 0; accent-color: var(--brass); }
+.credit { margin: 0; color: var(--muted); font-size: 12px; }
+.credit a { color: inherit; }
+
+@media (max-width: 760px) {
+  :root { --bar: 8px; }
+  .app { flex-direction: column; align-items: center; gap: 14px; }
+  .side { display: contents; }
+  .mast { order: -1; }
+  .mast, .table, .sheet { width: 100%; max-width: 560px; }
+  .sheet { flex: none; }
+  .mast h1 { font-size: 26px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .evalfill, .meter-fill { transition: none; }
+}
+</style>
+
+<div class="app">
+  <section class="table" aria-label="Board">
+    <div class="player" id="player-top"><span class="chip"></span><span class="who"></span><span class="taken"></span><span class="plus"></span></div>
+    <div class="board-row">
+      <div class="evalbar idle" id="evalbar" role="img" aria-label="Evaluation"><div class="evalfill" id="evalfill"></div></div>
+      <div class="board" id="board">
+        <div class="promo" id="promo" hidden><div class="promo-col" id="promo-col"></div></div>
+        <div class="result" id="result" hidden>
+          <div class="card">
+            <div class="score" id="result-score"></div>
+            <p id="result-text"></p>
+            <div class="row">
+              <button class="btn primary" id="again" type="button">New game</button>
+              <button class="btn" id="peek" type="button">See the board</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="player" id="player-bottom"><span class="chip"></span><span class="who"></span><span class="taken"></span><span class="plus"></span></div>
+  </section>
+
+  <aside class="side">
+    <header class="mast">
+      <h1>Stockshark Bot</h1>
+      <p>Every rule of the game, and opponents from a greedy shark to full-strength Stockfish with Claude as its strategist.</p>
+    </header>
+    <div class="sheet">
+      <div class="status" role="status" aria-live="polite">
+        <div class="line" id="status-line"></div>
+        <div class="note" id="status-note"></div>
+      </div>
+
+      <div class="engine" id="engine" hidden>
+        <div class="engine-head"><span class="engine-name" id="engine-name"></span><span class="pill" id="engine-state"></span></div>
+        <div class="engine-main"><span class="engine-eval" id="engine-eval"></span><span class="engine-stats" id="engine-stats"></span></div>
+        <div class="engine-pv" id="engine-pv"></div>
+        <div class="meter" id="engine-meter" hidden><div class="meter-fill" id="engine-meter-fill"></div></div>
+      </div>
+
+      <section class="claude" id="claude" hidden aria-label="Claude's plan">
+        <div class="claude-head"><h2>Claude's plan</h2><span class="pill" id="claude-state"></span></div>
+        <p class="plan" id="claude-plan"></p>
+        <p class="remark" id="claude-comment"></p>
+        <p class="veto" id="claude-veto" hidden></p>
+        <p class="connect" id="claude-connect" hidden></p>
+        <div class="claude-actions" id="claude-actions" hidden>
+          <button class="btn" id="claude-copy" type="button" hidden>Copy command</button>
+          <button class="btn" id="claude-retry" type="button" hidden>Ask Claude again</button>
+          <button class="btn" id="claude-stop" type="button" hidden>Stop</button>
+          <button class="btn" id="claude-fallback" type="button" hidden>Let Stockfish move</button>
+        </div>
+      </section>
+
+      <div class="scoresheet">
+        <div class="head"><span>No.</span><span>White</span><span>Black</span></div>
+        <ol class="moves" id="moves" aria-label="Moves"></ol>
+      </div>
+      <div class="actions">
+        <button class="btn primary wide" id="new" type="button">New game</button>
+        <button class="btn" id="undo" type="button">Take back</button>
+        <button class="btn" id="flip" type="button">Flip board</button>
+        <button class="btn" id="draw" type="button">Offer draw</button>
+        <button class="btn" id="resign" type="button">Resign</button>
+      </div>
+      <div class="setup">
+        <div class="field wide">
+          <label for="opponent">Opponent</label>
+          <select id="opponent">
+            <option value="stockfish">Stockfish 19 (max strength)</option>
+            <option value="claude">Claude + Stockfish</option>
+            <option value="stockshark">Stockshark (greedy)</option>
+            <option value="monkey">Monkey (random moves)</option>
+            <option value="human">A friend (same screen)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="side">You play</label>
+          <select id="side">
+            <option value="w">White</option>
+            <option value="b">Black</option>
+          </select>
+        </div>
+        <div class="field" id="think-field">
+          <label for="think">Think time</label>
+          <select id="think">
+            <option value="5">5 s a move</option>
+            <option value="15">15 s a move</option>
+            <option value="30">30 s a move</option>
+            <option value="60">1 min a move</option>
+            <option value="120">2 min a move</option>
+            <option value="300">5 min a move</option>
+            <option value="600">10 min a move</option>
+          </select>
+        </div>
+        <div class="field" id="veto-field">
+          <label for="veto">Stockfish veto</label>
+          <select id="veto">
+            <option value="strict">Best move only</option>
+            <option value="tight">Within 0.20</option>
+            <option value="loose">Within 0.50</option>
+            <option value="off">Off: Claude decides</option>
+          </select>
+        </div>
+        <div class="field" id="build-field" hidden>
+          <label for="build">Engine</label>
+          <select id="build">
+            <option value="full">Full NNUE, 99 MB</option>
+            <option value="lite">Lite, 2 MB</option>
+          </select>
+        </div>
+        <label class="check wide" id="ponder-field"><input type="checkbox" id="ponder"> Stockfish thinks on your time too</label>
+      </div>
+      <p class="credit">Cburnett pieces by Colin M.L. Burnett, GPLv2+. <a href="https://github.com/official-stockfish/Stockfish" target="_blank" rel="noopener">Stockfish 19</a>, GPLv3, in WebAssembly via <a href="https://github.com/nmrugg/stockfish.js" target="_blank" rel="noopener">stockfish.js</a>.</p>
+    </div>
+  </aside>
+</div>
+
+<script>
+// Rules engine. No DOM in here: positions are plain objects and every function is pure.
+// Squares are 0..63 with a8 = 0 and h1 = 63; pieces are two-letter strings like "wK" or "bP".
+const Chess = (() => {
+  'use strict';
+  const FILES = 'abcdefgh';
+  const START = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+  const KNIGHT = [[-2, -1], [-2, 1], [-1, -2], [-1, 2], [1, -2], [1, 2], [2, -1], [2, 1]];
+  const DIAG = [[-1, -1], [-1, 1], [1, -1], [1, 1]];
+  const ORTH = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+  const ALL = DIAG.concat(ORTH);
+  const VALUE = { P: 1, N: 3, B: 3, R: 5, Q: 9, K: 0 };
+
+  const other = c => (c === 'w' ? 'b' : 'w');
+  const sqName = sq => FILES[sq & 7] + (8 - (sq >> 3));
+  const onBoard = (r, f) => r >= 0 && r < 8 && f >= 0 && f < 8;
+  const uci = m => sqName(m.from) + sqName(m.to) + (m.promo ? m.promo.toLowerCase() : '');
+
+  function fromFEN(fen) {
+    const [rows, turn, rights = '-', ep = '-', half, full] = fen.trim().split(/\s+/);
+    const board = new Array(64).fill(null);
+    rows.split('/').forEach((row, r) => {
+      let f = 0;
+      for (const ch of row) {
+        if (ch >= '1' && ch <= '8') f += +ch;
+        else board[r * 8 + f++] = (ch === ch.toUpperCase() ? 'w' : 'b') + ch.toUpperCase();
+      }
+    });
+    return {
+      board,
+      turn: turn === 'b' ? 'b' : 'w',
+      castle: { wk: rights.includes('K'), wq: rights.includes('Q'), bk: rights.includes('k'), bq: rights.includes('q') },
+      ep: ep === '-' ? -1 : FILES.indexOf(ep[0]) + (8 - +ep[1]) * 8,
+      half: +half || 0,
+      full: +full || 1,
+    };
+  }
+
+  function toFEN(s) {
+    const rows = [];
+    for (let r = 0; r < 8; r++) {
+      let row = '', empty = 0;
+      for (let f = 0; f < 8; f++) {
+        const p = s.board[r * 8 + f];
+        if (!p) { empty++; continue; }
+        if (empty) { row += empty; empty = 0; }
+        row += p[0] === 'w' ? p[1] : p[1].toLowerCase();
+      }
+      rows.push(row + (empty || ''));
+    }
+    const c = s.castle;
+    const rights = (c.wk ? 'K' : '') + (c.wq ? 'Q' : '') + (c.bk ? 'k' : '') + (c.bq ? 'q' : '') || '-';
+    return `${rows.join('/')} ${s.turn} ${rights} ${s.ep >= 0 ? sqName(s.ep) : '-'} ${s.half} ${s.full}`;
+  }
+
+  // Is `sq` attacked by any piece of colour `by`?
+  function attacked(board, sq, by) {
+    const r = sq >> 3, f = sq & 7;
+    const pr = by === 'w' ? r + 1 : r - 1;
+    for (const df of [-1, 1]) if (onBoard(pr, f + df) && board[pr * 8 + f + df] === by + 'P') return true;
+    for (const [dr, df] of KNIGHT) if (onBoard(r + dr, f + df) && board[(r + dr) * 8 + f + df] === by + 'N') return true;
+    for (const [dr, df] of ALL) if (onBoard(r + dr, f + df) && board[(r + dr) * 8 + f + df] === by + 'K') return true;
+    for (const [dirs, slider] of [[DIAG, 'B'], [ORTH, 'R']]) {
+      for (const [dr, df] of dirs) {
+        let rr = r + dr, ff = f + df;
+        while (onBoard(rr, ff)) {
+          const p = board[rr * 8 + ff];
+          if (p) {
+            if (p === by + slider || p === by + 'Q') return true;
+            break;
+          }
+          rr += dr; ff += df;
+        }
+      }
+    }
+    return false;
+  }
+
+  const inCheck = (s, color) => attacked(s.board, s.board.indexOf(color + 'K'), other(color));
+
+  // Moves that obey how the pieces move but may still leave the mover's king in check.
+  function pseudoMoves(s) {
+    const b = s.board, color = s.turn, opp = other(color), moves = [];
+    for (let from = 0; from < 64; from++) {
+      const piece = b[from];
+      if (!piece || piece[0] !== color) continue;
+      const r = from >> 3, f = from & 7, t = piece[1];
+
+      if (t === 'P') {
+        const dir = color === 'w' ? -1 : 1, r1 = r + dir;
+        if (!onBoard(r1, f)) continue;
+        const promotes = r1 === (color === 'w' ? 0 : 7);
+        const add = (to, captured) => {
+          if (promotes) for (const promo of ['Q', 'R', 'B', 'N']) moves.push({ from, to, piece, captured, promo });
+          else moves.push({ from, to, piece, captured });
+        };
+        if (!b[r1 * 8 + f]) {
+          add(r1 * 8 + f, null);
+          const to2 = (r + 2 * dir) * 8 + f;
+          if (r === (color === 'w' ? 6 : 1) && !b[to2]) moves.push({ from, to: to2, piece, captured: null, double: true });
+        }
+        for (const df of [-1, 1]) {
+          if (!onBoard(r1, f + df)) continue;
+          const to = r1 * 8 + f + df, target = b[to];
+          if (target && target[0] === opp) add(to, target);
+          else if (to === s.ep) moves.push({ from, to, piece, captured: opp + 'P', ep: true });
+        }
+        continue;
+      }
+
+      const dirs = t === 'N' ? KNIGHT : t === 'B' ? DIAG : t === 'R' ? ORTH : ALL;
+      const slides = t === 'B' || t === 'R' || t === 'Q';
+      for (const [dr, df] of dirs) {
+        let rr = r + dr, ff = f + df;
+        while (onBoard(rr, ff)) {
+          const to = rr * 8 + ff, target = b[to];
+          if (!target) moves.push({ from, to, piece, captured: null });
+          else {
+            if (target[0] === opp) moves.push({ from, to, piece, captured: target });
+            break;
+          }
+          if (!slides) break;
+          rr += dr; ff += df;
+        }
+      }
+    }
+
+    // Castling: king and rook unmoved, squares between empty, king not in, through or into check.
+    // (The "into check" part is caught by the legality filter like any other king move.)
+    const home = color === 'w' ? 60 : 4, king = color + 'K', rook = color + 'R';
+    if (b[home] === king && !attacked(b, home, opp)) {
+      if (s.castle[color + 'k'] && b[home + 3] === rook && !b[home + 1] && !b[home + 2] && !attacked(b, home + 1, opp))
+        moves.push({ from: home, to: home + 2, piece: king, captured: null, castle: 'k' });
+      if (s.castle[color + 'q'] && b[home - 4] === rook && !b[home - 1] && !b[home - 2] && !b[home - 3] && !attacked(b, home - 1, opp))
+        moves.push({ from: home, to: home - 2, piece: king, captured: null, castle: 'q' });
+    }
+    return moves;
+  }
+
+  function applyMove(s, m) {
+    const board = s.board.slice();
+    const color = m.piece[0];
+    board[m.from] = null;
+    board[m.to] = m.promo ? color + m.promo : m.piece;
+    if (m.ep) board[m.to + (color === 'w' ? 8 : -8)] = null;
+    if (m.castle === 'k') { board[m.to + 1] = null; board[m.to - 1] = color + 'R'; }
+    if (m.castle === 'q') { board[m.to - 2] = null; board[m.to + 1] = color + 'R'; }
+
+    const castle = Object.assign({}, s.castle);
+    if (m.piece[1] === 'K') castle[color + 'k'] = castle[color + 'q'] = false;
+    for (const sq of [m.from, m.to]) {
+      if (sq === 63) castle.wk = false;
+      if (sq === 56) castle.wq = false;
+      if (sq === 7) castle.bk = false;
+      if (sq === 0) castle.bq = false;
+    }
+    return {
+      board,
+      turn: other(color),
+      castle,
+      ep: m.double ? (m.from + m.to) / 2 : -1,
+      half: m.piece[1] === 'P' || m.captured ? 0 : s.half + 1,
+      full: s.full + (color === 'b' ? 1 : 0),
+    };
+  }
+
+  const legalMoves = s => pseudoMoves(s).filter(m => !inCheck(applyMove(s, m), s.turn));
+
+  // Two positions repeat when the same side is to move with the same pieces, castling rights
+  // and en passant possibilities. The en passant square only counts if a capture is really on.
+  function positionKey(s, legal) {
+    const c = s.castle;
+    return s.board.map(p => p || '-').join('') + s.turn +
+      (c.wk ? 'K' : '') + (c.wq ? 'Q' : '') + (c.bk ? 'k' : '') + (c.bq ? 'q' : '') +
+      (s.ep >= 0 && legal.some(m => m.ep) ? sqName(s.ep) : '');
+  }
+
+  // Dead positions: bare kings, a lone minor piece, or only bishops that all share one square colour.
+  function insufficient(board) {
+    const shades = [];
+    let knights = 0;
+    for (let sq = 0; sq < 64; sq++) {
+      const p = board[sq];
+      if (!p || p[1] === 'K') continue;
+      if (p[1] === 'N') knights++;
+      else if (p[1] === 'B') shades.push(((sq >> 3) + (sq & 7)) & 1);
+      else return false;
+    }
+    if (knights + shades.length <= 1) return true;
+    return knights === 0 && shades.every(x => x === shades[0]);
+  }
+
+  // `repeats` is how many times the current position has occurred, this time included.
+  function outcome(s, legal, repeats) {
+    if (!legal.length) {
+      if (inCheck(s, s.turn)) return { result: s.turn === 'w' ? '0–1' : '1–0', reason: 'checkmate', winner: other(s.turn) };
+      return { result: '½–½', reason: 'stalemate' };
+    }
+    if (insufficient(s.board)) return { result: '½–½', reason: 'insufficient material' };
+    if (repeats >= 3) return { result: '½–½', reason: 'threefold repetition' };
+    if (s.half >= 100) return { result: '½–½', reason: 'the fifty-move rule' };
+    return null;
+  }
+
+  // Standard algebraic notation. `legal` is the legal move list of `s`, used to disambiguate.
+  function san(s, m, legal) {
+    let text;
+    if (m.castle) text = m.castle === 'k' ? 'O-O' : 'O-O-O';
+    else if (m.piece[1] === 'P') {
+      text = (m.captured ? FILES[m.from & 7] + 'x' : '') + sqName(m.to) + (m.promo ? '=' + m.promo : '');
+    } else {
+      const rivals = legal.filter(o => o.piece === m.piece && o.to === m.to && o.from !== m.from);
+      let from = '';
+      if (rivals.length) {
+        if (!rivals.some(o => (o.from & 7) === (m.from & 7))) from = FILES[m.from & 7];
+        else if (!rivals.some(o => (o.from >> 3) === (m.from >> 3))) from = String(8 - (m.from >> 3));
+        else from = sqName(m.from);
+      }
+      text = m.piece[1] + from + (m.captured ? 'x' : '') + sqName(m.to);
+    }
+    const next = applyMove(s, m);
+    if (inCheck(next, next.turn)) text += legalMoves(next).length ? '+' : '#';
+    return text;
+  }
+
+  // The simple bots. "monkey" moves at random. "stockshark" looks exactly one move ahead: it
+  // mates if it can, otherwise grabs the biggest piece on offer, likes giving check, and never
+  // asks what happens next.
+  function chooseMove(s, level) {
+    const legal = legalMoves(s);
+    if (!legal.length) return null;
+    const pick = list => list[Math.floor(Math.random() * list.length)];
+    if (level === 'monkey') return pick(legal);
+    let best = [], top = -Infinity;
+    for (const m of legal) {
+      const next = applyMove(s, m);
+      let score;
+      if (!legalMoves(next).length) score = inCheck(next, next.turn) ? 1000 : -50;
+      else score = (m.captured ? VALUE[m.captured[1]] : 0) + (m.promo ? VALUE[m.promo] - 1 : 0) + (inCheck(next, next.turn) ? 0.5 : 0);
+      if (score > top) { top = score; best = [m]; }
+      else if (score === top) best.push(m);
+    }
+    return pick(best);
+  }
+
+  return { START, VALUE, other, sqName, uci, fromFEN, toFEN, inCheck, legalMoves, applyMove, positionKey, insufficient, outcome, san, chooseMove };
+})();
+</script>
+
+<script>
+// Engine talk shared by both ways of running Stockfish: parsing UCI output and comparing
+// scores. Mirrors server/uci.mjs and server/guard.mjs in the bridge.
+const Uci = (() => {
+  'use strict';
+  const NUMERIC = new Set(['depth', 'seldepth', 'multipv', 'nodes', 'nps', 'time', 'hashfull', 'tbhits']);
+
+  function parseInfo(line) {
+    const tok = line.trim().split(/\s+/);
+    if (tok[0] !== 'info') return null;
+    const info = {};
+    for (let i = 1; i < tok.length; i++) {
+      const key = tok[i];
+      if (NUMERIC.has(key)) info[key] = Number(tok[++i]);
+      else if (key === 'score') {
+        const kind = tok[++i], value = Number(tok[++i]);
+        info.score = kind === 'mate' ? { mate: value } : { cp: value };
+        if (tok[i + 1] === 'lowerbound' || tok[i + 1] === 'upperbound') info.bound = tok[++i].replace('bound', '');
+      } else if (key === 'wdl') {
+        info.wdl = [Number(tok[i + 1]), Number(tok[i + 2]), Number(tok[i + 3])];
+        i += 3;
+      } else if (key === 'pv') {
+        info.pv = tok.slice(i + 1);
+        break;
+      } else if (key === 'string') return null;
+      else if (key === 'currmove' || key === 'currmovenumber' || key === 'cpuload') i++;
+    }
+    if (info.depth === undefined || !info.score) return null;
+    info.multipv = info.multipv || 1;
+    info.pv = info.pv || [];
+    return info;
+  }
+
+  function mergeLine(lines, info) {
+    const slot = info.multipv - 1, old = lines[slot];
+    if (!old || info.depth > old.depth || (info.depth === old.depth && (!info.bound || old.bound))) {
+      lines[slot] = info.pv.length || !old ? info : Object.assign({}, info, { pv: old.pv });
+    }
+    return lines;
+  }
+
+  function value(score) {
+    if (!score) return 0;
+    if (score.mate !== undefined) {
+      const m = score.mate;
+      if (m > 0) return 1e6 - m * 1000;
+      if (m < 0) return -1e6 - m * 1000;
+      return -1e6;
+    }
+    return score.cp;
+  }
+
+  const negate = s => (s.mate !== undefined ? { mate: -s.mate } : { cp: -s.cp });
+
+  function format(score, ascii) {
+    if (!score) return '';
+    const minus = ascii ? '-' : '−';
+    if (score.mate !== undefined) return score.mate === 0 ? '#0' : score.mate > 0 ? `#${score.mate}` : `#${minus}${-score.mate}`;
+    const p = score.cp / 100;
+    return (p > 0 ? '+' : p < 0 ? minus : '') + Math.abs(p).toFixed(2);
+  }
+
+  return { parseInfo, mergeLine, value, negate, format };
+})();
+</script>
+
+<script>
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const boardEl = $('board'), promoEl = $('promo'), promoCol = $('promo-col'), resultEl = $('result');
+  const PIECE_NAMES = { K: 'king', Q: 'queen', R: 'rook', B: 'bishop', N: 'knight', P: 'pawn' };
+  const BOTS = { stockfish: 'Stockfish', claude: 'Claude + Stockfish', stockshark: 'Stockshark', monkey: 'Monkey' };
+  const ENGINE_BOTS = new Set(['stockfish', 'claude']);
+  const VETO = { strict: 0, tight: 20, loose: 50, off: null };
+  const THINK = [5, 15, 30, 60, 120, 300, 600];
+  const STORE = 'stockshark-bot';
+  const BOT_DELAY = 450;
+  const MCP_COMMAND = '/mcp__stockshark__play';
+
+  const phone = matchMedia('(pointer: coarse)').matches;
+  const prefs = { opponent: 'stockfish', side: 'w', think: 60, veto: 'tight', ponder: true, build: phone ? 'lite' : 'full' };
+  const game = { id: '', state: null, legal: [], history: [], keys: [], manual: null, outcome: null };
+  const ui = {
+    selected: -1, targets: [], flipped: false, promo: null, drag: null, dismissed: false, note: '', armed: false,
+    eval: null,            // latest evaluation, White's point of view
+    live: null,            // { kind: 'bot' | 'ponder' | 'claude', info, started, ms, fen }
+    engineError: '',
+    claude: { plan: '', comment: '', veto: '', phase: '', error: '', draft: '', tier: '', asked: '' },
+    drawPending: false,
+  };
+  let botTimer = 0, armTimer = 0, botSeq = 0, botAbort = null;
+
+  const pieceSrc = p => `pieces/${p}.svg`;
+  const pieceAlt = p => `${p[0] === 'w' ? 'White' : 'Black'} ${PIECE_NAMES[p[1]]}`;
+  const pieceImg = (p, alt) => {
+    const img = new Image();
+    img.decoding = 'sync';
+    img.draggable = false;
+    img.src = pieceSrc(p);
+    img.alt = alt;
+    return img;
+  };
+  const vsBot = () => prefs.opponent !== 'human';
+  const botColor = () => Chess.other(prefs.side);
+  const botTurn = () => vsBot() && !game.outcome && game.state.turn !== prefs.side;
+  const humanTurn = () => !game.outcome && (!vsBot() || game.state.turn === prefs.side);
+  const nameOf = c => (vsBot() ? (c === prefs.side ? 'You' : BOTS[prefs.opponent]) : c === 'w' ? 'White' : 'Black');
+  const uciList = () => game.history.map(h => Chess.uci(h.move));
+  const newId = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
+  const findLegal = text => game.legal.find(m => Chess.uci(m) === text) || null;
+  const abortError = () => Object.assign(new Error('cancelled'), { name: 'AbortError' });
+
+  const squares = [];
+  for (let i = 0; i < 64; i++) {
+    const el = document.createElement('div');
+    el.innerHTML = '<span class="coord rank"></span><span class="coord file"></span>';
+    boardEl.insertBefore(el, promoEl);
+    squares.push(el);
+  }
+  for (const c of 'wb') for (const t of 'KQRBNP') new Image().src = pieceSrc(c + t);
+
+  // SAN for an engine line played from `s`, with move numbers: "15… Nf6 16. Re1 d5".
+  function pvSan(s, pv, max = 10) {
+    let st = s;
+    const out = [];
+    for (const u of pv.slice(0, max)) {
+      const legal = Chess.legalMoves(st);
+      const m = legal.find(x => Chess.uci(x) === u);
+      if (!m) break;
+      const text = Chess.san(st, m, legal);
+      out.push(st.turn === 'w' ? `${st.full}. ${text}` : out.length ? text : `${st.full}… ${text}`);
+      st = Chess.applyMove(st, m);
+    }
+    return out.join(' ');
+  }
+
+  const sanOf = (s, u) => {
+    const legal = Chess.legalMoves(s);
+    const m = legal.find(x => Chess.uci(x) === u);
+    return m ? Chess.san(s, m, legal) : u;
+  };
+
+  const big = n => (n >= 1e9 ? `${(n / 1e9).toFixed(2)} G` : n >= 1e6 ? `${(n / 1e6).toFixed(1)} M` : n >= 1e3 ? `${Math.round(n / 1e3)} k` : String(n || 0));
+
+  // ---- Stockfish, two ways ----------------------------------------------------------------
+  // In the bridge (npm start): native Stockfish with every core and a big hash table, reached
+  // over a WebSocket. In the page: Stockfish compiled to WebAssembly in a worker, used when
+  // the page runs on its own (as a claude.ai artifact).
+
+  // Until we know which engine this page has, a bot turn waits instead of reporting an error.
+  const boot = { probing: true };
+  const probed = () => {
+    if (!boot.probing) return;
+    boot.probing = false;
+    render();
+    scheduleBot();
+  };
+
+  const link = {
+    ws: null, open: false, wanted: false, retry: 1000, engine: null, claude: null, searches: new Map(), seq: 0,
+
+    // The bridge marks the page it serves; anywhere else (a claude.ai artifact) the page
+    // looks for its own WebAssembly engine instead.
+    start() {
+      if (document.querySelector('meta[name="stockshark-bridge"]') && /^https?:$/.test(location.protocol)) {
+        this.wanted = true;
+        this.connect();
+      } else if (/^https?:$/.test(location.protocol)) wasm.probe().finally(probed);
+      else probed();
+    },
+
+    connect() {
+      const ws = new WebSocket(`${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/ws`);
+      this.ws = ws;
+      ws.onopen = () => {
+        this.open = true;
+        this.retry = 1000;
+        this.send({ t: 'hello' });
+        if (boot.probing) return probed();
+        render();
+        scheduleBot();
+      };
+      ws.onmessage = e => {
+        let msg;
+        try { msg = JSON.parse(e.data); } catch (err) { return; }
+        onBridgeMessage(msg);
+      };
+      ws.onclose = () => {
+        const was = this.open;
+        this.open = false;
+        this.ws = null;
+        for (const job of this.searches.values()) job.reject(new Error('Lost the connection to the Stockshark bridge. Is npm start still running?'));
+        this.searches.clear();
+        if (was) render();
+        probed();
+        if (this.wanted) setTimeout(() => this.connect(), this.retry);
+        this.retry = Math.min(this.retry * 2, 15000);
+      };
+    },
+
+    send(msg) {
+      if (this.open && this.ws) this.ws.send(JSON.stringify(msg));
+    },
+
+    search(params, onInfo, signal) {
+      return new Promise((resolve, reject) => {
+        if (!this.open) return reject(new Error('The Stockshark bridge is not connected.'));
+        const id = 's' + ++this.seq;
+        const job = { onInfo, resolve, reject };
+        this.searches.set(id, job);
+        if (signal) {
+          signal.addEventListener('abort', () => {
+            this.send({ t: 'stop', id });
+            this.searches.delete(id);
+            reject(abortError());
+          }, { once: true });
+        }
+        this.send({ t: 'search', id, fen: params.startFen, moves: params.moves, movetime: params.movetime, multipv: params.multipv || 1, searchmoves: params.searchmoves });
+      });
+    },
+  };
+
+  function onBridgeMessage(msg) {
+    switch (msg.t) {
+      case 'welcome':
+        link.engine = msg.engine;
+        link.claude = msg.claude;
+        if (msg.claude && msg.claude.plan && !ui.claude.plan) ui.claude.plan = msg.claude.plan;
+        return render();
+      case 'superseded':
+        link.wanted = false;
+        ui.note = 'This board moved to another tab. Reload to take it back.';
+        return render();
+      case 'search_info': {
+        const job = link.searches.get(msg.id);
+        if (job && job.onInfo) job.onInfo(msg.info);
+        return;
+      }
+      case 'search_done': {
+        const job = link.searches.get(msg.id);
+        if (!job) return;
+        link.searches.delete(msg.id);
+        return job.resolve({ bestmove: msg.bestmove, lines: msg.lines || [], source: msg.source });
+      }
+      case 'search_error': {
+        const job = link.searches.get(msg.id);
+        if (!job) return;
+        link.searches.delete(msg.id);
+        return job.reject(msg.error === 'cancelled' ? abortError() : new Error(msg.error));
+      }
+      case 'ponder_info':
+        return showInfo(msg.info, 'ponder', game.state);
+      case 'claude':
+        link.claude = msg;
+        return renderClaude(), renderStatus();
+      case 'claude_analysis': {
+        // Show what Stockfish is computing for Claude: the live position, or a line it tests.
+        const testing = msg.played && msg.played.length;
+        let st = game.state;
+        if (testing) {
+          try { st = Chess.fromFEN(msg.fen); } catch (e) { st = game.state; }
+        }
+        ui.claude.asked = testing ? msg.played.join(' ') : '';
+        return showInfo(msg.info, 'claude', st);
+      }
+      case 'claude_veto':
+        ui.claude.veto = `Stockfish vetoed ${msg.san}: ${msg.reason}`;
+        return renderClaude();
+      case 'plan':
+        ui.claude.plan = msg.plan || ui.claude.plan;
+        ui.claude.comment = msg.comment || '';
+        save();
+        return renderClaude();
+      case 'bot_move':
+        return onClaudeMove(msg);
+      case 'draw_answer':
+        if (msg.gameId !== game.id || !ui.drawPending) return;
+        ui.drawPending = false;
+        if (msg.accept) return end({ result: '½–½', reason: 'agreement' });
+        ui.note = msg.message ? `Claude declines: “${msg.message}”` : 'Claude declines the draw.';
+        return render();
+      default:
+    }
+  }
+
+  // Stockfish compiled to WebAssembly, in a worker. The page downloads the engine itself
+  // (in parts, since the full network is 99 MB), keeps it in IndexedDB for next time, and
+  // hands the bytes to the worker.
+  const wasm = {
+    manifest: null, worker: null, build: '', status: 'off', progress: 0, error: '', name: '', hashMb: 0,
+    loading: null, current: null, queue: [], gen: 0, download: null,
+
+    probe() {
+      return fetch('engine/manifest.json', { cache: 'no-cache' })
+        .then(r => (r.ok ? r.json() : null))
+        .then(m => {
+          if (m && m.builds) {
+            this.manifest = m;
+            if (!m.builds[prefs.build]) prefs.build = Object.keys(m.builds)[0];
+            render();
+            scheduleBot();
+          }
+        })
+        .catch(() => {});
+    },
+
+    ensure() {
+      if (this.worker && this.build === prefs.build && this.status === 'ready') return Promise.resolve();
+      if (this.loading && this.build === prefs.build) return this.loading;
+      this.terminate();
+      this.build = prefs.build;
+      const gen = this.gen;
+      const p = this.load(prefs.build, gen).finally(() => { if (this.loading === p) this.loading = null; });
+      this.loading = p;
+      return p;
+    },
+
+    // `gen` changes whenever the engine is replaced; a load that is no longer current stops.
+    async load(build, gen) {
+      const current = () => gen === this.gen;
+      const spec = this.manifest && this.manifest.builds[build];
+      if (!spec) throw new Error('This page has no Stockfish files.');
+      this.status = 'loading';
+      this.progress = 0;
+      this.error = '';
+      render();
+      const key = `${this.manifest.version}:${build}`;
+      let bytes = await idb.get(key);
+      if (!current()) throw abortError();
+      if (!bytes) {
+        this.download = new AbortController();
+        bytes = await download(spec, p => {
+          if (!current()) return;
+          this.progress = p;
+          renderEngine();
+          renderStatus();
+        }, this.download.signal);
+        idb.put(key, bytes);
+      }
+      if (!current()) throw abortError();
+      const worker = new Worker('engine/sf-loader.js#stockshark-wasm');
+      this.worker = worker;
+      const lines = [];
+      const waitFor = (re, ms) => new Promise((resolve, reject) => {
+        const t = setTimeout(() => { worker.removeEventListener('message', h); reject(new Error('Stockfish did not start.')); }, ms);
+        const h = e => {
+          if (typeof e.data === 'string' && re.test(e.data)) {
+            clearTimeout(t);
+            worker.removeEventListener('message', h);
+            resolve(e.data);
+          }
+        };
+        worker.addEventListener('message', h);
+      });
+      worker.addEventListener('message', e => {
+        if (typeof e.data !== 'string') return;
+        if (this.status !== 'ready') lines.push(e.data);
+        this.onLine(e.data);
+      });
+      worker.onerror = e => {
+        if (!current()) return;
+        this.status = 'error';
+        this.error = `Stockfish crashed${e.message ? `: ${e.message}` : ''}.`;
+        this.fail(new Error(this.error));
+        render();
+      };
+      worker.postMessage({ wasm: bytes, script: spec.js }, [bytes]);
+      worker.postMessage('uci');
+      await waitFor(/^uciok/, 120000);
+      if (!current()) throw abortError();
+      const idLine = lines.find(l => l.startsWith('id name '));
+      this.name = idLine ? idLine.slice(8) : 'Stockfish';
+      const memory = navigator.deviceMemory || 8;
+      this.hashMb = phone ? 128 : memory >= 8 ? 1024 : memory >= 4 ? 512 : 256;
+      worker.postMessage(`setoption name Hash value ${this.hashMb}`);
+      worker.postMessage('setoption name UCI_ShowWDL value true');
+      worker.postMessage('isready');
+      await waitFor(/^readyok/, 120000);
+      if (!current()) throw abortError();
+      this.status = 'ready';
+      render();
+    },
+
+    terminate() {
+      this.gen++;
+      if (this.download) this.download.abort();
+      this.download = null;
+      if (this.worker) this.worker.terminate();
+      this.worker = null;
+      this.loading = null;
+      this.status = 'off';
+      this.fail(abortError());
+    },
+
+    fail(err) {
+      const jobs = this.queue.splice(0);
+      if (this.current) jobs.unshift(this.current);
+      this.current = null;
+      for (const j of jobs) j.reject(err);
+    },
+
+    search(params, onInfo, signal, kind = 'search') {
+      return new Promise((resolve, reject) => {
+        const job = { params, onInfo, signal, kind, resolve, reject, lines: [] };
+        if (signal) {
+          if (signal.aborted) return reject(abortError());
+          signal.addEventListener('abort', () => {
+            const i = this.queue.indexOf(job);
+            if (i >= 0) { this.queue.splice(i, 1); reject(abortError()); }
+            else if (this.current === job) { job.aborted = true; this.worker && this.worker.postMessage('stop'); }
+          }, { once: true });
+        }
+        if (kind !== 'ponder') {
+          for (const q of this.queue.filter(j => j.kind === 'ponder')) { this.queue.splice(this.queue.indexOf(q), 1); q.reject(abortError()); }
+          if (this.current && this.current.kind === 'ponder') this.worker.postMessage('stop');
+        }
+        this.queue.push(job);
+        this.ensure().then(() => this.pump(), err => {
+          const i = this.queue.indexOf(job);
+          if (i >= 0) this.queue.splice(i, 1);
+          reject(err);
+        });
+      });
+    },
+
+    pump() {
+      if (this.current || !this.queue.length || this.status !== 'ready') return;
+      const job = this.queue.shift();
+      this.current = job;
+      const p = job.params;
+      const w = this.worker;
+      w.postMessage(`setoption name MultiPV value ${p.multipv || 1}`);
+      w.postMessage(`position fen ${p.startFen}${p.moves.length ? ' moves ' + p.moves.join(' ') : ''}`);
+      let go = job.kind === 'ponder' ? 'go infinite' : `go movetime ${Math.round(p.movetime || 1000)}`;
+      if (p.searchmoves && p.searchmoves.length) go += ' searchmoves ' + p.searchmoves.join(' ');
+      w.postMessage(go);
+    },
+
+    onLine(line) {
+      const job = this.current;
+      if (!job) return;
+      if (line.startsWith('info ')) {
+        const info = Uci.parseInfo(line);
+        if (info) {
+          Uci.mergeLine(job.lines, info);
+          if (job.onInfo) job.onInfo(info);
+        }
+      } else if (line.startsWith('bestmove')) {
+        this.current = null;
+        const best = line.split(/\s+/)[1];
+        if (job.aborted) job.reject(abortError());
+        else job.resolve({ bestmove: /^[a-h][1-8][a-h][1-8][qrbn]?$/.test(best) ? best : null, lines: job.lines.filter(Boolean), source: 'stockfish' });
+        this.pump();
+      }
+    },
+  };
+
+  async function download(spec, onProgress, signal) {
+    const out = new Uint8Array(spec.bytes);
+    let offset = 0;
+    for (const part of spec.parts) {
+      const res = await fetch(part, { signal });
+      if (!res.ok) throw new Error(`Could not download the engine (HTTP ${res.status}).`);
+      if (res.body && res.body.getReader) {
+        const reader = res.body.getReader();
+        for (;;) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          out.set(value, offset);
+          offset += value.length;
+          onProgress(offset / spec.bytes);
+        }
+      } else {
+        const buf = new Uint8Array(await res.arrayBuffer());
+        out.set(buf, offset);
+        offset += buf.length;
+        onProgress(offset / spec.bytes);
+      }
+    }
+    if (offset !== spec.bytes) throw new Error('The engine download was incomplete.');
+    return out.buffer;
+  }
+
+  // IndexedDB keeps the downloaded engine, so the 99 MB comes down once. Optional: private
+  // windows and blocked storage just download again.
+  const idb = {
+    open() {
+      return new Promise((resolve, reject) => {
+        const req = indexedDB.open('stockshark', 1);
+        req.onupgradeneeded = () => req.result.createObjectStore('engine');
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+    },
+    async get(key) {
+      try {
+        const db = await this.open();
+        return await new Promise(resolve => {
+          const r = db.transaction('engine').objectStore('engine').get(key);
+          r.onsuccess = () => resolve(r.result instanceof ArrayBuffer ? r.result : null);
+          r.onerror = () => resolve(null);
+        });
+      } catch (e) {
+        return null;
+      }
+    },
+    async put(key, bytes) {
+      try {
+        const copy = bytes.slice(0);
+        const db = await this.open();
+        const tx = db.transaction('engine', 'readwrite');
+        const store = tx.objectStore('engine');
+        store.clear();
+        store.put(copy, key);
+      } catch (e) { /* storage is optional */ }
+    },
+  };
+
+  // One face for both engines.
+  const Engine = {
+    get backend() { return link.open ? 'bridge' : wasm.manifest ? 'wasm' : null; },
+    search(params, onInfo, signal) {
+      if (this.backend === 'bridge') return link.search(params, onInfo, signal);
+      if (this.backend === 'wasm') return wasm.search(params, onInfo, signal);
+      return Promise.reject(new Error('No Stockfish is available on this page. Run the Stockshark bridge (npm start) and open http://127.0.0.1:8787.'));
+    },
+    ponder(params) {
+      if (this.backend === 'bridge') link.send({ t: 'ponder', fen: params.startFen, moves: params.moves });
+      else if (this.backend === 'wasm' && wasm.status === 'ready' && !wasm.current && !wasm.queue.length) {
+        wasm.search(params, info => showInfo(info, 'ponder', game.state), null, 'ponder').catch(() => {});
+      }
+    },
+    stopPonder() {
+      if (this.backend === 'bridge') link.send({ t: 'ponder_stop' });
+      else if (wasm.current && wasm.current.kind === 'ponder' && wasm.worker) wasm.worker.postMessage('stop');
+    },
+  };
+
+  // ---- Claude ---------------------------------------------------------------------------
+  // Through the bridge, Claude Code plays over MCP and its moves arrive as messages. As a
+  // claude.ai artifact, the page asks Claude itself (the `sample` capability) and lends it a
+  // Stockfish tool that runs right here.
+
+  const claudeApi = { sample: null, tools: false, checked: false };
+  if (window.claude && typeof window.claude.use === 'function') {
+    window.claude.use('sample').then(async s => {
+      claudeApi.sample = s;
+      if (s && typeof s.limits === 'function') {
+        const limits = await s.limits().catch(() => null);
+        claudeApi.tools = !!(limits && limits.tools);
+      }
+      claudeApi.checked = true;
+      render();
+      scheduleBot();
+    }, () => { claudeApi.checked = true; render(); });
+  } else claudeApi.checked = true;
+
+  const claudeBackend = () => (link.open ? 'mcp' : claudeApi.sample && claudeApi.tools ? 'sample' : null);
+
+  // ---- Game state -------------------------------------------------------------------------
+
+  // Recompute everything derived from the current position. `keys` holds one entry per
+  // position reached, so it is always one longer than the move history.
+  function settle() {
+    game.legal = Chess.legalMoves(game.state);
+    if (game.keys.length === game.history.length) game.keys.push(Chess.positionKey(game.state, game.legal));
+    const key = game.keys[game.keys.length - 1];
+    game.outcome = game.manual || Chess.outcome(game.state, game.legal, game.keys.filter(k => k === key).length);
+  }
+
+  function reset() {
+    cancelBot();
+    game.id = newId();
+    game.state = Chess.fromFEN(Chess.START);
+    game.history = [];
+    game.keys = [];
+    game.manual = null;
+    ui.eval = null;
+    ui.live = null;
+    ui.claude = { plan: '', comment: '', veto: '', phase: '', error: '', draft: '', tier: '', asked: '' };
+    ui.drawPending = false;
+    settle();
+    clearTransient();
+  }
+
+  function clearTransient() {
+    ui.selected = -1;
+    ui.targets = [];
+    ui.promo = null;
+    ui.note = '';
+    ui.dismissed = false;
+    ui.armed = false;
+    clearTimeout(armTimer);
+  }
+
+  function push(move) {
+    game.history.push({ prev: game.state, move, san: Chess.san(game.state, move, game.legal) });
+    game.state = Chess.applyMove(game.state, move);
+    settle();
+  }
+
+  function pop() {
+    const last = game.history.pop();
+    game.keys.pop();
+    game.state = last.prev;
+    return last.move;
+  }
+
+  function play(move) {
+    push(move);
+    clearTransient();
+    ui.drawPending = false;
+    commit();
+  }
+
+  function end(manual) {
+    cancelBot();
+    game.manual = manual;
+    settle();
+    clearTransient();
+    commit();
+  }
+
+  function commit() {
+    save();
+    render();
+    scheduleBot();
+  }
+
+  // ---- The bot's turn ----------------------------------------------------------------------
+
+  function cancelBot() {
+    clearTimeout(botTimer);
+    botSeq++;
+    if (botAbort) botAbort.abort();
+    botAbort = null;
+  }
+
+  function scheduleBot() {
+    cancelBot();
+    syncBridge();
+    if (!botTurn()) return maybePonder();
+    const seq = botSeq, ply = game.history.length;
+    const still = () => seq === botSeq && botTurn() && game.history.length === ply;
+    const op = prefs.opponent;
+    if (op === 'stockshark' || op === 'monkey') {
+      botTimer = setTimeout(() => {
+        if (!still()) return;
+        const move = Chess.chooseMove(game.state, op);
+        if (move) play(move);
+      }, BOT_DELAY);
+    } else if (op === 'stockfish') engineTurn(still);
+    else if (op === 'claude') {
+      const backend = claudeBackend();
+      if (backend === 'sample') claudeSampleTurn(still);
+      else if (backend === 'mcp') claudeMcpTurn();
+      else render();
+    }
+  }
+
+  // Stockfish alone: think for the set time at full strength and play its best move.
+  async function engineTurn(still, note) {
+    if (!Engine.backend && boot.probing) return render();
+    const ctl = new AbortController();
+    botAbort = ctl;
+    ui.engineError = '';
+    ui.live = { kind: 'bot', info: null, started: Date.now(), ms: prefs.think * 1000, fen: Chess.toFEN(game.state) };
+    if (note) ui.claude.veto = note;
+    render();
+    try {
+      const res = await Engine.search(
+        { startFen: Chess.START, moves: uciList(), movetime: prefs.think * 1000, multipv: 1 },
+        info => { if (still()) showInfo(info, 'bot', game.state); },
+        ctl.signal,
+      );
+      if (!still()) return;
+      const move = findLegal(res.bestmove);
+      if (!move) throw new Error('Stockfish returned no move.');
+      if (res.lines[0]) setEval(res.lines[0].score, game.state.turn);
+      ui.live = null;
+      play(move);
+    } catch (err) {
+      if (!still() || err.name === 'AbortError') return;
+      ui.live = null;
+      ui.engineError = err.message;
+      render();
+    }
+  }
+
+  // Claude through MCP: tell the bridge it is Claude's turn (the sync does that) and wait for
+  // the move to come back. Stockfish warms its hash table on the position meanwhile.
+  function claudeMcpTurn() {
+    ui.claude.phase = 'mcp';
+    maybePonder();
+    render();
+  }
+
+  function onClaudeMove(msg) {
+    if (prefs.opponent !== 'claude' || msg.gameId !== game.id || msg.ply !== game.history.length || !botTurn()) return;
+    const move = findLegal(msg.uci);
+    if (!move) return;
+    ui.claude.plan = msg.plan || ui.claude.plan;
+    ui.claude.comment = msg.comment || '';
+    ui.claude.veto = '';
+    ui.claude.asked = '';
+    if (msg.eval) setEval(msg.eval, 'w');
+    ui.live = null;
+    play(move);
+  }
+
+  // Claude in the artifact: Stockfish scouts the candidates, Claude picks one that fits its
+  // plan (testing lines with Stockfish if it likes), Stockfish checks the pick.
+  async function claudeSampleTurn(still) {
+    if (!Engine.backend && boot.probing) return render();
+    const ctl = new AbortController();
+    botAbort = ctl;
+    const c = ui.claude;
+    Object.assign(c, { phase: 'scouting', error: '', draft: '', veto: '', asked: '' });
+    ui.live = { kind: 'claude', info: null, started: Date.now(), ms: prefs.think * 1000, fen: Chess.toFEN(game.state) };
+    render();
+    const base = { startFen: Chess.START, moves: uciList() };
+    const mover = game.state.turn;
+    let scout;
+    try {
+      scout = await Engine.search(Object.assign({ movetime: prefs.think * 1000, multipv: Math.min(5, game.legal.length) }, base),
+        info => { if (still()) showInfo(info, 'claude', game.state); }, ctl.signal);
+    } catch (err) {
+      if (!still() || err.name === 'AbortError') return;
+      ui.live = null;
+      ui.engineError = err.message;
+      return render();
+    }
+    if (!still()) return;
+    const lines = scout.lines.filter(l => l.pv.length);
+    if (!lines.length) return;
+    setEval(lines[0].score, mover);
+    ui.live = null;
+    c.phase = 'asking';
+    render();
+
+    let reply;
+    try {
+      const res = await claudeApi.sample(samplePrompt(lines), {
+        modelTier: 'complex',
+        signal: ctl.signal,
+        tools: [lineTool(still, ctl.signal)],
+        onText: ({ text }) => {
+          if (!still()) return;
+          c.draft = text;
+          renderClaude();
+        },
+      });
+      reply = res.text;
+      c.tier = res.modelTierApplied;
+    } catch (err) {
+      if (!still() || (err && err.code === 'cancelled')) return;
+      c.phase = 'error';
+      c.error = sampleErrorText(err && err.code);
+      return render();
+    }
+    if (!still()) return;
+    const parsed = parseReply(reply);
+    const chosen = findSan(parsed.move);
+    let move = chosen;
+    if (chosen) {
+      c.phase = 'checking';
+      render();
+      let verdict;
+      try {
+        verdict = await judge(chosen, lines, base, ctl.signal);
+      } catch (err) {
+        if (!still() || err.name === 'AbortError') return;
+        verdict = { ok: true };
+      }
+      if (!still()) return;
+      if (!verdict.ok) {
+        move = findLegal(lines[0].pv[0]);
+        c.veto = `Stockfish vetoed ${parsed.move}: ${verdict.reason} It played ${sanOf(game.state, lines[0].pv[0])} instead.`;
+      }
+    } else {
+      move = findLegal(lines[0].pv[0]);
+      c.veto = `Claude's answer named no legal move${parsed.move ? ` (“${parsed.move}”)` : ''}, so Stockfish played its best.`;
+    }
+    c.plan = parsed.plan || c.plan;
+    c.comment = parsed.comment || '';
+    c.phase = '';
+    c.draft = '';
+    if (move) play(move);
+  }
+
+  function findSan(text) {
+    if (!text) return null;
+    const t = text.replace(/^\d+\.(\.\.)?\s*/, '').replace(/[!?+#]+$/, '').replace(/^0-0-0$/, 'O-O-O').replace(/^0-0$/, 'O-O').trim();
+    const bare = s => s.replace(/[+#]+$/, '');
+    return game.legal.find(m => Chess.uci(m) === t.toLowerCase())
+      || game.legal.find(m => bare(Chess.san(game.state, m, game.legal)) === t)
+      || game.legal.find(m => bare(Chess.san(game.state, m, game.legal)).replace('=', '') === t.replace('=', ''))
+      || null;
+  }
+
+  // The veto, as in server/guard.mjs: a pick survives within the margin of Stockfish's best.
+  async function judge(move, lines, base, signal) {
+    const margin = VETO[prefs.veto];
+    const uci = Chess.uci(move);
+    if (margin === null || uci === lines[0].pv[0]) return { ok: true };
+    let line = lines.find(l => l.pv[0] === uci);
+    let score = line ? line.score : null;
+    if (!score) {
+      const res = await Engine.search(Object.assign({ movetime: Math.min(prefs.think, 30) * 1000, multipv: 1, searchmoves: [uci] }, base), null, signal);
+      score = res.lines[0] ? res.lines[0].score : null;
+    }
+    if (!score) return { ok: false, reason: 'Stockfish could not score it.' };
+    const loss = Uci.value(lines[0].score) - Uci.value(score);
+    if (loss <= margin) return { ok: true };
+    return { ok: false, reason: `it scores ${Uci.format(score)} against ${Uci.format(lines[0].score)} for ${sanOf(game.state, lines[0].pv[0])}.` };
+  }
+
+  function boardText(s) {
+    const rows = [];
+    for (let r = 0; r < 8; r++) {
+      let row = `${8 - r} `;
+      for (let f = 0; f < 8; f++) {
+        const p = s.board[r * 8 + f];
+        row += ' ' + (p ? (p[0] === 'w' ? p[1] : p[1].toLowerCase()) : '.');
+      }
+      rows.push(row);
+    }
+    rows.push('   a b c d e f g h');
+    return rows.join('\n');
+  }
+
+  function movetext() {
+    const out = [];
+    game.history.forEach((h, i) => out.push(i % 2 === 0 ? `${i / 2 + 1}. ${h.san}` : h.san));
+    return out.join(' ');
+  }
+
+  function samplePrompt(lines) {
+    const s = game.state, me = s.turn, colour = me === 'w' ? 'White' : 'Black';
+    const margin = VETO[prefs.veto];
+    const cands = lines.map((l, i) => {
+      const wdl = l.wdl ? ` (win ${Math.round(l.wdl[0] / 10)}%, draw ${Math.round(l.wdl[1] / 10)}%, loss ${Math.round(l.wdl[2] / 10)}%)` : '';
+      return `${i + 1}. ${sanOf(s, l.pv[0])}  ${Uci.format(l.score, true)}${wdl}  depth ${l.depth}  line: ${pvSan(s, l.pv, 10)}`;
+    }).join('\n');
+    const rule = margin === null
+      ? 'Your choice is final, so choose carefully.'
+      : margin === 0
+        ? "Stockfish will replace any move that is not its best, so you mostly explain and plan."
+        : `Stockfish will replace any move scoring more than ${(margin / 100).toFixed(2)} pawns below its best.`;
+    return `You are the strategist of a chess team called Stockshark, playing ${colour} against a human. Stockfish 19, the strongest engine there is, does the calculating; you choose the plan and the move that serves it, and you talk to the human about it.
+
+How to choose:
+- Pick one of Stockfish's candidates below, preferring the one that fits a coherent long-term plan. ${rule}
+- Keep your previous plan unless the position calls for a new one.
+- To test a concrete idea, call analyze_line with the next two to four moves you have in mind. Use it at most twice.
+
+Position (${colour} to move), FEN: ${Chess.toFEN(s)}
+${boardText(s)}
+(White's pieces are uppercase.)
+Moves so far: ${movetext() || '(none)'}
+Your plan from last move: ${ui.claude.plan || '(none yet)'}
+
+Stockfish's candidates for ${colour}, scores from your side (+ is good for you):
+${cands}
+
+Reply in exactly this format and nothing else:
+PLAN: <two to four sentences: the goal, the route, what to watch for>
+COMMENT: <one short, friendly sentence to your opponent about this move>
+MOVE: <your move in SAN, for example Nf3>`;
+  }
+
+  function lineTool(still, signal) {
+    return {
+      name: 'analyze_line',
+      description: 'Ask Stockfish 19 about a continuation from the current position. Plays the given moves (SAN, for example ["Nf5", "g6", "Nh6+"]) and returns the score and the best replies in the resulting position, scores from your side.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          moves: { type: 'array', items: { type: 'string' }, description: 'Moves to play first, in SAN, starting with your move.' },
+          seconds: { type: 'number', description: 'Thinking time, 3 to 60 seconds (default 15).' },
+        },
+        required: ['moves'],
+      },
+      async execute(input, context) {
+        if (!still()) throw new Error('The position changed; this line no longer applies.');
+        const me = game.state.turn;
+        let st = game.state;
+        const played = [], ucis = [];
+        for (const text of (Array.isArray(input.moves) ? input.moves : []).slice(0, 12)) {
+          const legal = Chess.legalMoves(st);
+          const t = String(text).replace(/[!?+#]+$/, '').trim();
+          const m = legal.find(x => Chess.san(st, x, legal).replace(/[+#]+$/, '') === t || Chess.uci(x) === t.toLowerCase());
+          if (!m) throw new Error(`"${text}" is not legal after ${played.join(' ') || 'the current position'}.`);
+          played.push(Chess.san(st, m, legal));
+          ucis.push(Chess.uci(m));
+          st = Chess.applyMove(st, m);
+        }
+        if (!played.length) throw new Error('Give at least one move.');
+        ui.claude.asked = played.join(' ');
+        renderClaude();
+        const legalThere = Chess.legalMoves(st);
+        if (!legalThere.length) return `After ${played.join(' ')}: ${Chess.inCheck(st, st.turn) ? 'checkmate' : 'stalemate'}.`;
+        const seconds = Math.min(60, Math.max(3, Number(input.seconds) || 15));
+        const both = new AbortController();
+        const stop = () => both.abort();
+        signal.addEventListener('abort', stop, { once: true });
+        if (context && context.signal) context.signal.addEventListener('abort', stop, { once: true });
+        const res = await Engine.search({ startFen: Chess.START, moves: uciList().concat(ucis), movetime: seconds * 1000, multipv: Math.min(3, legalThere.length) },
+          info => { if (still()) showInfo(info, 'claude', st); }, both.signal);
+        const flip = l => (st.turn === me ? l.score : Uci.negate(l.score));
+        const rows = res.lines.map(l => `${sanOf(st, l.pv[0])} ${Uci.format(flip(l), true)} (depth ${l.depth}): ${pvSan(st, l.pv, 8)}`);
+        return `After ${played.join(' ')} (${st.turn === 'w' ? 'White' : 'Black'} to move), scores from your side:\n${rows.join('\n')}`;
+      },
+    };
+  }
+
+  function parseReply(text) {
+    const keys = ['PLAN', 'COMMENT', 'MOVE'];
+    const out = { plan: '', comment: '', move: '' };
+    const marks = [];
+    for (const k of keys) {
+      const m = new RegExp(`(^|\\n)[ \\t*_#]*${k}[ \\t*_]*:`, 'i').exec(text);
+      if (m) marks.push({ k, at: m.index + m[0].length, start: m.index });
+    }
+    marks.sort((a, b) => a.start - b.start);
+    marks.forEach((m, i) => {
+      const stop = i + 1 < marks.length ? marks[i + 1].start : text.length;
+      out[m.k.toLowerCase()] = text.slice(m.at, stop).replace(/[*_`]/g, '').trim();
+    });
+    out.move = out.move.split(/\s+/)[0] || '';
+    return out;
+  }
+
+  function sampleErrorText(code) {
+    switch (code) {
+      case 'not_granted': return 'Claude access was declined for this page. Let Stockfish move, or allow Claude from the page menu and ask again.';
+      case 'rate_limited': return 'Claude is busy or your usage limit was reached. Try again in a little while, or let Stockfish move.';
+      case 'session_expired': return 'Your claude.ai session expired. Sign in again, then ask again.';
+      case 'sampling_disabled': return 'Claude is not available for this account.';
+      case 'tools_unavailable': return 'This view cannot lend Claude the Stockfish tool.';
+      default: return 'Claude did not answer this time. Ask again, or let Stockfish move.';
+    }
+  }
+
+  // ---- Thinking on the human's time ---------------------------------------------------------
+
+  function maybePonder() {
+    // Start the in-page engine download early, while the human thinks about a move.
+    if (ENGINE_BOTS.has(prefs.opponent) && Engine.backend === 'wasm' && wasm.status === 'off' && !wasm.loading) {
+      wasm.ensure().then(() => { if (!botTurn()) maybePonder(); }, () => render());
+    }
+    const on = prefs.ponder && ENGINE_BOTS.has(prefs.opponent) && !game.outcome && Engine.backend;
+    const claudeWaiting = prefs.opponent === 'claude' && botTurn() && claudeBackend() === 'mcp';
+    if (on && (humanTurn() || claudeWaiting) && (Engine.backend === 'bridge' || wasm.status === 'ready')) {
+      ui.live = { kind: 'ponder', info: null, started: Date.now(), ms: 0, fen: Chess.toFEN(game.state) };
+      Engine.ponder({ startFen: Chess.START, moves: uciList() });
+    } else {
+      Engine.stopPonder();
+      if (ui.live && ui.live.kind === 'ponder') ui.live = null;
+    }
+    renderEngine();
+  }
+
+  // ---- Evaluation and live engine output ------------------------------------------------------
+
+  function setEval(score, mover) {
+    if (!score) return;
+    ui.eval = mover === 'w' ? score : Uci.negate(score);
+  }
+
+  let engineFrame = 0;
+  function showInfo(info, kind, st) {
+    // Only the main line is shown; the other candidates would make the readout flicker. A
+    // ponder search still winding down never takes over the readout from a real search.
+    if (!info || info.multipv > 1) return;
+    if (kind === 'ponder' && ui.live && ui.live.kind !== 'ponder') return;
+    if (!ui.live || ui.live.kind !== kind) ui.live = { kind, info: null, started: Date.now(), ms: kind === 'ponder' ? 0 : prefs.think * 1000, fen: Chess.toFEN(st) };
+    ui.live.info = info;
+    ui.live.state = st;
+    if (info.multipv === 1 && !info.bound && st === game.state) setEval(info.score, st.turn);
+    if (!engineFrame) engineFrame = requestAnimationFrame(() => { engineFrame = 0; renderEngine(); renderEval(); renderStatus(); });
+  }
+
+  // ---- Bridge sync ---------------------------------------------------------------------------
+
+  function syncBridge() {
+    if (!link.open) return;
+    link.send({
+      t: 'sync',
+      game: {
+        id: game.id, startFen: Chess.START, moves: uciList(), mode: prefs.opponent, botColor: botColor(),
+        thinkMs: prefs.think * 1000, veto: VETO[prefs.veto], outcome: game.outcome, plan: ui.claude.plan,
+      },
+    });
+  }
+
+  // ---- Undo, draws, resignation ---------------------------------------------------------------
+
+  const canUndo = () => !!game.manual || (vsBot() ? game.history.some(h => h.move.piece[0] === prefs.side) : game.history.length > 0);
+
+  // A resignation or agreed draw is taken back on its own. Otherwise, against a bot, go back
+  // to your own previous move so it is your turn again.
+  function undo() {
+    if (!canUndo()) return;
+    cancelBot();
+    if (game.manual) game.manual = null;
+    else {
+      let move;
+      do move = pop(); while (vsBot() && move.piece[0] !== prefs.side);
+    }
+    ui.live = null;
+    settle();
+    clearTransient();
+    commit();
+  }
+
+  function offerDraw() {
+    if (game.outcome) return;
+    const agreed = { result: '½–½', reason: 'agreement' };
+    if (!vsBot()) return end(agreed);
+    if (prefs.opponent === 'claude' && claudeBackend() === 'mcp' && link.claude && link.claude.connected) {
+      ui.drawPending = true;
+      ui.note = 'Draw offered. Claude will answer when it has thought about it; moving withdraws the offer.';
+      link.send({ t: 'draw_offer', gameId: game.id });
+      return render();
+    }
+    if (ENGINE_BOTS.has(prefs.opponent)) {
+      // Stockfish takes a draw when it is not better.
+      if (!ui.eval) {
+        ui.note = `${BOTS[prefs.opponent]} declines. It has not evaluated the position yet.`;
+        return render();
+      }
+      const mine = botColor() === 'w' ? ui.eval : Uci.negate(ui.eval);
+      const v = Uci.value(mine);
+      if (v <= -50 || (Math.abs(v) <= 15 && game.history.length >= 60)) return end(agreed);
+      ui.note = `${BOTS[prefs.opponent]} declines. It rates its side at ${Uci.format(mine)}.`;
+      return render();
+    }
+    const material = { w: 0, b: 0 };
+    for (const p of game.state.board) if (p) material[p[0]] += Chess.VALUE[p[1]];
+    if (material[Chess.other(prefs.side)] < material[prefs.side]) return end(agreed);
+    ui.note = `${BOTS[prefs.opponent]} declines. It only takes a draw when it is behind on material.`;
+    render();
+  }
+
+  function resign() {
+    if (game.outcome) return;
+    if (!ui.armed) {
+      ui.armed = true;
+      clearTimeout(armTimer);
+      armTimer = setTimeout(() => { ui.armed = false; renderControls(); }, 3000);
+      return renderControls();
+    }
+    const loser = vsBot() ? prefs.side : game.state.turn;
+    end({ result: loser === 'w' ? '0–1' : '1–0', reason: 'resignation', winner: Chess.other(loser) });
+  }
+
+  // ---- Saving -----------------------------------------------------------------------------
+
+  const snapshot = () => ({
+    prefs: Object.assign({}, prefs),
+    id: game.id,
+    moves: game.history.map(h => Chess.uci(h.move)),
+    manual: game.manual,
+    flipped: ui.flipped,
+    plan: ui.claude.plan,
+    comment: ui.claude.comment,
+  });
+
+  function save() {
+    try { localStorage.setItem(STORE, JSON.stringify(snapshot())); } catch (e) { /* storage is optional */ }
+  }
+
+  function restore(data) {
+    if (!data || typeof data !== 'object') return;
+    const p = data.prefs || {};
+    if (p.opponent in BOTS || p.opponent === 'human') prefs.opponent = p.opponent;
+    if (p.side === 'w' || p.side === 'b') prefs.side = p.side;
+    if (THINK.includes(Number(p.think))) prefs.think = Number(p.think);
+    if (p.veto in VETO) prefs.veto = p.veto;
+    if (typeof p.ponder === 'boolean') prefs.ponder = p.ponder;
+    if (p.build === 'full' || p.build === 'lite') prefs.build = p.build;
+    if (typeof data.id === 'string' && data.id) game.id = data.id.slice(0, 40);
+    ui.flipped = 'flipped' in data ? !!data.flipped : vsBot() && prefs.side === 'b';
+    for (const text of Array.isArray(data.moves) ? data.moves : []) {
+      const move = game.legal.find(m => Chess.uci(m) === text);
+      if (!move || game.outcome) break;
+      push(move);
+    }
+    const m = data.manual;
+    if (m && !game.outcome && (m.reason === 'agreement' || m.reason === 'resignation') && ['1–0', '0–1', '½–½'].includes(m.result)) {
+      game.manual = { result: m.result, reason: m.reason, winner: m.winner === 'w' || m.winner === 'b' ? m.winner : undefined };
+      settle();
+    }
+    if (typeof data.plan === 'string') ui.claude.plan = data.plan.slice(0, 1500);
+    if (typeof data.comment === 'string') ui.claude.comment = data.comment.slice(0, 400);
+  }
+
+  // ---- Rendering --------------------------------------------------------------------------
+
+  function outcomeText(o) {
+    if (!o.winner) return `Draw by ${o.reason}.`;
+    const who = nameOf(o.winner);
+    return `${who} ${who === 'You' ? 'win' : 'wins'} by ${o.reason}.`;
+  }
+
+  function renderBoard() {
+    const s = game.state;
+    const last = game.history.length ? game.history[game.history.length - 1].move : null;
+    const checkSq = Chess.inCheck(s, s.turn) ? s.board.indexOf(s.turn + 'K') : -1;
+    const mine = humanTurn() && !ui.promo;
+    for (let i = 0; i < 64; i++) {
+      const sq = ui.flipped ? 63 - i : i, el = squares[i], p = s.board[sq];
+      el.dataset.sq = sq;
+      let cls = 'sq ' + (((sq >> 3) + (sq & 7)) & 1 ? 'dark' : 'light');
+      if (last && (sq === last.from || sq === last.to)) cls += ' last';
+      if (sq === ui.selected) cls += ' sel';
+      if (sq === checkSq) cls += ' check';
+      const target = ui.targets.find(m => m.to === sq);
+      if (target) cls += target.captured ? ' hint cap' : ' hint';
+      if (mine && p && p[0] === s.turn) cls += ' grab';
+      if (ui.drag && ui.drag.ghost && ui.drag.sq === sq) cls += ' lift';
+      el.className = cls;
+
+      el.children[0].textContent = (i & 7) === 0 ? 8 - (sq >> 3) : '';
+      el.children[1].textContent = (i >> 3) === 7 ? 'abcdefgh'[sq & 7] : '';
+
+      let img = el.querySelector('.piece');
+      if (!p) { if (img) img.remove(); continue; }
+      if (!img) {
+        img = pieceImg(p, pieceAlt(p));
+        img.className = 'piece';
+        img.dataset.p = p;
+        el.append(img);
+      }
+      if (img.dataset.p !== p) {
+        img.dataset.p = p;
+        img.src = pieceSrc(p);
+        img.alt = pieceAlt(p);
+      }
+    }
+  }
+
+  function renderPlayers() {
+    const material = { w: 0, b: 0 };
+    for (const p of game.state.board) if (p) material[p[0]] += Chess.VALUE[p[1]];
+    const top = ui.flipped ? 'w' : 'b';
+    for (const [el, c] of [[$('player-top'), top], [$('player-bottom'), Chess.other(top)]]) {
+      el.classList.toggle('turn', !game.outcome && game.state.turn === c);
+      el.children[0].className = 'chip ' + c;
+      el.children[1].textContent = nameOf(c);
+      const taken = game.history
+        .filter(h => h.move.captured && h.move.piece[0] === c)
+        .map(h => h.move.captured)
+        .sort((a, b) => Chess.VALUE[b[1]] - Chess.VALUE[a[1]]);
+      const tray = el.children[2], key = c + taken.join('');
+      if (tray.dataset.key !== key) {
+        tray.dataset.key = key;
+        tray.replaceChildren(...taken.map(p => pieceImg(p, pieceAlt(p))));
+      }
+      const lead = material[c] - material[Chess.other(c)];
+      el.children[3].textContent = lead > 0 ? '+' + lead : '';
+    }
+  }
+
+  function engineLabel() {
+    if (Engine.backend === 'bridge') {
+      const e = link.engine;
+      if (!e || !e.name) return e && e.error ? 'Stockfish failed to start' : 'Stockfish is starting';
+      const hash = e.hashMb >= 1024 ? `${(e.hashMb / 1024).toFixed(e.hashMb % 1024 ? 1 : 0)} GB` : `${e.hashMb} MB`;
+      return `${e.name.replace(/ WASM.*$/, '')} · ${e.backend === 'native' ? 'native' : 'WebAssembly'} · ${e.threads} threads · ${hash} hash`;
+    }
+    if (Engine.backend === 'wasm') {
+      const spec = wasm.manifest.builds[prefs.build];
+      return `${spec ? spec.label : 'Stockfish'} · in this page${wasm.hashMb ? ` · ${wasm.hashMb} MB hash` : ''}`;
+    }
+    return 'No Stockfish here';
+  }
+
+  function thinkingLine() {
+    const live = ui.live;
+    if (!live || !live.info) return '';
+    const i = live.info;
+    const secs = Math.round((Date.now() - live.started) / 1000);
+    const of = live.ms ? ` of ${Math.round(live.ms / 1000)}` : '';
+    return `Depth ${i.depth}${i.seldepth ? `/${i.seldepth}` : ''} · ${big(i.nps)}n/s · ${secs} s${of}`;
+  }
+
+  function renderEngine() {
+    const show = ENGINE_BOTS.has(prefs.opponent);
+    $('engine').hidden = !show;
+    if (!show) return;
+    $('engine-name').textContent = engineLabel();
+    const pill = $('engine-state');
+    let state = 'Ready', cls = 'ok';
+    if (!Engine.backend) { state = link.wanted ? 'Reconnecting' : 'Unavailable'; cls = 'bad'; }
+    else if (Engine.backend === 'wasm' && wasm.status === 'loading') { state = `Loading ${Math.round(wasm.progress * 100)}%`; cls = 'busy'; }
+    else if (Engine.backend === 'wasm' && wasm.status === 'error') { state = 'Crashed'; cls = 'bad'; }
+    else if (Engine.backend === 'wasm' && wasm.status === 'off') { state = 'Not loaded'; cls = ''; }
+    else if (Engine.backend === 'bridge' && link.engine && link.engine.error && !link.engine.ready) { state = 'Error'; cls = 'bad'; }
+    else if (Engine.backend === 'bridge' && link.engine && !link.engine.ready) { state = 'Starting'; cls = 'busy'; }
+    else if (ui.live && ui.live.kind === 'ponder' && ui.live.info) { state = 'On your time'; cls = 'busy'; }
+    else if (ui.live && ui.live.kind !== 'ponder') { state = 'Thinking'; cls = 'busy'; }
+    pill.textContent = state;
+    pill.className = 'pill ' + cls;
+
+    const live = ui.live;
+    const st = live && live.state ? live.state : game.state;
+    const info = live && live.info;
+    const score = info ? (st.turn === 'w' ? info.score : Uci.negate(info.score)) : ui.eval;
+    $('engine-eval').textContent = score ? Uci.format(score) : '';
+    $('engine-stats').textContent = info ? thinkingLine() : ui.engineError ? '' : score ? 'White’s view' : '';
+    $('engine-pv').textContent = ui.engineError
+      ? ui.engineError
+      : info && info.pv.length ? pvSan(st, info.pv, 10) : '';
+    const meter = $('engine-meter');
+    meter.hidden = !(live && live.ms && live.kind !== 'ponder');
+    if (!meter.hidden) $('engine-meter-fill').style.width = `${Math.min(100, ((Date.now() - live.started) / live.ms) * 100)}%`;
+  }
+
+  function renderEval() {
+    const bar = $('evalbar');
+    const e = ui.eval;
+    bar.classList.toggle('idle', !e || !ENGINE_BOTS.has(prefs.opponent));
+    bar.classList.toggle('flipped', ui.flipped);
+    let pct = 50;
+    if (e && e.mate !== undefined) pct = e.mate > 0 ? 100 : e.mate < 0 ? 0 : 50;
+    else if (e) pct = 50 + 50 * (2 / (1 + Math.exp(-0.00368208 * e.cp)) - 1);
+    pct = Math.max(3, Math.min(97, pct));
+    $('evalfill').style.height = `${pct}%`;
+    bar.setAttribute('aria-label', e ? `Evaluation ${Uci.format(e)} for White` : 'No evaluation yet');
+  }
+
+  function renderClaude() {
+    const show = prefs.opponent === 'claude';
+    $('claude').hidden = !show;
+    if (!show) return;
+    const c = ui.claude, backend = claudeBackend();
+    const pill = $('claude-state');
+    let state = '', cls = '';
+    const connect = $('claude-connect');
+    let connectText = '';
+    const buttons = { copy: false, retry: false, stop: false, fallback: false };
+    if (backend === 'mcp') {
+      const lc = link.claude || {};
+      if (!lc.connected) { state = 'Not connected'; cls = 'bad'; }
+      else if (lc.busy) { state = 'Analysing'; cls = 'busy'; }
+      else if (botTurn()) { state = 'Thinking'; cls = 'busy'; }
+      else if (lc.waiting) { state = 'Waiting for you'; cls = 'ok'; }
+      else { state = 'Connected'; cls = 'ok'; }
+      if (!lc.connected) {
+        connect.innerHTML = 'Claude plays through Claude Code. In the <code>stockshark</code> folder run <code>claude</code>, then <code>' + MCP_COMMAND + '</code>.';
+        connectText = 'x';
+        buttons.copy = true;
+      }
+      buttons.fallback = botTurn();
+    } else if (backend === 'sample') {
+      if (c.phase === 'scouting') { state = 'Stockfish scouting'; cls = 'busy'; }
+      else if (c.phase === 'asking') { state = 'Claude thinking'; cls = 'busy'; }
+      else if (c.phase === 'checking') { state = 'Checking'; cls = 'busy'; }
+      else if (c.phase === 'error') { state = 'No answer'; cls = 'bad'; }
+      else { state = 'Ready'; cls = 'ok'; }
+      buttons.stop = c.phase === 'asking' || c.phase === 'scouting';
+      buttons.retry = c.phase === 'error' && botTurn();
+      buttons.fallback = botTurn() && c.phase !== 'checking';
+      if (c.error) { connect.textContent = c.error; connectText = 'x'; }
+    } else {
+      state = 'Unavailable';
+      cls = 'bad';
+      connect.innerHTML = claudeApi.checked
+        ? 'Claude needs either the Stockshark bridge (run <code>npm start</code> and open <code>http://127.0.0.1:8787</code>) or this page opened on claude.ai.'
+        : 'Looking for Claude…';
+      connectText = 'x';
+      buttons.fallback = botTurn() && !!Engine.backend;
+    }
+    pill.textContent = state;
+    pill.className = 'pill ' + cls;
+    connect.hidden = !connectText;
+
+    const drafting = c.phase === 'asking' && c.draft;
+    const draft = drafting ? parseReply(c.draft) : null;
+    $('claude-plan').textContent = drafting && draft.plan ? draft.plan : c.plan;
+    $('claude-comment').textContent = drafting ? (draft.comment || '') : c.comment;
+    const veto = $('claude-veto');
+    const asked = c.asked && (c.phase === 'asking' || backend === 'mcp') && botTurn() ? `Testing ${c.asked} with Stockfish…` : '';
+    veto.textContent = c.veto || asked;
+    veto.hidden = !(c.veto || asked);
+    $('claude-copy').hidden = !buttons.copy;
+    $('claude-retry').hidden = !buttons.retry;
+    $('claude-stop').hidden = !buttons.stop;
+    $('claude-fallback').hidden = !buttons.fallback;
+    $('claude-actions').hidden = !Object.values(buttons).some(Boolean);
+  }
+
+  function renderStatus() {
+    const s = game.state, o = game.outcome;
+    let line, note = ui.note;
+    if (o) {
+      line = outcomeText(o);
+      note = note || `Final score ${o.result}.`;
+    } else {
+      const check = Chess.inCheck(s, s.turn);
+      if (botTurn()) {
+        const op = prefs.opponent;
+        line = `${BOTS[op]} is thinking…`;
+        if (op === 'stockfish' || op === 'claude') {
+          if (!Engine.backend && boot.probing) note = note || 'Looking for Stockfish…';
+          else if (Engine.backend === 'wasm' && wasm.status === 'loading') note = note || `Loading Stockfish 19: ${Math.round(wasm.progress * 100)}% of ${Math.round(wasm.manifest.builds[prefs.build].bytes / 1048576)} MB. It stays saved for next time.`;
+          else if (ui.engineError) note = note || ui.engineError;
+          else if (!Engine.backend && op === 'stockfish') note = note || 'No Stockfish is available here. Run the Stockshark bridge (npm start) and open http://127.0.0.1:8787.';
+        }
+        if (op === 'claude') {
+          const backend = claudeBackend(), c = ui.claude;
+          if (backend === 'mcp') {
+            line = 'Claude is planning…';
+            if (!(link.claude && link.claude.connected)) note = note || 'Waiting for Claude Code to connect.';
+          } else if (backend === 'sample') {
+            line = c.phase === 'scouting' ? 'Stockfish is scouting candidates…'
+              : c.phase === 'asking' ? 'Claude is choosing a plan…'
+                : c.phase === 'checking' ? 'Stockfish is checking Claude’s pick…'
+                  : c.phase === 'error' ? 'Claude did not answer.' : 'Claude is planning…';
+          } else {
+            line = 'Claude is not available here.';
+          }
+        }
+      } else if (vsBot()) line = check ? 'Your move. You are in check.' : 'Your move';
+      else line = `${nameOf(s.turn)} to move` + (check ? '. Check.' : '');
+      if (!note && !game.history.length && !botTurn()) note = 'Tap a piece to see where it can go, or drag it there.';
+    }
+    $('status-line').textContent = line;
+    $('status-note').textContent = note;
+  }
+
+  function renderMoves() {
+    const list = $('moves'), h = game.history, rows = [];
+    const cell = (cls, text) => {
+      const span = document.createElement('span');
+      span.className = cls;
+      span.textContent = text;
+      return span;
+    };
+    const row = (cls, ...cells) => {
+      const li = document.createElement('li');
+      li.className = cls;
+      li.append(...cells);
+      return li;
+    };
+    for (let i = 0; i < h.length || i === 0; i += 2) {
+      rows.push(row('',
+        cell('n', i / 2 + 1 + '.'),
+        cell(i === h.length - 1 ? 'm cur' : 'm', h[i] ? h[i].san : ''),
+        cell(i + 1 === h.length - 1 ? 'm cur' : 'm', h[i + 1] ? h[i + 1].san : '')));
+    }
+    if (game.outcome) rows.push(row('final', cell('n', ''), cell('m', game.outcome.result), cell('m', '')));
+    list.replaceChildren(...rows);
+    list.scrollTop = list.scrollHeight;
+  }
+
+  function renderControls() {
+    $('undo').disabled = !canUndo();
+    $('draw').disabled = !!game.outcome || ui.drawPending;
+    $('resign').disabled = !!game.outcome;
+    $('resign').textContent = ui.armed ? 'Confirm resign' : 'Resign';
+    $('resign').classList.toggle('armed', ui.armed);
+    $('opponent').value = prefs.opponent;
+    $('side').value = prefs.side;
+    $('side').disabled = !vsBot();
+    $('think').value = String(prefs.think);
+    $('veto').value = prefs.veto;
+    $('build').value = prefs.build;
+    $('ponder').checked = prefs.ponder;
+    const engineOn = ENGINE_BOTS.has(prefs.opponent);
+    $('think-field').hidden = !engineOn;
+    $('veto-field').hidden = prefs.opponent !== 'claude';
+    $('ponder-field').hidden = !engineOn;
+    $('build-field').hidden = !(engineOn && Engine.backend === 'wasm' && Object.keys(wasm.manifest.builds).length > 1);
+    const claudeOpt = $('opponent').querySelector('option[value="claude"]');
+    claudeOpt.textContent = link.open ? 'Claude + Stockfish (MCP)' : 'Claude + Stockfish';
+  }
+
+  function renderOverlays() {
+    promoEl.hidden = !ui.promo;
+    if (ui.promo) {
+      const { to, piece } = ui.promo[0];
+      const i = ui.flipped ? 63 - to : to, up = i >> 3 !== 0;
+      promoCol.style.left = (i & 7) * 12.5 + '%';
+      promoCol.style.top = up ? 'auto' : '0';
+      promoCol.style.bottom = up ? '0' : 'auto';
+      promoCol.classList.toggle('up', up);
+      promoCol.replaceChildren(...['Q', 'N', 'R', 'B'].map(t => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.dataset.t = t;
+        btn.setAttribute('aria-label', `Promote to ${PIECE_NAMES[t]}`);
+        btn.append(pieceImg(piece[0] + t, ''));
+        return btn;
+      }));
+    }
+    const o = game.outcome;
+    resultEl.hidden = !o || ui.dismissed;
+    if (o) {
+      $('result-score').textContent = o.result;
+      $('result-text').textContent = outcomeText(o);
+    }
+  }
+
+  function render() {
+    renderBoard();
+    renderPlayers();
+    renderStatus();
+    renderEngine();
+    renderEval();
+    renderClaude();
+    renderMoves();
+    renderControls();
+    renderOverlays();
+  }
+
+  // Keep the clock in the engine readout moving between engine messages.
+  setInterval(() => { if (ui.live && ui.live.kind !== 'ponder') { renderEngine(); renderStatus(); } }, 1000);
+
+  // ---- Moving pieces: click a piece then a square, or drag it ------------------------------
+
+  function select(sq) {
+    ui.selected = sq;
+    ui.targets = sq < 0 ? [] : game.legal.filter(m => m.from === sq);
+    renderBoard();
+  }
+
+  // `moves` all share one from/to pair: a single move, or the four promotion choices.
+  function attempt(moves) {
+    if (moves.length === 1) return play(moves[0]);
+    ui.promo = moves;
+    render();
+  }
+
+  function dropDrag() {
+    const d = ui.drag;
+    ui.drag = null;
+    if (d && d.ghost) d.ghost.remove();
+    return d;
+  }
+
+  boardEl.addEventListener('pointerdown', e => {
+    if (e.button > 0 || ui.promo || ui.drag) return;
+    const el = e.target.closest('.sq');
+    if (!el || !humanTurn()) return;
+    e.preventDefault();
+    const sq = +el.dataset.sq;
+    const moves = ui.targets.filter(m => m.to === sq);
+    if (moves.length) return attempt(moves);
+    const p = game.state.board[sq];
+    if (!p || p[0] !== game.state.turn) return select(-1);
+    const again = ui.selected === sq;
+    select(sq);
+    ui.drag = { sq, x: e.clientX, y: e.clientY, id: e.pointerId, again, ghost: null, size: 0 };
+  });
+
+  window.addEventListener('pointermove', e => {
+    const d = ui.drag;
+    if (!d || e.pointerId !== d.id) return;
+    if (!d.ghost) {
+      if (Math.hypot(e.clientX - d.x, e.clientY - d.y) < 5) return;
+      const img = squares[ui.flipped ? 63 - d.sq : d.sq].querySelector('.piece');
+      d.size = img.getBoundingClientRect().width;
+      d.ghost = img.cloneNode();
+      d.ghost.className = 'ghost';
+      d.ghost.style.width = d.ghost.style.height = d.size + 'px';
+      document.body.append(d.ghost);
+      renderBoard();
+    }
+    d.ghost.style.transform = `translate(${e.clientX - d.size / 2}px, ${e.clientY - d.size / 2}px)`;
+  });
+
+  window.addEventListener('pointerup', e => {
+    if (!ui.drag || e.pointerId !== ui.drag.id) return;
+    const d = dropDrag();
+    if (!d.ghost) {
+      if (d.again) select(-1);
+      return;
+    }
+    const under = document.elementFromPoint(e.clientX, e.clientY);
+    const el = under && under.closest ? under.closest('.sq') : null;
+    const moves = el && boardEl.contains(el) ? ui.targets.filter(m => m.to === +el.dataset.sq) : [];
+    if (moves.length) attempt(moves);
+    else renderBoard();
+  });
+
+  window.addEventListener('pointercancel', e => {
+    if (ui.drag && e.pointerId === ui.drag.id) { dropDrag(); renderBoard(); }
+  });
+
+  promoEl.addEventListener('click', e => {
+    const btn = e.target.closest('button');
+    const moves = ui.promo;
+    if (!moves) return;
+    if (btn) return play(moves.find(m => m.promo === btn.dataset.t));
+    ui.promo = null;
+    render();
+  });
+
+  // ---- Controls ---------------------------------------------------------------------------
+
+  function newGame() {
+    reset();
+    ui.flipped = vsBot() && prefs.side === 'b';
+    commit();
+  }
+
+  $('new').addEventListener('click', newGame);
+  $('again').addEventListener('click', newGame);
+  $('peek').addEventListener('click', () => { ui.dismissed = true; renderOverlays(); });
+  $('undo').addEventListener('click', undo);
+  $('draw').addEventListener('click', offerDraw);
+  $('resign').addEventListener('click', resign);
+  $('flip').addEventListener('click', () => { ui.flipped = !ui.flipped; save(); render(); });
+
+  function changeSetup() {
+    const before = prefs.opponent;
+    prefs.opponent = $('opponent').value;
+    prefs.side = $('side').value;
+    prefs.think = Number($('think').value) || 60;
+    prefs.veto = $('veto').value in VETO ? $('veto').value : 'tight';
+    prefs.ponder = $('ponder').checked;
+    const build = $('build').value;
+    if (build !== prefs.build) {
+      prefs.build = build;
+      wasm.terminate();
+    }
+    if (vsBot()) ui.flipped = prefs.side === 'b';
+    if (before !== prefs.opponent) ui.live = null;
+    ui.selected = -1;
+    ui.targets = [];
+    ui.promo = null;
+    ui.note = '';
+    ui.engineError = '';
+    commit();
+  }
+  for (const id of ['opponent', 'side', 'think', 'veto', 'ponder', 'build']) $(id).addEventListener('change', changeSetup);
+
+  $('claude-copy').addEventListener('click', () => {
+    const btn = $('claude-copy');
+    const done = ok => { btn.textContent = ok ? 'Copied' : MCP_COMMAND; setTimeout(() => { btn.textContent = 'Copy command'; }, 2000); };
+    try { navigator.clipboard.writeText(MCP_COMMAND).then(() => done(true), () => done(false)); } catch (e) { done(false); }
+  });
+  $('claude-retry').addEventListener('click', () => { ui.claude.error = ''; scheduleBot(); });
+  $('claude-stop').addEventListener('click', () => {
+    cancelBot();
+    ui.claude.phase = 'error';
+    ui.claude.error = 'Stopped. Ask Claude again, or let Stockfish move.';
+    ui.live = null;
+    render();
+  });
+  $('claude-fallback').addEventListener('click', () => {
+    if (!botTurn() || !Engine.backend) return;
+    cancelBot();
+    const seq = botSeq, ply = game.history.length;
+    Object.assign(ui.claude, { phase: '', error: '', draft: '' });
+    engineTurn(() => seq === botSeq && botTurn() && game.history.length === ply, 'Stockfish moved on its own this turn.');
+  });
+
+  // ---- Boot -------------------------------------------------------------------------------
+
+  function start(data) {
+    reset();
+    let saved = data && Array.isArray(data.moves) ? data : null;
+    if (!saved) {
+      try { saved = JSON.parse(localStorage.getItem(STORE)); } catch (e) { saved = null; }
+    }
+    restore(saved);
+    render();
+    scheduleBot();
+    link.start();
+  }
+
+  const hot = window.claude && window.claude.hot;
+  if (hot && hot.snapshot) hot.snapshot(snapshot);
+  if (hot && hot.ready) hot.ready(data => start(data || hot.data));
+  else start(hot && hot.data);
+})();
+</script>

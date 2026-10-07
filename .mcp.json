@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "stockshark": {
+      "command": "node",
+      "args": ["stockshark/server/index.mjs", "--stdio"],
+      "env": {
+        "STOCKSHARK_PORT": "${STOCKSHARK_PORT:-8787}"
+      }
+    }
+  }
+}

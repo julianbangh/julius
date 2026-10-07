@@ -1,0 +1,6 @@
+{
+  "enabledMcpjsonServers": ["stockshark"],
+  "permissions": {
+    "allow": ["mcp__stockshark"]
+  }
+}
