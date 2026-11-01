@@ -9,3 +9,7 @@ cd stockshark && npm install && npm run get-stockfish && claude
 ```
 
 Then run `/mcp__stockshark__play` in Claude Code and open <http://127.0.0.1:8787>.
+
+## BillZero
+
+[`billzero/BUILD_PROMPT.md`](billzero/BUILD_PROMPT.md) is a complete build brief for an autonomous agent to create BillZero, an app that gets nonprofit-hospital bills reduced or wiped through their legally required financial-assistance policies.
