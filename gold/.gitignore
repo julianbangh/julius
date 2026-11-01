@@ -1,0 +1,3 @@
+pyodide/
+dist/
+__pycache__/
