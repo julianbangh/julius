@@ -1,0 +1,9 @@
+The map you grew up with has been lying to you.
+Look at Greenland. On this map, it looks as big as Africa.
+But watch what happens when we slide it down to the equator.
+Greenland shrinks. Africa is actually 14 times bigger.
+This is the Mercator projection, made in 1569 for sailors. It keeps directions right, but stretches everything near the poles.
+Russia looks gigantic. Slide it down... still huge, but now it's smaller than Africa.
+Canada looks four times bigger than Brazil. In reality? Only about 17% bigger.
+And Africa? You can fit the US, China, India, and most of Europe inside it.
+So next time you look at a world map, remember: the sizes are a lie.

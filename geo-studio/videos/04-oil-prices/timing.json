@@ -1,0 +1,1137 @@
+{
+ "duration": 72.505188,
+ "tempo": 1.18,
+ "words": [
+  {
+   "w": "Why",
+   "s": 0.0,
+   "e": 0.28,
+   "line": 0
+  },
+  {
+   "w": "did",
+   "s": 0.28,
+   "e": 0.5,
+   "line": 0
+  },
+  {
+   "w": "oil",
+   "s": 0.5,
+   "e": 0.84,
+   "line": 0
+  },
+  {
+   "w": "prices",
+   "s": 0.84,
+   "e": 1.3,
+   "line": 0
+  },
+  {
+   "w": "go",
+   "s": 1.3,
+   "e": 1.58,
+   "line": 0
+  },
+  {
+   "w": "up",
+   "s": 1.58,
+   "e": 1.76,
+   "line": 0
+  },
+  {
+   "w": "so",
+   "s": 1.76,
+   "e": 2.04,
+   "line": 0
+  },
+  {
+   "w": "much",
+   "s": 2.04,
+   "e": 2.32,
+   "line": 0
+  },
+  {
+   "w": "this",
+   "s": 2.32,
+   "e": 2.58,
+   "line": 0
+  },
+  {
+   "w": "year?",
+   "s": 2.58,
+   "e": 2.94,
+   "line": 0
+  },
+  {
+   "w": "In",
+   "s": 3.56,
+   "e": 3.7,
+   "line": 1
+  },
+  {
+   "w": "February,",
+   "s": 3.7,
+   "e": 4.2,
+   "line": 1
+  },
+  {
+   "w": "a",
+   "s": 4.48,
+   "e": 4.66,
+   "line": 1
+  },
+  {
+   "w": "barrel",
+   "s": 4.66,
+   "e": 4.86,
+   "line": 1
+  },
+  {
+   "w": "of",
+   "s": 4.86,
+   "e": 5.1,
+   "line": 1
+  },
+  {
+   "w": "oil",
+   "s": 5.1,
+   "e": 5.34,
+   "line": 1
+  },
+  {
+   "w": "cost",
+   "s": 5.34,
+   "e": 5.68,
+   "line": 1
+  },
+  {
+   "w": "72",
+   "s": 5.68,
+   "e": 6.44,
+   "line": 1
+  },
+  {
+   "w": "dollars.",
+   "s": 6.44,
+   "e": 6.86,
+   "line": 1
+  },
+  {
+   "w": "Then",
+   "s": 7.4,
+   "e": 7.66,
+   "line": 2
+  },
+  {
+   "w": "on",
+   "s": 7.66,
+   "e": 8.02,
+   "line": 2
+  },
+  {
+   "w": "February",
+   "s": 8.02,
+   "e": 8.38,
+   "line": 2
+  },
+  {
+   "w": "28th,",
+   "s": 8.38,
+   "e": 9.48,
+   "line": 2
+  },
+  {
+   "w": "the",
+   "s": 9.58,
+   "e": 9.63,
+   "line": 2
+  },
+  {
+   "w": "US",
+   "s": 9.62,
+   "e": 9.88,
+   "line": 2
+  },
+  {
+   "w": "and",
+   "s": 9.88,
+   "e": 10.32,
+   "line": 2
+  },
+  {
+   "w": "Israel",
+   "s": 10.32,
+   "e": 10.74,
+   "line": 2
+  },
+  {
+   "w": "went",
+   "s": 10.74,
+   "e": 11.08,
+   "line": 2
+  },
+  {
+   "w": "to",
+   "s": 11.08,
+   "e": 11.26,
+   "line": 2
+  },
+  {
+   "w": "war",
+   "s": 11.26,
+   "e": 11.52,
+   "line": 2
+  },
+  {
+   "w": "with",
+   "s": 11.52,
+   "e": 11.76,
+   "line": 2
+  },
+  {
+   "w": "Iran.",
+   "s": 11.76,
+   "e": 12.12,
+   "line": 2
+  },
+  {
+   "w": "And",
+   "s": 12.7,
+   "e": 12.84,
+   "line": 3
+  },
+  {
+   "w": "Iran",
+   "s": 12.84,
+   "e": 13.18,
+   "line": 3
+  },
+  {
+   "w": "did",
+   "s": 13.18,
+   "e": 13.46,
+   "line": 3
+  },
+  {
+   "w": "what",
+   "s": 13.46,
+   "e": 13.7,
+   "line": 3
+  },
+  {
+   "w": "everyone",
+   "s": 13.7,
+   "e": 14.2,
+   "line": 3
+  },
+  {
+   "w": "feared.",
+   "s": 14.2,
+   "e": 14.66,
+   "line": 3
+  },
+  {
+   "w": "It",
+   "s": 15.06,
+   "e": 15.32,
+   "line": 3
+  },
+  {
+   "w": "shut",
+   "s": 15.32,
+   "e": 15.56,
+   "line": 3
+  },
+  {
+   "w": "the",
+   "s": 15.56,
+   "e": 15.8,
+   "line": 3
+  },
+  {
+   "w": "Strait",
+   "s": 15.8,
+   "e": 16.04,
+   "line": 3
+  },
+  {
+   "w": "of",
+   "s": 16.04,
+   "e": 16.2,
+   "line": 3
+  },
+  {
+   "w": "Hormuz.",
+   "s": 16.2,
+   "e": 16.66,
+   "line": 3
+  },
+  {
+   "w": "This",
+   "s": 17.3,
+   "e": 17.54,
+   "line": 4
+  },
+  {
+   "w": "gap",
+   "s": 17.54,
+   "e": 17.86,
+   "line": 4
+  },
+  {
+   "w": "is",
+   "s": 17.86,
+   "e": 18.18,
+   "line": 4
+  },
+  {
+   "w": "just",
+   "s": 18.18,
+   "e": 18.5,
+   "line": 4
+  },
+  {
+   "w": "21",
+   "s": 18.5,
+   "e": 19.14,
+   "line": 4
+  },
+  {
+   "w": "miles",
+   "s": 19.14,
+   "e": 19.5,
+   "line": 4
+  },
+  {
+   "w": "wide,",
+   "s": 19.5,
+   "e": 19.94,
+   "line": 4
+  },
+  {
+   "w": "and",
+   "s": 20.2,
+   "e": 20.34,
+   "line": 4
+  },
+  {
+   "w": "a",
+   "s": 20.34,
+   "e": 20.5,
+   "line": 4
+  },
+  {
+   "w": "fifth",
+   "s": 20.5,
+   "e": 20.72,
+   "line": 4
+  },
+  {
+   "w": "of",
+   "s": 20.72,
+   "e": 20.98,
+   "line": 4
+  },
+  {
+   "w": "the",
+   "s": 20.98,
+   "e": 21.06,
+   "line": 4
+  },
+  {
+   "w": "world's",
+   "s": 21.06,
+   "e": 21.44,
+   "line": 4
+  },
+  {
+   "w": "oil",
+   "s": 21.44,
+   "e": 21.7,
+   "line": 4
+  },
+  {
+   "w": "sails",
+   "s": 21.7,
+   "e": 22.0,
+   "line": 4
+  },
+  {
+   "w": "through",
+   "s": 22.0,
+   "e": 22.34,
+   "line": 4
+  },
+  {
+   "w": "it.",
+   "s": 22.34,
+   "e": 22.66,
+   "line": 4
+  },
+  {
+   "w": "Tankers",
+   "s": 23.12,
+   "e": 23.48,
+   "line": 5
+  },
+  {
+   "w": "stopped.",
+   "s": 23.48,
+   "e": 23.9,
+   "line": 5
+  },
+  {
+   "w": "Oil",
+   "s": 24.58,
+   "e": 24.66,
+   "line": 5
+  },
+  {
+   "w": "had",
+   "s": 24.66,
+   "e": 24.94,
+   "line": 5
+  },
+  {
+   "w": "its",
+   "s": 24.94,
+   "e": 25.1,
+   "line": 5
+  },
+  {
+   "w": "biggest",
+   "s": 25.1,
+   "e": 25.46,
+   "line": 5
+  },
+  {
+   "w": "weekly",
+   "s": 25.46,
+   "e": 25.96,
+   "line": 5
+  },
+  {
+   "w": "jump",
+   "s": 25.96,
+   "e": 26.28,
+   "line": 5
+  },
+  {
+   "w": "on",
+   "s": 26.28,
+   "e": 26.52,
+   "line": 5
+  },
+  {
+   "w": "record,",
+   "s": 26.52,
+   "e": 26.84,
+   "line": 5
+  },
+  {
+   "w": "and",
+   "s": 27.08,
+   "e": 27.36,
+   "line": 5
+  },
+  {
+   "w": "on",
+   "s": 27.36,
+   "e": 27.54,
+   "line": 5
+  },
+  {
+   "w": "March",
+   "s": 27.54,
+   "e": 27.76,
+   "line": 5
+  },
+  {
+   "w": "9th",
+   "s": 27.76,
+   "e": 28.42,
+   "line": 5
+  },
+  {
+   "w": "it",
+   "s": 28.42,
+   "e": 28.56,
+   "line": 5
+  },
+  {
+   "w": "broke",
+   "s": 28.56,
+   "e": 28.84,
+   "line": 5
+  },
+  {
+   "w": "100",
+   "s": 28.84,
+   "e": 29.6,
+   "line": 5
+  },
+  {
+   "w": "dollars.",
+   "s": 29.6,
+   "e": 30.08,
+   "line": 5
+  },
+  {
+   "w": "In",
+   "s": 30.72,
+   "e": 30.8,
+   "line": 6
+  },
+  {
+   "w": "April,",
+   "s": 30.8,
+   "e": 31.14,
+   "line": 6
+  },
+  {
+   "w": "a",
+   "s": 31.5,
+   "e": 31.55,
+   "line": 6
+  },
+  {
+   "w": "ceasefire",
+   "s": 31.5,
+   "e": 31.84,
+   "line": 6
+  },
+  {
+   "w": "crashed",
+   "s": 31.84,
+   "e": 32.54,
+   "line": 6
+  },
+  {
+   "w": "prices.",
+   "s": 32.54,
+   "e": 33.02,
+   "line": 6
+  },
+  {
+   "w": "Then",
+   "s": 33.86,
+   "e": 33.96,
+   "line": 6
+  },
+  {
+   "w": "a",
+   "s": 33.96,
+   "e": 34.24,
+   "line": 6
+  },
+  {
+   "w": "US",
+   "s": 34.24,
+   "e": 34.56,
+   "line": 6
+  },
+  {
+   "w": "blockade",
+   "s": 34.56,
+   "e": 35.0,
+   "line": 6
+  },
+  {
+   "w": "threat",
+   "s": 35.0,
+   "e": 35.44,
+   "line": 6
+  },
+  {
+   "w": "sent",
+   "s": 35.44,
+   "e": 35.8,
+   "line": 6
+  },
+  {
+   "w": "oil",
+   "s": 35.8,
+   "e": 36.08,
+   "line": 6
+  },
+  {
+   "w": "to",
+   "s": 36.08,
+   "e": 36.36,
+   "line": 6
+  },
+  {
+   "w": "a",
+   "s": 36.36,
+   "e": 36.52,
+   "line": 6
+  },
+  {
+   "w": "four-year",
+   "s": 36.52,
+   "e": 36.98,
+   "line": 6
+  },
+  {
+   "w": "high",
+   "s": 36.98,
+   "e": 37.38,
+   "line": 6
+  },
+  {
+   "w": "of",
+   "s": 37.38,
+   "e": 37.66,
+   "line": 6
+  },
+  {
+   "w": "126.",
+   "s": 37.66,
+   "e": 38.48,
+   "line": 6
+  },
+  {
+   "w": "In",
+   "s": 39.5,
+   "e": 39.72,
+   "line": 7
+  },
+  {
+   "w": "June,",
+   "s": 39.72,
+   "e": 40.06,
+   "line": 7
+  },
+  {
+   "w": "a",
+   "s": 40.4,
+   "e": 40.45,
+   "line": 7
+  },
+  {
+   "w": "deal",
+   "s": 40.44,
+   "e": 40.64,
+   "line": 7
+  },
+  {
+   "w": "reopened",
+   "s": 40.64,
+   "e": 41.14,
+   "line": 7
+  },
+  {
+   "w": "the",
+   "s": 41.14,
+   "e": 41.36,
+   "line": 7
+  },
+  {
+   "w": "strait,",
+   "s": 41.36,
+   "e": 41.74,
+   "line": 7
+  },
+  {
+   "w": "and",
+   "s": 42.04,
+   "e": 42.14,
+   "line": 7
+  },
+  {
+   "w": "oil",
+   "s": 42.14,
+   "e": 42.48,
+   "line": 7
+  },
+  {
+   "w": "fell",
+   "s": 42.48,
+   "e": 42.74,
+   "line": 7
+  },
+  {
+   "w": "back",
+   "s": 42.74,
+   "e": 43.04,
+   "line": 7
+  },
+  {
+   "w": "to",
+   "s": 43.04,
+   "e": 43.24,
+   "line": 7
+  },
+  {
+   "w": "around",
+   "s": 43.24,
+   "e": 43.58,
+   "line": 7
+  },
+  {
+   "w": "72.",
+   "s": 43.58,
+   "e": 44.08,
+   "line": 7
+  },
+  {
+   "w": "Then",
+   "s": 44.94,
+   "e": 45.24,
+   "line": 8
+  },
+  {
+   "w": "in",
+   "s": 45.24,
+   "e": 45.54,
+   "line": 8
+  },
+  {
+   "w": "July,",
+   "s": 45.54,
+   "e": 45.94,
+   "line": 8
+  },
+  {
+   "w": "the",
+   "s": 46.22,
+   "e": 46.36,
+   "line": 8
+  },
+  {
+   "w": "strikes",
+   "s": 46.36,
+   "e": 46.76,
+   "line": 8
+  },
+  {
+   "w": "started",
+   "s": 46.76,
+   "e": 47.26,
+   "line": 8
+  },
+  {
+   "w": "again.",
+   "s": 47.26,
+   "e": 47.68,
+   "line": 8
+  },
+  {
+   "w": "Tankers",
+   "s": 48.34,
+   "e": 48.62,
+   "line": 8
+  },
+  {
+   "w": "were",
+   "s": 48.62,
+   "e": 48.78,
+   "line": 8
+  },
+  {
+   "w": "hit",
+   "s": 48.78,
+   "e": 49.0,
+   "line": 8
+  },
+  {
+   "w": "off",
+   "s": 49.0,
+   "e": 49.22,
+   "line": 8
+  },
+  {
+   "w": "Saudi",
+   "s": 49.22,
+   "e": 49.56,
+   "line": 8
+  },
+  {
+   "w": "Arabia,",
+   "s": 49.56,
+   "e": 49.98,
+   "line": 8
+  },
+  {
+   "w": "and",
+   "s": 50.36,
+   "e": 50.58,
+   "line": 8
+  },
+  {
+   "w": "oil",
+   "s": 50.58,
+   "e": 50.92,
+   "line": 8
+  },
+  {
+   "w": "shot",
+   "s": 50.92,
+   "e": 51.24,
+   "line": 8
+  },
+  {
+   "w": "back",
+   "s": 51.24,
+   "e": 51.56,
+   "line": 8
+  },
+  {
+   "w": "over",
+   "s": 51.56,
+   "e": 51.86,
+   "line": 8
+  },
+  {
+   "w": "100.",
+   "s": 51.86,
+   "e": 52.28,
+   "line": 8
+  },
+  {
+   "w": "In",
+   "s": 52.96,
+   "e": 53.22,
+   "line": 9
+  },
+  {
+   "w": "September,",
+   "s": 53.22,
+   "e": 53.64,
+   "line": 9
+  },
+  {
+   "w": "American",
+   "s": 54.38,
+   "e": 54.5,
+   "line": 9
+  },
+  {
+   "w": "diesel",
+   "s": 54.5,
+   "e": 54.84,
+   "line": 9
+  },
+  {
+   "w": "hit",
+   "s": 54.84,
+   "e": 55.14,
+   "line": 9
+  },
+  {
+   "w": "a",
+   "s": 55.14,
+   "e": 55.3,
+   "line": 9
+  },
+  {
+   "w": "record",
+   "s": 55.3,
+   "e": 55.56,
+   "line": 9
+  },
+  {
+   "w": "6",
+   "s": 55.56,
+   "e": 56.0,
+   "line": 9
+  },
+  {
+   "w": "dollars",
+   "s": 56.0,
+   "e": 56.32,
+   "line": 9
+  },
+  {
+   "w": "a",
+   "s": 56.32,
+   "e": 56.56,
+   "line": 9
+  },
+  {
+   "w": "gallon.",
+   "s": 56.56,
+   "e": 56.74,
+   "line": 9
+  },
+  {
+   "w": "October",
+   "s": 57.46,
+   "e": 57.92,
+   "line": 10
+  },
+  {
+   "w": "was",
+   "s": 57.92,
+   "e": 58.36,
+   "line": 10
+  },
+  {
+   "w": "the",
+   "s": 58.36,
+   "e": 58.54,
+   "line": 10
+  },
+  {
+   "w": "worst",
+   "s": 58.54,
+   "e": 58.78,
+   "line": 10
+  },
+  {
+   "w": "month",
+   "s": 58.78,
+   "e": 59.1,
+   "line": 10
+  },
+  {
+   "w": "yet",
+   "s": 59.1,
+   "e": 59.4,
+   "line": 10
+  },
+  {
+   "w": "for",
+   "s": 59.4,
+   "e": 59.68,
+   "line": 10
+  },
+  {
+   "w": "tanker",
+   "s": 59.68,
+   "e": 59.96,
+   "line": 10
+  },
+  {
+   "w": "attacks.",
+   "s": 59.96,
+   "e": 60.46,
+   "line": 10
+  },
+  {
+   "w": "And",
+   "s": 61.16,
+   "e": 61.21,
+   "line": 10
+  },
+  {
+   "w": "today,",
+   "s": 61.18,
+   "e": 61.54,
+   "line": 10
+  },
+  {
+   "w": "oil",
+   "s": 62.0,
+   "e": 62.12,
+   "line": 10
+  },
+  {
+   "w": "is",
+   "s": 62.12,
+   "e": 62.36,
+   "line": 10
+  },
+  {
+   "w": "still",
+   "s": 62.36,
+   "e": 62.6,
+   "line": 10
+  },
+  {
+   "w": "around",
+   "s": 62.6,
+   "e": 63.0,
+   "line": 10
+  },
+  {
+   "w": "105",
+   "s": 63.0,
+   "e": 63.9,
+   "line": 10
+  },
+  {
+   "w": "dollars,",
+   "s": 63.9,
+   "e": 64.58,
+   "line": 10
+  },
+  {
+   "w": "about",
+   "s": 65.02,
+   "e": 65.28,
+   "line": 10
+  },
+  {
+   "w": "45%",
+   "s": 65.28,
+   "e": 66.34,
+   "line": 10
+  },
+  {
+   "w": "higher",
+   "s": 66.34,
+   "e": 66.68,
+   "line": 10
+  },
+  {
+   "w": "than",
+   "s": 66.68,
+   "e": 66.94,
+   "line": 10
+  },
+  {
+   "w": "in",
+   "s": 66.94,
+   "e": 67.1,
+   "line": 10
+  },
+  {
+   "w": "February.",
+   "s": 67.1,
+   "e": 67.48,
+   "line": 10
+  },
+  {
+   "w": "As",
+   "s": 68.16,
+   "e": 68.3,
+   "line": 11
+  },
+  {
+   "w": "long",
+   "s": 68.3,
+   "e": 68.56,
+   "line": 11
+  },
+  {
+   "w": "as",
+   "s": 68.56,
+   "e": 68.76,
+   "line": 11
+  },
+  {
+   "w": "that",
+   "s": 68.76,
+   "e": 68.94,
+   "line": 11
+  },
+  {
+   "w": "strait",
+   "s": 68.94,
+   "e": 69.36,
+   "line": 11
+  },
+  {
+   "w": "stays",
+   "s": 69.36,
+   "e": 69.62,
+   "line": 11
+  },
+  {
+   "w": "shut,",
+   "s": 69.62,
+   "e": 70.0,
+   "line": 11
+  },
+  {
+   "w": "your",
+   "s": 70.46,
+   "e": 70.62,
+   "line": 11
+  },
+  {
+   "w": "gas",
+   "s": 70.62,
+   "e": 71.06,
+   "line": 11
+  },
+  {
+   "w": "stays",
+   "s": 71.06,
+   "e": 71.56,
+   "line": 11
+  },
+  {
+   "w": "expensive.",
+   "s": 71.56,
+   "e": 72.0,
+   "line": 11
+  }
+ ],
+ "lines": [
+  {
+   "i": 0,
+   "text": "Why did oil prices go up so much this year?",
+   "s": 0.0,
+   "e": 2.94
+  },
+  {
+   "i": 1,
+   "text": "In February, a barrel of oil cost 72 dollars.",
+   "s": 3.56,
+   "e": 6.86
+  },
+  {
+   "i": 2,
+   "text": "Then on February 28th, the US and Israel went to war with Iran.",
+   "s": 7.4,
+   "e": 12.12
+  },
+  {
+   "i": 3,
+   "text": "And Iran did what everyone feared. It shut the Strait of Hormuz.",
+   "s": 12.7,
+   "e": 16.66
+  },
+  {
+   "i": 4,
+   "text": "This gap is just 21 miles wide, and a fifth of the world's oil sails through it.",
+   "s": 17.3,
+   "e": 22.66
+  },
+  {
+   "i": 5,
+   "text": "Tankers stopped. Oil had its biggest weekly jump on record, and on March 9th it broke 100 dollars.",
+   "s": 23.12,
+   "e": 30.08
+  },
+  {
+   "i": 6,
+   "text": "In April, a ceasefire crashed prices. Then a US blockade threat sent oil to a four-year high of 126.",
+   "s": 30.72,
+   "e": 38.48
+  },
+  {
+   "i": 7,
+   "text": "In June, a deal reopened the strait, and oil fell back to around 72.",
+   "s": 39.5,
+   "e": 44.08
+  },
+  {
+   "i": 8,
+   "text": "Then in July, the strikes started again. Tankers were hit off Saudi Arabia, and oil shot back over 100.",
+   "s": 44.94,
+   "e": 52.28
+  },
+  {
+   "i": 9,
+   "text": "In September, American diesel hit a record 6 dollars a gallon.",
+   "s": 52.96,
+   "e": 56.74
+  },
+  {
+   "i": 10,
+   "text": "October was the worst month yet for tanker attacks. And today, oil is still around 105 dollars, about 45% higher than in February.",
+   "s": 57.46,
+   "e": 67.48
+  },
+  {
+   "i": 11,
+   "text": "As long as that strait stays shut, your gas stays expensive.",
+   "s": 68.16,
+   "e": 72.0
+  }
+ ],
+ "heard": "why did oil prices go up so much this year? In February, a barrel of oil cost 72 dollars. Then on February 28th, the US and Israel went to war with Iran. And Iran did what everyone feared. It shut the Strait of Hormuz. This gap is just 21 miles wide, and a fifth of the world's oil sails through it. Tankers stopped. Oil had its biggest weekly jump on record, and on March 9th it broke 100 dollars. In April, a ceasefire crashed prices. Then a US blockade threat sent oil to a four -year high of 126. In June, a deal reopened the strait, and oil fell back to around 72. Then in July, the strikes started again. Tankers were hit off Saudi Arabia, and oil shot back over 100. In September, American diesel hit a record 6 dollars a gallon. October was the worst month yet for tanker attacks. And today, oil is still around 105 dollars, about 45 percent higher than in February. As long as that strait stays shut, your gas stays expensive."
+}

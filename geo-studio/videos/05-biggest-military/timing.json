@@ -1,0 +1,735 @@
+{
+ "duration": 63.5615,
+ "tempo": 1.15,
+ "words": [
+  {
+   "w": "Who",
+   "s": 0.0,
+   "e": 0.26,
+   "line": 0
+  },
+  {
+   "w": "has",
+   "s": 0.26,
+   "e": 0.52,
+   "line": 0
+  },
+  {
+   "w": "the",
+   "s": 0.52,
+   "e": 0.74,
+   "line": 0
+  },
+  {
+   "w": "biggest",
+   "s": 0.74,
+   "e": 1.02,
+   "line": 0
+  },
+  {
+   "w": "military",
+   "s": 1.02,
+   "e": 1.48,
+   "line": 0
+  },
+  {
+   "w": "on",
+   "s": 1.48,
+   "e": 1.9,
+   "line": 0
+  },
+  {
+   "w": "Earth?",
+   "s": 1.9,
+   "e": 2.12,
+   "line": 0
+  },
+  {
+   "w": "Let's",
+   "s": 2.98,
+   "e": 3.22,
+   "line": 0
+  },
+  {
+   "w": "start",
+   "s": 3.22,
+   "e": 3.42,
+   "line": 0
+  },
+  {
+   "w": "with",
+   "s": 3.42,
+   "e": 3.68,
+   "line": 0
+  },
+  {
+   "w": "the",
+   "s": 3.68,
+   "e": 3.82,
+   "line": 0
+  },
+  {
+   "w": "smallest.",
+   "s": 3.82,
+   "e": 4.24,
+   "line": 0
+  },
+  {
+   "w": "Costa",
+   "s": 5.12,
+   "e": 5.2,
+   "line": 1
+  },
+  {
+   "w": "Rica:",
+   "s": 5.2,
+   "e": 5.66,
+   "line": 1
+  },
+  {
+   "w": "zero.",
+   "s": 5.66,
+   "e": 6.32,
+   "line": 1
+  },
+  {
+   "w": "It",
+   "s": 7.08,
+   "e": 7.14,
+   "line": 1
+  },
+  {
+   "w": "abolished",
+   "s": 7.14,
+   "e": 7.56,
+   "line": 1
+  },
+  {
+   "w": "its",
+   "s": 7.56,
+   "e": 7.82,
+   "line": 1
+  },
+  {
+   "w": "army",
+   "s": 7.82,
+   "e": 8.12,
+   "line": 1
+  },
+  {
+   "w": "in",
+   "s": 8.12,
+   "e": 8.48,
+   "line": 1
+  },
+  {
+   "w": "1948.",
+   "s": 8.48,
+   "e": 9.42,
+   "line": 1
+  },
+  {
+   "w": "Vatican",
+   "s": 10.38,
+   "e": 10.6,
+   "line": 2
+  },
+  {
+   "w": "City:",
+   "s": 10.6,
+   "e": 11.02,
+   "line": 2
+  },
+  {
+   "w": "135",
+   "s": 11.02,
+   "e": 12.34,
+   "line": 2
+  },
+  {
+   "w": "Swiss",
+   "s": 12.34,
+   "e": 13.24,
+   "line": 2
+  },
+  {
+   "w": "Guards.",
+   "s": 13.24,
+   "e": 13.68,
+   "line": 2
+  },
+  {
+   "w": "The",
+   "s": 14.18,
+   "e": 14.32,
+   "line": 2
+  },
+  {
+   "w": "smallest",
+   "s": 14.32,
+   "e": 14.74,
+   "line": 2
+  },
+  {
+   "w": "army",
+   "s": 14.74,
+   "e": 15.06,
+   "line": 2
+  },
+  {
+   "w": "in",
+   "s": 15.06,
+   "e": 15.24,
+   "line": 2
+  },
+  {
+   "w": "the",
+   "s": 15.24,
+   "e": 15.34,
+   "line": 2
+  },
+  {
+   "w": "world.",
+   "s": 15.34,
+   "e": 15.76,
+   "line": 2
+  },
+  {
+   "w": "Luxembourg:",
+   "s": 16.56,
+   "e": 16.84,
+   "line": 3
+  },
+  {
+   "w": "about",
+   "s": 16.84,
+   "e": 17.72,
+   "line": 3
+  },
+  {
+   "w": "1,000",
+   "s": 17.72,
+   "e": 18.62,
+   "line": 3
+  },
+  {
+   "w": "soldiers.",
+   "s": 18.62,
+   "e": 19.08,
+   "line": 3
+  },
+  {
+   "w": "Ireland:",
+   "s": 19.88,
+   "e": 20.16,
+   "line": 4
+  },
+  {
+   "w": "7,500.",
+   "s": 20.16,
+   "e": 21.68,
+   "line": 4
+  },
+  {
+   "w": "The",
+   "s": 22.7,
+   "e": 22.75,
+   "line": 5
+  },
+  {
+   "w": "United",
+   "s": 22.74,
+   "e": 23.12,
+   "line": 5
+  },
+  {
+   "w": "Kingdom:",
+   "s": 23.12,
+   "e": 23.56,
+   "line": 5
+  },
+  {
+   "w": "around",
+   "s": 23.56,
+   "e": 24.22,
+   "line": 5
+  },
+  {
+   "w": "140,000.",
+   "s": 24.22,
+   "e": 26.28,
+   "line": 5
+  },
+  {
+   "w": "Turkey:",
+   "s": 26.68,
+   "e": 26.86,
+   "line": 6
+  },
+  {
+   "w": "355,000.",
+   "s": 26.86,
+   "e": 29.12,
+   "line": 6
+  },
+  {
+   "w": "The",
+   "s": 29.5,
+   "e": 29.55,
+   "line": 6
+  },
+  {
+   "w": "second",
+   "s": 29.52,
+   "e": 29.98,
+   "line": 6
+  },
+  {
+   "w": "biggest",
+   "s": 29.98,
+   "e": 30.22,
+   "line": 6
+  },
+  {
+   "w": "in",
+   "s": 30.22,
+   "e": 30.5,
+   "line": 6
+  },
+  {
+   "w": "NATO.",
+   "s": 30.5,
+   "e": 30.86,
+   "line": 6
+  },
+  {
+   "w": "Pakistan:",
+   "s": 32.1,
+   "e": 32.15,
+   "line": 7
+  },
+  {
+   "w": "660,000.",
+   "s": 32.1,
+   "e": 34.54,
+   "line": 7
+  },
+  {
+   "w": "Russia:",
+   "s": 35.16,
+   "e": 35.21,
+   "line": 8
+  },
+  {
+   "w": "about",
+   "s": 35.16,
+   "e": 35.68,
+   "line": 8
+  },
+  {
+   "w": "1.1",
+   "s": 35.68,
+   "e": 36.66,
+   "line": 8
+  },
+  {
+   "w": "million.",
+   "s": 36.66,
+   "e": 36.98,
+   "line": 8
+  },
+  {
+   "w": "North",
+   "s": 38.0,
+   "e": 38.05,
+   "line": 9
+  },
+  {
+   "w": "Korea:",
+   "s": 38.0,
+   "e": 38.42,
+   "line": 9
+  },
+  {
+   "w": "1.28",
+   "s": 38.42,
+   "e": 39.76,
+   "line": 9
+  },
+  {
+   "w": "million,",
+   "s": 39.76,
+   "e": 40.06,
+   "line": 9
+  },
+  {
+   "w": "out",
+   "s": 40.58,
+   "e": 40.64,
+   "line": 9
+  },
+  {
+   "w": "of",
+   "s": 40.64,
+   "e": 40.8,
+   "line": 9
+  },
+  {
+   "w": "just",
+   "s": 40.8,
+   "e": 41.04,
+   "line": 9
+  },
+  {
+   "w": "26",
+   "s": 41.04,
+   "e": 41.76,
+   "line": 9
+  },
+  {
+   "w": "million",
+   "s": 41.76,
+   "e": 42.06,
+   "line": 9
+  },
+  {
+   "w": "people.",
+   "s": 42.06,
+   "e": 42.56,
+   "line": 9
+  },
+  {
+   "w": "The",
+   "s": 43.22,
+   "e": 43.3,
+   "line": 10
+  },
+  {
+   "w": "United",
+   "s": 43.3,
+   "e": 43.6,
+   "line": 10
+  },
+  {
+   "w": "States:",
+   "s": 43.6,
+   "e": 44.12,
+   "line": 10
+  },
+  {
+   "w": "1.3",
+   "s": 44.12,
+   "e": 45.32,
+   "line": 10
+  },
+  {
+   "w": "million.",
+   "s": 45.32,
+   "e": 45.68,
+   "line": 10
+  },
+  {
+   "w": "India:",
+   "s": 46.78,
+   "e": 46.83,
+   "line": 11
+  },
+  {
+   "w": "almost",
+   "s": 46.78,
+   "e": 47.38,
+   "line": 11
+  },
+  {
+   "w": "1.5",
+   "s": 47.38,
+   "e": 48.48,
+   "line": 11
+  },
+  {
+   "w": "million.",
+   "s": 48.48,
+   "e": 48.88,
+   "line": 11
+  },
+  {
+   "w": "And",
+   "s": 49.68,
+   "e": 49.78,
+   "line": 12
+  },
+  {
+   "w": "number",
+   "s": 49.78,
+   "e": 50.12,
+   "line": 12
+  },
+  {
+   "w": "one:",
+   "s": 50.12,
+   "e": 50.62,
+   "line": 12
+  },
+  {
+   "w": "China,",
+   "s": 51.12,
+   "e": 51.46,
+   "line": 12
+  },
+  {
+   "w": "with",
+   "s": 51.46,
+   "e": 51.92,
+   "line": 12
+  },
+  {
+   "w": "over",
+   "s": 51.92,
+   "e": 52.2,
+   "line": 12
+  },
+  {
+   "w": "2",
+   "s": 52.2,
+   "e": 52.54,
+   "line": 12
+  },
+  {
+   "w": "million",
+   "s": 52.54,
+   "e": 52.92,
+   "line": 12
+  },
+  {
+   "w": "active",
+   "s": 52.92,
+   "e": 53.32,
+   "line": 12
+  },
+  {
+   "w": "soldiers.",
+   "s": 53.32,
+   "e": 53.84,
+   "line": 12
+  },
+  {
+   "w": "But",
+   "s": 54.52,
+   "e": 54.7,
+   "line": 13
+  },
+  {
+   "w": "size",
+   "s": 54.7,
+   "e": 55.06,
+   "line": 13
+  },
+  {
+   "w": "isn't",
+   "s": 55.06,
+   "e": 55.5,
+   "line": 13
+  },
+  {
+   "w": "everything.",
+   "s": 55.5,
+   "e": 55.98,
+   "line": 13
+  },
+  {
+   "w": "America",
+   "s": 56.74,
+   "e": 57.0,
+   "line": 13
+  },
+  {
+   "w": "spends",
+   "s": 57.0,
+   "e": 57.4,
+   "line": 13
+  },
+  {
+   "w": "almost",
+   "s": 57.4,
+   "e": 57.88,
+   "line": 13
+  },
+  {
+   "w": "a",
+   "s": 57.88,
+   "e": 58.12,
+   "line": 13
+  },
+  {
+   "w": "trillion",
+   "s": 58.12,
+   "e": 58.46,
+   "line": 13
+  },
+  {
+   "w": "dollars",
+   "s": 58.46,
+   "e": 58.88,
+   "line": 13
+  },
+  {
+   "w": "a",
+   "s": 58.88,
+   "e": 59.12,
+   "line": 13
+  },
+  {
+   "w": "year",
+   "s": 59.12,
+   "e": 59.34,
+   "line": 13
+  },
+  {
+   "w": "on",
+   "s": 59.34,
+   "e": 59.56,
+   "line": 13
+  },
+  {
+   "w": "its",
+   "s": 59.56,
+   "e": 59.7,
+   "line": 13
+  },
+  {
+   "w": "military.",
+   "s": 59.7,
+   "e": 60.18,
+   "line": 13
+  },
+  {
+   "w": "More",
+   "s": 60.88,
+   "e": 61.08,
+   "line": 13
+  },
+  {
+   "w": "than",
+   "s": 61.08,
+   "e": 61.28,
+   "line": 13
+  },
+  {
+   "w": "the",
+   "s": 61.28,
+   "e": 61.44,
+   "line": 13
+  },
+  {
+   "w": "next",
+   "s": 61.44,
+   "e": 61.68,
+   "line": 13
+  },
+  {
+   "w": "nine",
+   "s": 61.68,
+   "e": 62.12,
+   "line": 13
+  },
+  {
+   "w": "countries",
+   "s": 62.12,
+   "e": 62.6,
+   "line": 13
+  },
+  {
+   "w": "combined.",
+   "s": 62.6,
+   "e": 63.08,
+   "line": 13
+  }
+ ],
+ "lines": [
+  {
+   "i": 0,
+   "text": "Who has the biggest military on Earth? Let's start with the smallest.",
+   "s": 0.0,
+   "e": 4.24
+  },
+  {
+   "i": 1,
+   "text": "Costa Rica: zero. It abolished its army in 1948.",
+   "s": 5.12,
+   "e": 9.42
+  },
+  {
+   "i": 2,
+   "text": "Vatican City: 135 Swiss Guards. The smallest army in the world.",
+   "s": 10.38,
+   "e": 15.76
+  },
+  {
+   "i": 3,
+   "text": "Luxembourg: about 1,000 soldiers.",
+   "s": 16.56,
+   "e": 19.08
+  },
+  {
+   "i": 4,
+   "text": "Ireland: 7,500.",
+   "s": 19.88,
+   "e": 21.68
+  },
+  {
+   "i": 5,
+   "text": "The United Kingdom: around 140,000.",
+   "s": 22.7,
+   "e": 26.28
+  },
+  {
+   "i": 6,
+   "text": "Turkey: 355,000. The second biggest in NATO.",
+   "s": 26.68,
+   "e": 30.86
+  },
+  {
+   "i": 7,
+   "text": "Pakistan: 660,000.",
+   "s": 32.1,
+   "e": 34.54
+  },
+  {
+   "i": 8,
+   "text": "Russia: about 1.1 million.",
+   "s": 35.16,
+   "e": 36.98
+  },
+  {
+   "i": 9,
+   "text": "North Korea: 1.28 million, out of just 26 million people.",
+   "s": 38.0,
+   "e": 42.56
+  },
+  {
+   "i": 10,
+   "text": "The United States: 1.3 million.",
+   "s": 43.22,
+   "e": 45.68
+  },
+  {
+   "i": 11,
+   "text": "India: almost 1.5 million.",
+   "s": 46.78,
+   "e": 48.88
+  },
+  {
+   "i": 12,
+   "text": "And number one: China, with over 2 million active soldiers.",
+   "s": 49.68,
+   "e": 53.84
+  },
+  {
+   "i": 13,
+   "text": "But size isn't everything. America spends almost a trillion dollars a year on its military. More than the next nine countries combined.",
+   "s": 54.52,
+   "e": 63.08
+  }
+ ],
+ "heard": "Who has the biggest military on Earth? Let's start with the smallest. Costa Rica zero. It abolished its army in 1948. Vatican City 135 Swiss Guards. The smallest army in the world. Luxembourg about 1 ,000 soldiers. Ireland 7 ,500. The United Kingdom around 140 ,000. Turkey 355 ,000. The second biggest in NATO. Pakistan 660 ,000. Russia about 1 .1 million. North Korea 1 .28 million, out of just 26 million people. The United States 1 .3 million. India almost 1 .5 million. And number one. China with over 2 million active soldiers. But size isn't everything. America spends almost a trillion dollars a year on its military. More than the next nine countries combined."
+}

@@ -1,0 +1,885 @@
+{
+ "duration": 57.688646,
+ "tempo": 1.15,
+ "words": [
+  {
+   "w": "What",
+   "s": 0.0,
+   "e": 0.22,
+   "line": 0
+  },
+  {
+   "w": "if",
+   "s": 0.22,
+   "e": 0.38,
+   "line": 0
+  },
+  {
+   "w": "the",
+   "s": 0.38,
+   "e": 0.52,
+   "line": 0
+  },
+  {
+   "w": "oceans",
+   "s": 0.52,
+   "e": 0.9,
+   "line": 0
+  },
+  {
+   "w": "suddenly",
+   "s": 0.9,
+   "e": 1.56,
+   "line": 0
+  },
+  {
+   "w": "dropped",
+   "s": 1.56,
+   "e": 1.9,
+   "line": 0
+  },
+  {
+   "w": "by",
+   "s": 1.9,
+   "e": 2.26,
+   "line": 0
+  },
+  {
+   "w": "120",
+   "s": 2.26,
+   "e": 3.2,
+   "line": 0
+  },
+  {
+   "w": "meters?",
+   "s": 3.2,
+   "e": 3.72,
+   "line": 0
+  },
+  {
+   "w": "Minus",
+   "s": 4.62,
+   "e": 4.88,
+   "line": 1
+  },
+  {
+   "w": "10",
+   "s": 4.88,
+   "e": 5.14,
+   "line": 1
+  },
+  {
+   "w": "meters:",
+   "s": 5.14,
+   "e": 5.54,
+   "line": 1
+  },
+  {
+   "w": "harbors",
+   "s": 6.06,
+   "e": 6.34,
+   "line": 1
+  },
+  {
+   "w": "run",
+   "s": 6.34,
+   "e": 6.62,
+   "line": 1
+  },
+  {
+   "w": "dry,",
+   "s": 6.62,
+   "e": 7.04,
+   "line": 1
+  },
+  {
+   "w": "and",
+   "s": 7.28,
+   "e": 7.46,
+   "line": 1
+  },
+  {
+   "w": "ships",
+   "s": 7.46,
+   "e": 7.7,
+   "line": 1
+  },
+  {
+   "w": "are",
+   "s": 7.7,
+   "e": 7.94,
+   "line": 1
+  },
+  {
+   "w": "stuck",
+   "s": 7.94,
+   "e": 8.22,
+   "line": 1
+  },
+  {
+   "w": "in",
+   "s": 8.22,
+   "e": 8.38,
+   "line": 1
+  },
+  {
+   "w": "the",
+   "s": 8.38,
+   "e": 8.48,
+   "line": 1
+  },
+  {
+   "w": "mud.",
+   "s": 8.48,
+   "e": 8.72,
+   "line": 1
+  },
+  {
+   "w": "Minus",
+   "s": 9.6,
+   "e": 9.82,
+   "line": 2
+  },
+  {
+   "w": "50:",
+   "s": 9.82,
+   "e": 10.1,
+   "line": 2
+  },
+  {
+   "w": "Britain",
+   "s": 10.58,
+   "e": 10.9,
+   "line": 2
+  },
+  {
+   "w": "isn't",
+   "s": 10.9,
+   "e": 11.42,
+   "line": 2
+  },
+  {
+   "w": "an",
+   "s": 11.42,
+   "e": 11.62,
+   "line": 2
+  },
+  {
+   "w": "island",
+   "s": 11.62,
+   "e": 11.84,
+   "line": 2
+  },
+  {
+   "w": "anymore.",
+   "s": 11.84,
+   "e": 12.26,
+   "line": 2
+  },
+  {
+   "w": "It's",
+   "s": 12.68,
+   "e": 12.9,
+   "line": 2
+  },
+  {
+   "w": "joined",
+   "s": 12.9,
+   "e": 13.14,
+   "line": 2
+  },
+  {
+   "w": "to",
+   "s": 13.14,
+   "e": 13.34,
+   "line": 2
+  },
+  {
+   "w": "Europe",
+   "s": 13.34,
+   "e": 13.6,
+   "line": 2
+  },
+  {
+   "w": "by",
+   "s": 13.6,
+   "e": 13.92,
+   "line": 2
+  },
+  {
+   "w": "a",
+   "s": 13.92,
+   "e": 14.06,
+   "line": 2
+  },
+  {
+   "w": "lost",
+   "s": 14.06,
+   "e": 14.3,
+   "line": 2
+  },
+  {
+   "w": "land",
+   "s": 14.3,
+   "e": 14.74,
+   "line": 2
+  },
+  {
+   "w": "called",
+   "s": 14.74,
+   "e": 15.16,
+   "line": 2
+  },
+  {
+   "w": "Doggerland.",
+   "s": 15.16,
+   "e": 15.96,
+   "line": 2
+  },
+  {
+   "w": "Asia",
+   "s": 16.82,
+   "e": 17.08,
+   "line": 3
+  },
+  {
+   "w": "and",
+   "s": 17.08,
+   "e": 17.32,
+   "line": 3
+  },
+  {
+   "w": "America",
+   "s": 17.32,
+   "e": 17.66,
+   "line": 3
+  },
+  {
+   "w": "join",
+   "s": 17.66,
+   "e": 18.08,
+   "line": 3
+  },
+  {
+   "w": "too.",
+   "s": 18.08,
+   "e": 18.5,
+   "line": 3
+  },
+  {
+   "w": "The",
+   "s": 19.0,
+   "e": 19.18,
+   "line": 3
+  },
+  {
+   "w": "Bering",
+   "s": 19.18,
+   "e": 19.5,
+   "line": 3
+  },
+  {
+   "w": "land",
+   "s": 19.5,
+   "e": 19.82,
+   "line": 3
+  },
+  {
+   "w": "bridge",
+   "s": 19.82,
+   "e": 20.08,
+   "line": 3
+  },
+  {
+   "w": "is",
+   "s": 20.08,
+   "e": 20.3,
+   "line": 3
+  },
+  {
+   "w": "back,",
+   "s": 20.3,
+   "e": 20.62,
+   "line": 3
+  },
+  {
+   "w": "the",
+   "s": 20.88,
+   "e": 21.04,
+   "line": 3
+  },
+  {
+   "w": "same",
+   "s": 21.04,
+   "e": 21.28,
+   "line": 3
+  },
+  {
+   "w": "path",
+   "s": 21.28,
+   "e": 21.62,
+   "line": 3
+  },
+  {
+   "w": "the",
+   "s": 21.62,
+   "e": 21.92,
+   "line": 3
+  },
+  {
+   "w": "first",
+   "s": 21.92,
+   "e": 22.18,
+   "line": 3
+  },
+  {
+   "w": "Americans",
+   "s": 22.18,
+   "e": 22.58,
+   "line": 3
+  },
+  {
+   "w": "walked.",
+   "s": 22.58,
+   "e": 23.08,
+   "line": 3
+  },
+  {
+   "w": "Minus",
+   "s": 23.92,
+   "e": 24.16,
+   "line": 4
+  },
+  {
+   "w": "70:",
+   "s": 24.16,
+   "e": 24.58,
+   "line": 4
+  },
+  {
+   "w": "almost",
+   "s": 25.08,
+   "e": 25.32,
+   "line": 4
+  },
+  {
+   "w": "the",
+   "s": 25.32,
+   "e": 25.58,
+   "line": 4
+  },
+  {
+   "w": "entire",
+   "s": 25.58,
+   "e": 26.04,
+   "line": 4
+  },
+  {
+   "w": "Persian",
+   "s": 26.04,
+   "e": 26.5,
+   "line": 4
+  },
+  {
+   "w": "Gulf",
+   "s": 26.5,
+   "e": 26.8,
+   "line": 4
+  },
+  {
+   "w": "drains.",
+   "s": 26.8,
+   "e": 27.2,
+   "line": 4
+  },
+  {
+   "w": "You",
+   "s": 27.8,
+   "e": 27.85,
+   "line": 4
+  },
+  {
+   "w": "could",
+   "s": 27.82,
+   "e": 27.98,
+   "line": 4
+  },
+  {
+   "w": "walk",
+   "s": 27.98,
+   "e": 28.2,
+   "line": 4
+  },
+  {
+   "w": "from",
+   "s": 28.2,
+   "e": 28.42,
+   "line": 4
+  },
+  {
+   "w": "Iran",
+   "s": 28.42,
+   "e": 28.78,
+   "line": 4
+  },
+  {
+   "w": "to",
+   "s": 28.78,
+   "e": 29.12,
+   "line": 4
+  },
+  {
+   "w": "Saudi",
+   "s": 29.12,
+   "e": 29.38,
+   "line": 4
+  },
+  {
+   "w": "Arabia.",
+   "s": 29.38,
+   "e": 29.88,
+   "line": 4
+  },
+  {
+   "w": "Minus",
+   "s": 30.7,
+   "e": 30.94,
+   "line": 5
+  },
+  {
+   "w": "100:",
+   "s": 30.94,
+   "e": 31.44,
+   "line": 5
+  },
+  {
+   "w": "Indonesia,",
+   "s": 32.66,
+   "e": 32.71,
+   "line": 5
+  },
+  {
+   "w": "Malaysia",
+   "s": 33.0,
+   "e": 33.24,
+   "line": 5
+  },
+  {
+   "w": "and",
+   "s": 33.24,
+   "e": 33.72,
+   "line": 5
+  },
+  {
+   "w": "Borneo",
+   "s": 33.72,
+   "e": 34.26,
+   "line": 5
+  },
+  {
+   "w": "fuse",
+   "s": 34.26,
+   "e": 34.72,
+   "line": 5
+  },
+  {
+   "w": "into",
+   "s": 34.72,
+   "e": 35.04,
+   "line": 5
+  },
+  {
+   "w": "one",
+   "s": 35.04,
+   "e": 35.38,
+   "line": 5
+  },
+  {
+   "w": "giant",
+   "s": 35.38,
+   "e": 35.78,
+   "line": 5
+  },
+  {
+   "w": "landmass",
+   "s": 35.78,
+   "e": 36.42,
+   "line": 5
+  },
+  {
+   "w": "called",
+   "s": 36.42,
+   "e": 36.84,
+   "line": 5
+  },
+  {
+   "w": "Sundaland.",
+   "s": 36.84,
+   "e": 37.68,
+   "line": 5
+  },
+  {
+   "w": "And",
+   "s": 38.22,
+   "e": 38.42,
+   "line": 6
+  },
+  {
+   "w": "at",
+   "s": 38.42,
+   "e": 38.56,
+   "line": 6
+  },
+  {
+   "w": "minus",
+   "s": 38.56,
+   "e": 38.9,
+   "line": 6
+  },
+  {
+   "w": "120,",
+   "s": 38.9,
+   "e": 39.74,
+   "line": 6
+  },
+  {
+   "w": "Australia,",
+   "s": 40.6,
+   "e": 40.68,
+   "line": 6
+  },
+  {
+   "w": "New",
+   "s": 41.12,
+   "e": 41.22,
+   "line": 6
+  },
+  {
+   "w": "Guinea",
+   "s": 41.22,
+   "e": 41.44,
+   "line": 6
+  },
+  {
+   "w": "and",
+   "s": 41.44,
+   "e": 41.82,
+   "line": 6
+  },
+  {
+   "w": "Tasmania",
+   "s": 41.82,
+   "e": 42.36,
+   "line": 6
+  },
+  {
+   "w": "become",
+   "s": 42.36,
+   "e": 42.88,
+   "line": 6
+  },
+  {
+   "w": "a",
+   "s": 42.88,
+   "e": 43.1,
+   "line": 6
+  },
+  {
+   "w": "single",
+   "s": 43.1,
+   "e": 43.38,
+   "line": 6
+  },
+  {
+   "w": "continent.",
+   "s": 43.38,
+   "e": 43.76,
+   "line": 6
+  },
+  {
+   "w": "This",
+   "s": 44.42,
+   "e": 44.64,
+   "line": 7
+  },
+  {
+   "w": "isn't",
+   "s": 44.64,
+   "e": 45.08,
+   "line": 7
+  },
+  {
+   "w": "fantasy.",
+   "s": 45.08,
+   "e": 45.54,
+   "line": 7
+  },
+  {
+   "w": "20,000",
+   "s": 46.0,
+   "e": 46.64,
+   "line": 7
+  },
+  {
+   "w": "years",
+   "s": 46.64,
+   "e": 46.86,
+   "line": 7
+  },
+  {
+   "w": "ago,",
+   "s": 46.86,
+   "e": 47.2,
+   "line": 7
+  },
+  {
+   "w": "in",
+   "s": 47.3,
+   "e": 47.48,
+   "line": 7
+  },
+  {
+   "w": "the",
+   "s": 47.48,
+   "e": 47.6,
+   "line": 7
+  },
+  {
+   "w": "last",
+   "s": 47.6,
+   "e": 47.86,
+   "line": 7
+  },
+  {
+   "w": "Ice",
+   "s": 47.86,
+   "e": 48.14,
+   "line": 7
+  },
+  {
+   "w": "Age,",
+   "s": 48.14,
+   "e": 48.46,
+   "line": 7
+  },
+  {
+   "w": "this",
+   "s": 48.76,
+   "e": 48.94,
+   "line": 7
+  },
+  {
+   "w": "was",
+   "s": 48.94,
+   "e": 49.2,
+   "line": 7
+  },
+  {
+   "w": "the",
+   "s": 49.2,
+   "e": 49.4,
+   "line": 7
+  },
+  {
+   "w": "real",
+   "s": 49.4,
+   "e": 49.66,
+   "line": 7
+  },
+  {
+   "w": "world.",
+   "s": 49.66,
+   "e": 50.1,
+   "line": 7
+  },
+  {
+   "w": "So",
+   "s": 50.58,
+   "e": 50.84,
+   "line": 8
+  },
+  {
+   "w": "if",
+   "s": 50.84,
+   "e": 50.98,
+   "line": 8
+  },
+  {
+   "w": "the",
+   "s": 50.98,
+   "e": 51.16,
+   "line": 8
+  },
+  {
+   "w": "seas",
+   "s": 51.16,
+   "e": 51.36,
+   "line": 8
+  },
+  {
+   "w": "dropped",
+   "s": 51.36,
+   "e": 51.68,
+   "line": 8
+  },
+  {
+   "w": "today,",
+   "s": 51.68,
+   "e": 52.16,
+   "line": 8
+  },
+  {
+   "w": "every",
+   "s": 52.5,
+   "e": 52.78,
+   "line": 8
+  },
+  {
+   "w": "coastline",
+   "s": 52.78,
+   "e": 53.16,
+   "line": 8
+  },
+  {
+   "w": "and",
+   "s": 53.16,
+   "e": 53.54,
+   "line": 8
+  },
+  {
+   "w": "every",
+   "s": 53.54,
+   "e": 53.94,
+   "line": 8
+  },
+  {
+   "w": "sea",
+   "s": 53.94,
+   "e": 54.24,
+   "line": 8
+  },
+  {
+   "w": "border",
+   "s": 54.24,
+   "e": 54.52,
+   "line": 8
+  },
+  {
+   "w": "would",
+   "s": 54.52,
+   "e": 54.8,
+   "line": 8
+  },
+  {
+   "w": "have",
+   "s": 54.8,
+   "e": 55.0,
+   "line": 8
+  },
+  {
+   "w": "to",
+   "s": 55.0,
+   "e": 55.12,
+   "line": 8
+  },
+  {
+   "w": "be",
+   "s": 55.12,
+   "e": 55.26,
+   "line": 8
+  },
+  {
+   "w": "redrawn.",
+   "s": 55.26,
+   "e": 55.8,
+   "line": 8
+  },
+  {
+   "w": "Who",
+   "s": 56.46,
+   "e": 56.64,
+   "line": 8
+  },
+  {
+   "w": "gets",
+   "s": 56.64,
+   "e": 56.84,
+   "line": 8
+  },
+  {
+   "w": "the",
+   "s": 56.84,
+   "e": 57.08,
+   "line": 8
+  },
+  {
+   "w": "new",
+   "s": 57.08,
+   "e": 57.24,
+   "line": 8
+  },
+  {
+   "w": "land?",
+   "s": 57.24,
+   "e": 57.54,
+   "line": 8
+  }
+ ],
+ "lines": [
+  {
+   "i": 0,
+   "text": "What if the oceans suddenly dropped by 120 meters?",
+   "s": 0.0,
+   "e": 3.72
+  },
+  {
+   "i": 1,
+   "text": "Minus 10 meters: harbors run dry, and ships are stuck in the mud.",
+   "s": 4.62,
+   "e": 8.72
+  },
+  {
+   "i": 2,
+   "text": "Minus 50: Britain isn't an island anymore. It's joined to Europe by a lost land called Doggerland.",
+   "s": 9.6,
+   "e": 15.96
+  },
+  {
+   "i": 3,
+   "text": "Asia and America join too. The Bering land bridge is back, the same path the first Americans walked.",
+   "s": 16.82,
+   "e": 23.08
+  },
+  {
+   "i": 4,
+   "text": "Minus 70: almost the entire Persian Gulf drains. You could walk from Iran to Saudi Arabia.",
+   "s": 23.92,
+   "e": 29.88
+  },
+  {
+   "i": 5,
+   "text": "Minus 100: Indonesia, Malaysia and Borneo fuse into one giant landmass called Sundaland.",
+   "s": 30.7,
+   "e": 37.68
+  },
+  {
+   "i": 6,
+   "text": "And at minus 120, Australia, New Guinea and Tasmania become a single continent.",
+   "s": 38.22,
+   "e": 43.76
+  },
+  {
+   "i": 7,
+   "text": "This isn't fantasy. 20,000 years ago, in the last Ice Age, this was the real world.",
+   "s": 44.42,
+   "e": 50.1
+  },
+  {
+   "i": 8,
+   "text": "So if the seas dropped today, every coastline and every sea border would have to be redrawn. Who gets the new land?",
+   "s": 50.58,
+   "e": 57.54
+  }
+ ],
+ "heard": "What if the oceans suddenly dropped by 120 meters? Minus 10 meters, harbors run dry, and ships are stuck in the mud. Minus 50. Britain isn't an island anymore. It's joined to Europe by a lost land called Doggerland. Asia and America join too. The Bering land bridge is back, the same path the first Americans walked. Minus 70. Almost the entire Persian Gulf drains. You could walk from Iran to Saudi Arabia. Minus 100. Indonesia, Malaysia and Borneo fuse into one giant landmass called Sundaland. And at minus 120, Australia, New Guinea and Tasmania become a single continent. This isn't fantasy. 20 ,000 years ago, in the last Ice Age, this was the real world. So if the seas dropped today, every coastline and every sea border would have to be redrawn. Who gets the new land?"
+}

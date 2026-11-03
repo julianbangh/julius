@@ -1,0 +1,915 @@
+{
+ "duration": 69.601146,
+ "tempo": 1.18,
+ "words": [
+  {
+   "w": "How",
+   "s": 0.0,
+   "e": 0.24,
+   "line": 0
+  },
+  {
+   "w": "big",
+   "s": 0.24,
+   "e": 0.5,
+   "line": 0
+  },
+  {
+   "w": "do",
+   "s": 0.5,
+   "e": 0.76,
+   "line": 0
+  },
+  {
+   "w": "bombs",
+   "s": 0.76,
+   "e": 1.04,
+   "line": 0
+  },
+  {
+   "w": "get?",
+   "s": 1.04,
+   "e": 1.42,
+   "line": 0
+  },
+  {
+   "w": "Let's",
+   "s": 2.08,
+   "e": 2.32,
+   "line": 0
+  },
+  {
+   "w": "drop",
+   "s": 2.32,
+   "e": 2.56,
+   "line": 0
+  },
+  {
+   "w": "every",
+   "s": 2.56,
+   "e": 3.04,
+   "line": 0
+  },
+  {
+   "w": "one",
+   "s": 3.04,
+   "e": 3.34,
+   "line": 0
+  },
+  {
+   "w": "of",
+   "s": 3.34,
+   "e": 3.48,
+   "line": 0
+  },
+  {
+   "w": "them",
+   "s": 3.48,
+   "e": 3.68,
+   "line": 0
+  },
+  {
+   "w": "on",
+   "s": 3.68,
+   "e": 4.02,
+   "line": 0
+  },
+  {
+   "w": "Central",
+   "s": 4.02,
+   "e": 4.42,
+   "line": 0
+  },
+  {
+   "w": "Park.",
+   "s": 4.42,
+   "e": 4.78,
+   "line": 0
+  },
+  {
+   "w": "A",
+   "s": 5.52,
+   "e": 5.57,
+   "line": 1
+  },
+  {
+   "w": "hand",
+   "s": 5.54,
+   "e": 5.78,
+   "line": 1
+  },
+  {
+   "w": "grenade.",
+   "s": 5.78,
+   "e": 6.12,
+   "line": 1
+  },
+  {
+   "w": "Kill",
+   "s": 6.8,
+   "e": 6.85,
+   "line": 1
+  },
+  {
+   "w": "radius:",
+   "s": 6.84,
+   "e": 7.28,
+   "line": 1
+  },
+  {
+   "w": "about",
+   "s": 7.28,
+   "e": 7.82,
+   "line": 1
+  },
+  {
+   "w": "5",
+   "s": 7.82,
+   "e": 8.24,
+   "line": 1
+  },
+  {
+   "w": "meters.",
+   "s": 8.24,
+   "e": 8.62,
+   "line": 1
+  },
+  {
+   "w": "A",
+   "s": 9.28,
+   "e": 9.42,
+   "line": 2
+  },
+  {
+   "w": "2,000",
+   "s": 9.42,
+   "e": 10.16,
+   "line": 2
+  },
+  {
+   "w": "pound",
+   "s": 10.16,
+   "e": 10.34,
+   "line": 2
+  },
+  {
+   "w": "bomb:",
+   "s": 10.34,
+   "e": 10.82,
+   "line": 2
+  },
+  {
+   "w": "about",
+   "s": 10.82,
+   "e": 11.36,
+   "line": 2
+  },
+  {
+   "w": "35",
+   "s": 11.36,
+   "e": 12.02,
+   "line": 2
+  },
+  {
+   "w": "meters.",
+   "s": 12.02,
+   "e": 12.56,
+   "line": 2
+  },
+  {
+   "w": "The",
+   "s": 13.1,
+   "e": 13.28,
+   "line": 3
+  },
+  {
+   "w": "MOAB,",
+   "s": 13.28,
+   "e": 13.72,
+   "line": 3
+  },
+  {
+   "w": "the",
+   "s": 14.04,
+   "e": 14.1,
+   "line": 3
+  },
+  {
+   "w": "biggest",
+   "s": 14.1,
+   "e": 14.46,
+   "line": 3
+  },
+  {
+   "w": "non-nuclear",
+   "s": 14.46,
+   "e": 15.24,
+   "line": 3
+  },
+  {
+   "w": "bomb",
+   "s": 15.24,
+   "e": 15.64,
+   "line": 3
+  },
+  {
+   "w": "America",
+   "s": 15.64,
+   "e": 15.98,
+   "line": 3
+  },
+  {
+   "w": "has",
+   "s": 15.98,
+   "e": 16.34,
+   "line": 3
+  },
+  {
+   "w": "ever",
+   "s": 16.34,
+   "e": 16.64,
+   "line": 3
+  },
+  {
+   "w": "used",
+   "s": 16.64,
+   "e": 17.0,
+   "line": 3
+  },
+  {
+   "w": "in",
+   "s": 17.0,
+   "e": 17.24,
+   "line": 3
+  },
+  {
+   "w": "combat:",
+   "s": 17.24,
+   "e": 17.64,
+   "line": 3
+  },
+  {
+   "w": "about",
+   "s": 18.16,
+   "e": 18.4,
+   "line": 3
+  },
+  {
+   "w": "100",
+   "s": 18.4,
+   "e": 19.16,
+   "line": 3
+  },
+  {
+   "w": "meters.",
+   "s": 19.16,
+   "e": 19.56,
+   "line": 3
+  },
+  {
+   "w": "Now",
+   "s": 20.3,
+   "e": 20.48,
+   "line": 4
+  },
+  {
+   "w": "the",
+   "s": 20.48,
+   "e": 20.72,
+   "line": 4
+  },
+  {
+   "w": "nukes.",
+   "s": 20.72,
+   "e": 21.04,
+   "line": 4
+  },
+  {
+   "w": "The",
+   "s": 21.58,
+   "e": 21.84,
+   "line": 4
+  },
+  {
+   "w": "Davy",
+   "s": 21.84,
+   "e": 22.22,
+   "line": 4
+  },
+  {
+   "w": "Crockett,",
+   "s": 22.22,
+   "e": 22.6,
+   "line": 4
+  },
+  {
+   "w": "the",
+   "s": 22.6,
+   "e": 22.86,
+   "line": 4
+  },
+  {
+   "w": "smallest",
+   "s": 22.86,
+   "e": 23.28,
+   "line": 4
+  },
+  {
+   "w": "nuke",
+   "s": 23.28,
+   "e": 23.6,
+   "line": 4
+  },
+  {
+   "w": "ever",
+   "s": 23.6,
+   "e": 23.94,
+   "line": 4
+  },
+  {
+   "w": "built:",
+   "s": 23.94,
+   "e": 24.28,
+   "line": 4
+  },
+  {
+   "w": "120",
+   "s": 25.44,
+   "e": 25.49,
+   "line": 4
+  },
+  {
+   "w": "meters,",
+   "s": 25.46,
+   "e": 25.94,
+   "line": 4
+  },
+  {
+   "w": "plus",
+   "s": 26.42,
+   "e": 26.5,
+   "line": 4
+  },
+  {
+   "w": "deadly",
+   "s": 26.5,
+   "e": 27.06,
+   "line": 4
+  },
+  {
+   "w": "radiation.",
+   "s": 27.06,
+   "e": 27.72,
+   "line": 4
+  },
+  {
+   "w": "Little",
+   "s": 28.52,
+   "e": 28.58,
+   "line": 5
+  },
+  {
+   "w": "Boy,",
+   "s": 28.58,
+   "e": 28.9,
+   "line": 5
+  },
+  {
+   "w": "the",
+   "s": 29.22,
+   "e": 29.3,
+   "line": 5
+  },
+  {
+   "w": "bomb",
+   "s": 29.3,
+   "e": 29.52,
+   "line": 5
+  },
+  {
+   "w": "that",
+   "s": 29.52,
+   "e": 29.74,
+   "line": 5
+  },
+  {
+   "w": "hit",
+   "s": 29.74,
+   "e": 29.92,
+   "line": 5
+  },
+  {
+   "w": "Hiroshima:",
+   "s": 29.92,
+   "e": 30.44,
+   "line": 5
+  },
+  {
+   "w": "1.1",
+   "s": 30.98,
+   "e": 31.9,
+   "line": 5
+  },
+  {
+   "w": "kilometers.",
+   "s": 31.9,
+   "e": 32.28,
+   "line": 5
+  },
+  {
+   "w": "Central",
+   "s": 33.16,
+   "e": 33.34,
+   "line": 5
+  },
+  {
+   "w": "Park",
+   "s": 33.34,
+   "e": 33.7,
+   "line": 5
+  },
+  {
+   "w": "is",
+   "s": 33.7,
+   "e": 34.08,
+   "line": 5
+  },
+  {
+   "w": "gone.",
+   "s": 34.08,
+   "e": 34.46,
+   "line": 5
+  },
+  {
+   "w": "A",
+   "s": 35.16,
+   "e": 35.36,
+   "line": 6
+  },
+  {
+   "w": "modern",
+   "s": 35.36,
+   "e": 35.66,
+   "line": 6
+  },
+  {
+   "w": "W88",
+   "s": 35.66,
+   "e": 36.58,
+   "line": 6
+  },
+  {
+   "w": "warhead:",
+   "s": 36.58,
+   "e": 37.16,
+   "line": 6
+  },
+  {
+   "w": "three",
+   "s": 37.58,
+   "e": 37.78,
+   "line": 6
+  },
+  {
+   "w": "and",
+   "s": 37.78,
+   "e": 37.98,
+   "line": 6
+  },
+  {
+   "w": "a",
+   "s": 37.98,
+   "e": 38.14,
+   "line": 6
+  },
+  {
+   "w": "half",
+   "s": 38.14,
+   "e": 38.4,
+   "line": 6
+  },
+  {
+   "w": "kilometers.",
+   "s": 38.4,
+   "e": 38.88,
+   "line": 6
+  },
+  {
+   "w": "Most",
+   "s": 39.48,
+   "e": 39.7,
+   "line": 6
+  },
+  {
+   "w": "of",
+   "s": 39.7,
+   "e": 39.92,
+   "line": 6
+  },
+  {
+   "w": "Manhattan.",
+   "s": 39.92,
+   "e": 40.34,
+   "line": 6
+  },
+  {
+   "w": "The",
+   "s": 41.12,
+   "e": 41.2,
+   "line": 7
+  },
+  {
+   "w": "B83,",
+   "s": 41.2,
+   "e": 41.94,
+   "line": 7
+  },
+  {
+   "w": "the",
+   "s": 42.54,
+   "e": 42.64,
+   "line": 7
+  },
+  {
+   "w": "most",
+   "s": 42.64,
+   "e": 42.86,
+   "line": 7
+  },
+  {
+   "w": "powerful",
+   "s": 42.86,
+   "e": 43.34,
+   "line": 7
+  },
+  {
+   "w": "bomb",
+   "s": 43.34,
+   "e": 43.72,
+   "line": 7
+  },
+  {
+   "w": "America",
+   "s": 43.72,
+   "e": 44.08,
+   "line": 7
+  },
+  {
+   "w": "still",
+   "s": 44.08,
+   "e": 44.5,
+   "line": 7
+  },
+  {
+   "w": "has:",
+   "s": 44.5,
+   "e": 45.0,
+   "line": 7
+  },
+  {
+   "w": "5",
+   "s": 45.44,
+   "e": 45.78,
+   "line": 7
+  },
+  {
+   "w": "kilometers.",
+   "s": 45.78,
+   "e": 46.24,
+   "line": 7
+  },
+  {
+   "w": "Castle",
+   "s": 46.54,
+   "e": 47.093,
+   "line": 8
+  },
+  {
+   "w": "Bravo,",
+   "s": 47.093,
+   "e": 47.646,
+   "line": 8
+  },
+  {
+   "w": "America's",
+   "s": 47.646,
+   "e": 48.407,
+   "line": 8
+  },
+  {
+   "w": "biggest",
+   "s": 48.407,
+   "e": 49.03,
+   "line": 8
+  },
+  {
+   "w": "ever",
+   "s": 49.03,
+   "e": 49.444,
+   "line": 8
+  },
+  {
+   "w": "test:",
+   "s": 49.444,
+   "e": 49.929,
+   "line": 8
+  },
+  {
+   "w": "11",
+   "s": 49.929,
+   "e": 50.205,
+   "line": 8
+  },
+  {
+   "w": "kilometers.",
+   "s": 50.205,
+   "e": 51.104,
+   "line": 8
+  },
+  {
+   "w": "Manhattan,",
+   "s": 51.104,
+   "e": 51.934,
+   "line": 8
+  },
+  {
+   "w": "the",
+   "s": 51.934,
+   "e": 52.28,
+   "line": 8
+  },
+  {
+   "w": "Bronx,",
+   "s": 52.28,
+   "e": 52.833,
+   "line": 8
+  },
+  {
+   "w": "and",
+   "s": 52.833,
+   "e": 53.179,
+   "line": 8
+  },
+  {
+   "w": "half",
+   "s": 53.179,
+   "e": 53.594,
+   "line": 8
+  },
+  {
+   "w": "of",
+   "s": 53.594,
+   "e": 53.87,
+   "line": 8
+  },
+  {
+   "w": "Brooklyn",
+   "s": 53.87,
+   "e": 54.562,
+   "line": 8
+  },
+  {
+   "w": "and",
+   "s": 54.562,
+   "e": 54.908,
+   "line": 8
+  },
+  {
+   "w": "Queens.",
+   "s": 54.908,
+   "e": 55.53,
+   "line": 8
+  },
+  {
+   "w": "And",
+   "s": 55.88,
+   "e": 56.06,
+   "line": 9
+  },
+  {
+   "w": "the",
+   "s": 56.06,
+   "e": 56.26,
+   "line": 9
+  },
+  {
+   "w": "king.",
+   "s": 56.26,
+   "e": 56.54,
+   "line": 9
+  },
+  {
+   "w": "The",
+   "s": 57.3,
+   "e": 57.35,
+   "line": 9
+  },
+  {
+   "w": "Tsar",
+   "s": 57.3,
+   "e": 57.74,
+   "line": 9
+  },
+  {
+   "w": "Bomba.",
+   "s": 57.74,
+   "e": 58.32,
+   "line": 9
+  },
+  {
+   "w": "50",
+   "s": 58.82,
+   "e": 59.12,
+   "line": 9
+  },
+  {
+   "w": "megatons.",
+   "s": 59.12,
+   "e": 59.8,
+   "line": 9
+  },
+  {
+   "w": "17",
+   "s": 60.54,
+   "e": 61.02,
+   "line": 9
+  },
+  {
+   "w": "kilometers",
+   "s": 61.02,
+   "e": 61.52,
+   "line": 9
+  },
+  {
+   "w": "of",
+   "s": 61.52,
+   "e": 61.98,
+   "line": 9
+  },
+  {
+   "w": "total",
+   "s": 61.98,
+   "e": 62.32,
+   "line": 9
+  },
+  {
+   "w": "destruction,",
+   "s": 62.32,
+   "e": 62.82,
+   "line": 9
+  },
+  {
+   "w": "and",
+   "s": 63.14,
+   "e": 63.3,
+   "line": 9
+  },
+  {
+   "w": "burns",
+   "s": 63.3,
+   "e": 63.64,
+   "line": 9
+  },
+  {
+   "w": "almost",
+   "s": 63.64,
+   "e": 64.12,
+   "line": 9
+  },
+  {
+   "w": "50",
+   "s": 64.12,
+   "e": 64.7,
+   "line": 9
+  },
+  {
+   "w": "kilometers",
+   "s": 64.7,
+   "e": 65.12,
+   "line": 9
+  },
+  {
+   "w": "away.",
+   "s": 65.12,
+   "e": 65.64,
+   "line": 9
+  },
+  {
+   "w": "One",
+   "s": 66.22,
+   "e": 66.54,
+   "line": 10
+  },
+  {
+   "w": "bomb.",
+   "s": 66.54,
+   "e": 66.88,
+   "line": 10
+  },
+  {
+   "w": "And",
+   "s": 67.44,
+   "e": 67.56,
+   "line": 10
+  },
+  {
+   "w": "the",
+   "s": 67.56,
+   "e": 67.7,
+   "line": 10
+  },
+  {
+   "w": "whole",
+   "s": 67.7,
+   "e": 68.04,
+   "line": 10
+  },
+  {
+   "w": "city",
+   "s": 68.04,
+   "e": 68.42,
+   "line": 10
+  },
+  {
+   "w": "is",
+   "s": 68.42,
+   "e": 68.9,
+   "line": 10
+  },
+  {
+   "w": "gone.",
+   "s": 68.9,
+   "e": 69.18,
+   "line": 10
+  }
+ ],
+ "lines": [
+  {
+   "i": 0,
+   "text": "How big do bombs get? Let's drop every one of them on Central Park.",
+   "s": 0.0,
+   "e": 4.78
+  },
+  {
+   "i": 1,
+   "text": "A hand grenade. Kill radius: about 5 meters.",
+   "s": 5.52,
+   "e": 8.62
+  },
+  {
+   "i": 2,
+   "text": "A 2,000 pound bomb: about 35 meters.",
+   "s": 9.28,
+   "e": 12.56
+  },
+  {
+   "i": 3,
+   "text": "The MOAB, the biggest non-nuclear bomb America has ever used in combat: about 100 meters.",
+   "s": 13.1,
+   "e": 19.56
+  },
+  {
+   "i": 4,
+   "text": "Now the nukes. The Davy Crockett, the smallest nuke ever built: 120 meters, plus deadly radiation.",
+   "s": 20.3,
+   "e": 27.72
+  },
+  {
+   "i": 5,
+   "text": "Little Boy, the bomb that hit Hiroshima: 1.1 kilometers. Central Park is gone.",
+   "s": 28.52,
+   "e": 34.46
+  },
+  {
+   "i": 6,
+   "text": "A modern W88 warhead: three and a half kilometers. Most of Manhattan.",
+   "s": 35.16,
+   "e": 40.34
+  },
+  {
+   "i": 7,
+   "text": "The B83, the most powerful bomb America still has: 5 kilometers.",
+   "s": 41.12,
+   "e": 46.24
+  },
+  {
+   "i": 8,
+   "text": "Castle Bravo, America's biggest ever test: 11 kilometers. Manhattan, the Bronx, and half of Brooklyn and Queens.",
+   "s": 46.54,
+   "e": 55.53
+  },
+  {
+   "i": 9,
+   "text": "And the king. The Tsar Bomba. 50 megatons. 17 kilometers of total destruction, and burns almost 50 kilometers away.",
+   "s": 55.88,
+   "e": 65.64
+  },
+  {
+   "i": 10,
+   "text": "One bomb. And the whole city is gone.",
+   "s": 66.22,
+   "e": 69.18
+  }
+ ],
+ "heard": "How big do bombs get? Let's drop every one of them on Central Park. A hand grenade. Kill radius about 5 meters. A 2 ,000 pound bomb about 35 meters. The MOAB, the biggest non -nuclear bomb America has ever used in combat. About 100 meters. Now the nukes. The Davy Crockett, the smallest nuke ever built. 120 meters, plus deadly radiation. Little Boy, the bomb that hit Hiroshima. 1 .1 kilometers. Central Park is gone. A modern W88 warhead, three and a half kilometers. Most of Manhattan. The B83, the most powerful bomb America still has. 5 kilometers. Castle Bravo, the Bronx, and half of Brooklyn and Queens. And the king. The Tsar Bomba. 50 megatons. 17 kilometers of total destruction, and burns almost 50 kilometers away. One bomb. And the whole city is gone."
+}

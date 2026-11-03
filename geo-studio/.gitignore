@@ -1,0 +1,14 @@
+node_modules/
+.venv/
+.cache/
+out/
+videos/*/audio/*.wav
+*.part.mp4
+data/
+assets/flags/
+assets/sfx/*.wav
+# Artlist generations are licensed to the account owner, not for redistribution in a public repo
+assets/music/
+videos/*/audio/
+__pycache__/
+assets/people/*_preview.jpg

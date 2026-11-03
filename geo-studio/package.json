@@ -1,0 +1,17 @@
+{
+  "name": "geo-studio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Geo Studio: a code-driven engine for vertical geography videos (maps, satellite imagery, globes, cinematic explosions, captions).",
+  "scripts": {
+    "fetch-data": "node scripts/fetch-data.mjs",
+    "render": "node engine/cli.mjs render",
+    "still": "node engine/cli.mjs still"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "0.1.65",
+    "d3-geo": "3.1.1",
+    "d3-geo-projection": "4.0.0"
+  }
+}

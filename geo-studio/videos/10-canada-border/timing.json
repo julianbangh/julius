@@ -1,0 +1,951 @@
+{
+ "duration": 56.781688,
+ "tempo": 1.15,
+ "words": [
+  {
+   "w": "Canada",
+   "s": 0.0,
+   "e": 0.46,
+   "line": 0
+  },
+  {
+   "w": "is",
+   "s": 0.46,
+   "e": 0.82,
+   "line": 0
+  },
+  {
+   "w": "the",
+   "s": 0.82,
+   "e": 1.0,
+   "line": 0
+  },
+  {
+   "w": "second",
+   "s": 1.0,
+   "e": 1.34,
+   "line": 0
+  },
+  {
+   "w": "biggest",
+   "s": 1.34,
+   "e": 1.78,
+   "line": 0
+  },
+  {
+   "w": "country",
+   "s": 1.78,
+   "e": 2.12,
+   "line": 0
+  },
+  {
+   "w": "on",
+   "s": 2.12,
+   "e": 2.52,
+   "line": 0
+  },
+  {
+   "w": "Earth.",
+   "s": 2.52,
+   "e": 2.74,
+   "line": 0
+  },
+  {
+   "w": "So",
+   "s": 3.42,
+   "e": 3.47,
+   "line": 0
+  },
+  {
+   "w": "why",
+   "s": 3.42,
+   "e": 3.66,
+   "line": 0
+  },
+  {
+   "w": "do",
+   "s": 3.66,
+   "e": 3.84,
+   "line": 0
+  },
+  {
+   "w": "three",
+   "s": 3.84,
+   "e": 4.14,
+   "line": 0
+  },
+  {
+   "w": "out",
+   "s": 4.14,
+   "e": 4.32,
+   "line": 0
+  },
+  {
+   "w": "of",
+   "s": 4.32,
+   "e": 4.46,
+   "line": 0
+  },
+  {
+   "w": "four",
+   "s": 4.46,
+   "e": 4.74,
+   "line": 0
+  },
+  {
+   "w": "Canadians",
+   "s": 4.74,
+   "e": 5.16,
+   "line": 0
+  },
+  {
+   "w": "live",
+   "s": 5.16,
+   "e": 5.66,
+   "line": 0
+  },
+  {
+   "w": "right",
+   "s": 5.66,
+   "e": 5.96,
+   "line": 0
+  },
+  {
+   "w": "here?",
+   "s": 5.96,
+   "e": 6.3,
+   "line": 0
+  },
+  {
+   "w": "About",
+   "s": 6.98,
+   "e": 7.08,
+   "line": 1
+  },
+  {
+   "w": "76%",
+   "s": 7.08,
+   "e": 8.24,
+   "line": 1
+  },
+  {
+   "w": "of",
+   "s": 8.24,
+   "e": 8.4,
+   "line": 1
+  },
+  {
+   "w": "Canadians",
+   "s": 8.4,
+   "e": 8.82,
+   "line": 1
+  },
+  {
+   "w": "live",
+   "s": 8.82,
+   "e": 9.26,
+   "line": 1
+  },
+  {
+   "w": "within",
+   "s": 9.26,
+   "e": 9.58,
+   "line": 1
+  },
+  {
+   "w": "160",
+   "s": 9.58,
+   "e": 10.46,
+   "line": 1
+  },
+  {
+   "w": "kilometers",
+   "s": 10.46,
+   "e": 11.04,
+   "line": 1
+  },
+  {
+   "w": "of",
+   "s": 11.04,
+   "e": 11.4,
+   "line": 1
+  },
+  {
+   "w": "the",
+   "s": 11.4,
+   "e": 11.52,
+   "line": 1
+  },
+  {
+   "w": "US",
+   "s": 11.52,
+   "e": 11.78,
+   "line": 1
+  },
+  {
+   "w": "border.",
+   "s": 11.78,
+   "e": 12.22,
+   "line": 1
+  },
+  {
+   "w": "Head",
+   "s": 13.06,
+   "e": 13.18,
+   "line": 2
+  },
+  {
+   "w": "north",
+   "s": 13.18,
+   "e": 13.46,
+   "line": 2
+  },
+  {
+   "w": "and",
+   "s": 13.46,
+   "e": 13.84,
+   "line": 2
+  },
+  {
+   "w": "the",
+   "s": 13.84,
+   "e": 13.94,
+   "line": 2
+  },
+  {
+   "w": "land",
+   "s": 13.94,
+   "e": 14.2,
+   "line": 2
+  },
+  {
+   "w": "gets",
+   "s": 14.2,
+   "e": 14.48,
+   "line": 2
+  },
+  {
+   "w": "brutal.",
+   "s": 14.48,
+   "e": 14.84,
+   "line": 2
+  },
+  {
+   "w": "Around",
+   "s": 15.42,
+   "e": 15.64,
+   "line": 2
+  },
+  {
+   "w": "half",
+   "s": 15.64,
+   "e": 15.94,
+   "line": 2
+  },
+  {
+   "w": "of",
+   "s": 15.94,
+   "e": 16.12,
+   "line": 2
+  },
+  {
+   "w": "Canada",
+   "s": 16.12,
+   "e": 16.42,
+   "line": 2
+  },
+  {
+   "w": "sits",
+   "s": 16.42,
+   "e": 16.78,
+   "line": 2
+  },
+  {
+   "w": "on",
+   "s": 16.78,
+   "e": 17.12,
+   "line": 2
+  },
+  {
+   "w": "permafrost.",
+   "s": 17.12,
+   "e": 17.72,
+   "line": 2
+  },
+  {
+   "w": "The",
+   "s": 18.34,
+   "e": 18.48,
+   "line": 3
+  },
+  {
+   "w": "Canadian",
+   "s": 18.48,
+   "e": 18.82,
+   "line": 3
+  },
+  {
+   "w": "Shield,",
+   "s": 18.82,
+   "e": 19.22,
+   "line": 3
+  },
+  {
+   "w": "a",
+   "s": 19.66,
+   "e": 19.72,
+   "line": 3
+  },
+  {
+   "w": "giant",
+   "s": 19.72,
+   "e": 20.06,
+   "line": 3
+  },
+  {
+   "w": "slab",
+   "s": 20.06,
+   "e": 20.5,
+   "line": 3
+  },
+  {
+   "w": "of",
+   "s": 20.5,
+   "e": 20.78,
+   "line": 3
+  },
+  {
+   "w": "ancient",
+   "s": 20.78,
+   "e": 21.06,
+   "line": 3
+  },
+  {
+   "w": "rock,",
+   "s": 21.06,
+   "e": 21.46,
+   "line": 3
+  },
+  {
+   "w": "covers",
+   "s": 21.58,
+   "e": 21.9,
+   "line": 3
+  },
+  {
+   "w": "most",
+   "s": 21.9,
+   "e": 22.24,
+   "line": 3
+  },
+  {
+   "w": "of",
+   "s": 22.24,
+   "e": 22.44,
+   "line": 3
+  },
+  {
+   "w": "the",
+   "s": 22.44,
+   "e": 22.56,
+   "line": 3
+  },
+  {
+   "w": "middle.",
+   "s": 22.56,
+   "e": 22.78,
+   "line": 3
+  },
+  {
+   "w": "Thin",
+   "s": 23.34,
+   "e": 23.58,
+   "line": 3
+  },
+  {
+   "w": "soil,",
+   "s": 23.58,
+   "e": 23.98,
+   "line": 3
+  },
+  {
+   "w": "endless",
+   "s": 24.52,
+   "e": 24.58,
+   "line": 3
+  },
+  {
+   "w": "lakes,",
+   "s": 24.58,
+   "e": 25.0,
+   "line": 3
+  },
+  {
+   "w": "almost",
+   "s": 25.46,
+   "e": 25.56,
+   "line": 3
+  },
+  {
+   "w": "no",
+   "s": 25.56,
+   "e": 25.96,
+   "line": 3
+  },
+  {
+   "w": "farms.",
+   "s": 25.96,
+   "e": 26.42,
+   "line": 3
+  },
+  {
+   "w": "Nunavut",
+   "s": 27.22,
+   "e": 27.74,
+   "line": 4
+  },
+  {
+   "w": "is",
+   "s": 27.74,
+   "e": 28.0,
+   "line": 4
+  },
+  {
+   "w": "bigger",
+   "s": 28.0,
+   "e": 28.3,
+   "line": 4
+  },
+  {
+   "w": "than",
+   "s": 28.3,
+   "e": 28.54,
+   "line": 4
+  },
+  {
+   "w": "Mexico,",
+   "s": 28.54,
+   "e": 28.86,
+   "line": 4
+  },
+  {
+   "w": "and",
+   "s": 29.32,
+   "e": 29.4,
+   "line": 4
+  },
+  {
+   "w": "it",
+   "s": 29.4,
+   "e": 29.5,
+   "line": 4
+  },
+  {
+   "w": "has",
+   "s": 29.5,
+   "e": 29.72,
+   "line": 4
+  },
+  {
+   "w": "just",
+   "s": 29.72,
+   "e": 30.04,
+   "line": 4
+  },
+  {
+   "w": "40,000",
+   "s": 30.04,
+   "e": 30.86,
+   "line": 4
+  },
+  {
+   "w": "people.",
+   "s": 30.86,
+   "e": 31.3,
+   "line": 4
+  },
+  {
+   "w": "But",
+   "s": 31.98,
+   "e": 32.1,
+   "line": 5
+  },
+  {
+   "w": "the",
+   "s": 32.1,
+   "e": 32.3,
+   "line": 5
+  },
+  {
+   "w": "south",
+   "s": 32.3,
+   "e": 32.54,
+   "line": 5
+  },
+  {
+   "w": "has",
+   "s": 32.54,
+   "e": 32.94,
+   "line": 5
+  },
+  {
+   "w": "the",
+   "s": 32.94,
+   "e": 33.14,
+   "line": 5
+  },
+  {
+   "w": "farmland,",
+   "s": 33.14,
+   "e": 33.5,
+   "line": 5
+  },
+  {
+   "w": "the",
+   "s": 33.92,
+   "e": 34.0,
+   "line": 5
+  },
+  {
+   "w": "Great",
+   "s": 34.0,
+   "e": 34.22,
+   "line": 5
+  },
+  {
+   "w": "Lakes,",
+   "s": 34.22,
+   "e": 34.52,
+   "line": 5
+  },
+  {
+   "w": "and",
+   "s": 34.8,
+   "e": 34.9,
+   "line": 5
+  },
+  {
+   "w": "the",
+   "s": 34.9,
+   "e": 35.04,
+   "line": 5
+  },
+  {
+   "w": "St.",
+   "s": 35.04,
+   "e": 35.24,
+   "line": 5
+  },
+  {
+   "w": "Lawrence",
+   "s": 35.42,
+   "e": 35.56,
+   "line": 5
+  },
+  {
+   "w": "River,",
+   "s": 35.56,
+   "e": 35.86,
+   "line": 5
+  },
+  {
+   "w": "a",
+   "s": 36.24,
+   "e": 36.42,
+   "line": 5
+  },
+  {
+   "w": "highway",
+   "s": 36.42,
+   "e": 36.66,
+   "line": 5
+  },
+  {
+   "w": "to",
+   "s": 36.66,
+   "e": 37.02,
+   "line": 5
+  },
+  {
+   "w": "the",
+   "s": 37.02,
+   "e": 37.18,
+   "line": 5
+  },
+  {
+   "w": "ocean.",
+   "s": 37.18,
+   "e": 37.44,
+   "line": 5
+  },
+  {
+   "w": "The",
+   "s": 38.16,
+   "e": 38.32,
+   "line": 6
+  },
+  {
+   "w": "railways",
+   "s": 38.32,
+   "e": 38.7,
+   "line": 6
+  },
+  {
+   "w": "were",
+   "s": 38.7,
+   "e": 39.02,
+   "line": 6
+  },
+  {
+   "w": "built",
+   "s": 39.02,
+   "e": 39.24,
+   "line": 6
+  },
+  {
+   "w": "along",
+   "s": 39.24,
+   "e": 39.5,
+   "line": 6
+  },
+  {
+   "w": "the",
+   "s": 39.5,
+   "e": 39.7,
+   "line": 6
+  },
+  {
+   "w": "border,",
+   "s": 39.7,
+   "e": 39.96,
+   "line": 6
+  },
+  {
+   "w": "and",
+   "s": 40.18,
+   "e": 40.36,
+   "line": 6
+  },
+  {
+   "w": "the",
+   "s": 40.36,
+   "e": 40.5,
+   "line": 6
+  },
+  {
+   "w": "cities",
+   "s": 40.5,
+   "e": 40.74,
+   "line": 6
+  },
+  {
+   "w": "grew",
+   "s": 40.74,
+   "e": 41.08,
+   "line": 6
+  },
+  {
+   "w": "along",
+   "s": 41.08,
+   "e": 41.42,
+   "line": 6
+  },
+  {
+   "w": "the",
+   "s": 41.42,
+   "e": 41.6,
+   "line": 6
+  },
+  {
+   "w": "railways.",
+   "s": 41.6,
+   "e": 42.02,
+   "line": 6
+  },
+  {
+   "w": "And",
+   "s": 42.68,
+   "e": 42.86,
+   "line": 7
+  },
+  {
+   "w": "right",
+   "s": 42.86,
+   "e": 43.12,
+   "line": 7
+  },
+  {
+   "w": "next",
+   "s": 43.12,
+   "e": 43.36,
+   "line": 7
+  },
+  {
+   "w": "door",
+   "s": 43.36,
+   "e": 43.68,
+   "line": 7
+  },
+  {
+   "w": "is",
+   "s": 43.68,
+   "e": 43.98,
+   "line": 7
+  },
+  {
+   "w": "the",
+   "s": 43.98,
+   "e": 44.16,
+   "line": 7
+  },
+  {
+   "w": "biggest",
+   "s": 44.16,
+   "e": 44.46,
+   "line": 7
+  },
+  {
+   "w": "economy",
+   "s": 44.46,
+   "e": 44.98,
+   "line": 7
+  },
+  {
+   "w": "on",
+   "s": 44.98,
+   "e": 45.32,
+   "line": 7
+  },
+  {
+   "w": "Earth.",
+   "s": 45.32,
+   "e": 45.56,
+   "line": 7
+  },
+  {
+   "w": "Three",
+   "s": 46.2,
+   "e": 46.46,
+   "line": 7
+  },
+  {
+   "w": "quarters",
+   "s": 46.46,
+   "e": 46.74,
+   "line": 7
+  },
+  {
+   "w": "of",
+   "s": 46.74,
+   "e": 47.06,
+   "line": 7
+  },
+  {
+   "w": "Canada's",
+   "s": 47.06,
+   "e": 47.54,
+   "line": 7
+  },
+  {
+   "w": "exports",
+   "s": 47.54,
+   "e": 47.9,
+   "line": 7
+  },
+  {
+   "w": "go",
+   "s": 47.9,
+   "e": 48.3,
+   "line": 7
+  },
+  {
+   "w": "to",
+   "s": 48.3,
+   "e": 48.48,
+   "line": 7
+  },
+  {
+   "w": "the",
+   "s": 48.48,
+   "e": 48.64,
+   "line": 7
+  },
+  {
+   "w": "US.",
+   "s": 48.64,
+   "e": 48.92,
+   "line": 7
+  },
+  {
+   "w": "So",
+   "s": 49.7,
+   "e": 49.92,
+   "line": 8
+  },
+  {
+   "w": "on",
+   "s": 49.92,
+   "e": 50.08,
+   "line": 8
+  },
+  {
+   "w": "the",
+   "s": 50.08,
+   "e": 50.24,
+   "line": 8
+  },
+  {
+   "w": "map,",
+   "s": 50.24,
+   "e": 50.5,
+   "line": 8
+  },
+  {
+   "w": "Canada",
+   "s": 50.82,
+   "e": 50.96,
+   "line": 8
+  },
+  {
+   "w": "is",
+   "s": 50.96,
+   "e": 51.24,
+   "line": 8
+  },
+  {
+   "w": "huge.",
+   "s": 51.24,
+   "e": 51.62,
+   "line": 8
+  },
+  {
+   "w": "But",
+   "s": 52.26,
+   "e": 52.34,
+   "line": 8
+  },
+  {
+   "w": "where",
+   "s": 52.34,
+   "e": 52.54,
+   "line": 8
+  },
+  {
+   "w": "people",
+   "s": 52.54,
+   "e": 52.88,
+   "line": 8
+  },
+  {
+   "w": "actually",
+   "s": 52.88,
+   "e": 53.32,
+   "line": 8
+  },
+  {
+   "w": "live,",
+   "s": 53.32,
+   "e": 53.72,
+   "line": 8
+  },
+  {
+   "w": "it's",
+   "s": 54.08,
+   "e": 54.18,
+   "line": 8
+  },
+  {
+   "w": "a",
+   "s": 54.18,
+   "e": 54.32,
+   "line": 8
+  },
+  {
+   "w": "long,",
+   "s": 54.32,
+   "e": 54.64,
+   "line": 8
+  },
+  {
+   "w": "thin",
+   "s": 54.94,
+   "e": 55.06,
+   "line": 8
+  },
+  {
+   "w": "country",
+   "s": 55.06,
+   "e": 55.58,
+   "line": 8
+  },
+  {
+   "w": "hugging",
+   "s": 55.58,
+   "e": 55.98,
+   "line": 8
+  },
+  {
+   "w": "America.",
+   "s": 55.98,
+   "e": 56.38,
+   "line": 8
+  }
+ ],
+ "lines": [
+  {
+   "i": 0,
+   "text": "Canada is the second biggest country on Earth. So why do three out of four Canadians live right here?",
+   "s": 0.0,
+   "e": 6.3
+  },
+  {
+   "i": 1,
+   "text": "About 76% of Canadians live within 160 kilometers of the US border.",
+   "s": 6.98,
+   "e": 12.22
+  },
+  {
+   "i": 2,
+   "text": "Head north and the land gets brutal. Around half of Canada sits on permafrost.",
+   "s": 13.06,
+   "e": 17.72
+  },
+  {
+   "i": 3,
+   "text": "The Canadian Shield, a giant slab of ancient rock, covers most of the middle. Thin soil, endless lakes, almost no farms.",
+   "s": 18.34,
+   "e": 26.42
+  },
+  {
+   "i": 4,
+   "text": "Nunavut is bigger than Mexico, and it has just 40,000 people.",
+   "s": 27.22,
+   "e": 31.3
+  },
+  {
+   "i": 5,
+   "text": "But the south has the farmland, the Great Lakes, and the St. Lawrence River, a highway to the ocean.",
+   "s": 31.98,
+   "e": 37.44
+  },
+  {
+   "i": 6,
+   "text": "The railways were built along the border, and the cities grew along the railways.",
+   "s": 38.16,
+   "e": 42.02
+  },
+  {
+   "i": 7,
+   "text": "And right next door is the biggest economy on Earth. Three quarters of Canada's exports go to the US.",
+   "s": 42.68,
+   "e": 48.92
+  },
+  {
+   "i": 8,
+   "text": "So on the map, Canada is huge. But where people actually live, it's a long, thin country hugging America.",
+   "s": 49.7,
+   "e": 56.38
+  }
+ ],
+ "heard": "Canada is the second biggest country on Earth. So why do three out of four Canadians live right here? About 76 % of Canadians live within 160 kilometers of the US border. Head north and the land gets brutal. Around half of Canada sits on permafrost. The Canadian Shield, a giant slab of ancient rock, covers most of the middle. Thin soil, endless lakes, almost no farms. Nunavut is bigger than Mexico, and it has just 40 ,000 people. But the south has the farmland, the Great Lakes, and the St. Lawrence River, a highway to the ocean. The railways were built along the border, and the cities grew along the railways. And right next door is the biggest economy on Earth. Three quarters of Canada's exports go to the US. So on the map, Canada is huge. But where people actually live, it's a long, thin country hugging America."
+}

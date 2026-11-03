@@ -1,0 +1,771 @@
+{
+ "duration": 49.092729,
+ "tempo": 1.15,
+ "words": [
+  {
+   "w": "What",
+   "s": 0.0,
+   "e": 0.2,
+   "line": 0
+  },
+  {
+   "w": "if",
+   "s": 0.2,
+   "e": 0.34,
+   "line": 0
+  },
+  {
+   "w": "the",
+   "s": 0.34,
+   "e": 0.5,
+   "line": 0
+  },
+  {
+   "w": "Roman",
+   "s": 0.5,
+   "e": 0.74,
+   "line": 0
+  },
+  {
+   "w": "Empire",
+   "s": 0.74,
+   "e": 1.14,
+   "line": 0
+  },
+  {
+   "w": "came",
+   "s": 1.14,
+   "e": 1.52,
+   "line": 0
+  },
+  {
+   "w": "back",
+   "s": 1.52,
+   "e": 1.84,
+   "line": 0
+  },
+  {
+   "w": "today?",
+   "s": 1.84,
+   "e": 2.26,
+   "line": 0
+  },
+  {
+   "w": "At",
+   "s": 2.88,
+   "e": 3.02,
+   "line": 1
+  },
+  {
+   "w": "its",
+   "s": 3.02,
+   "e": 3.22,
+   "line": 1
+  },
+  {
+   "w": "peak",
+   "s": 3.22,
+   "e": 3.5,
+   "line": 1
+  },
+  {
+   "w": "in",
+   "s": 3.5,
+   "e": 3.82,
+   "line": 1
+  },
+  {
+   "w": "117",
+   "s": 3.82,
+   "e": 4.46,
+   "line": 1
+  },
+  {
+   "w": "AD,",
+   "s": 4.46,
+   "e": 5.08,
+   "line": 1
+  },
+  {
+   "w": "Rome",
+   "s": 5.7,
+   "e": 5.78,
+   "line": 1
+  },
+  {
+   "w": "ruled",
+   "s": 5.78,
+   "e": 6.18,
+   "line": 1
+  },
+  {
+   "w": "5",
+   "s": 6.18,
+   "e": 6.62,
+   "line": 1
+  },
+  {
+   "w": "million",
+   "s": 6.62,
+   "e": 7.08,
+   "line": 1
+  },
+  {
+   "w": "square",
+   "s": 7.08,
+   "e": 7.44,
+   "line": 1
+  },
+  {
+   "w": "kilometers,",
+   "s": 7.44,
+   "e": 7.92,
+   "line": 1
+  },
+  {
+   "w": "from",
+   "s": 8.3,
+   "e": 8.48,
+   "line": 1
+  },
+  {
+   "w": "Britain",
+   "s": 8.48,
+   "e": 8.74,
+   "line": 1
+  },
+  {
+   "w": "to",
+   "s": 8.74,
+   "e": 9.16,
+   "line": 1
+  },
+  {
+   "w": "Egypt.",
+   "s": 9.16,
+   "e": 9.54,
+   "line": 1
+  },
+  {
+   "w": "Bring",
+   "s": 10.1,
+   "e": 10.26,
+   "line": 2
+  },
+  {
+   "w": "those",
+   "s": 10.26,
+   "e": 10.52,
+   "line": 2
+  },
+  {
+   "w": "borders",
+   "s": 10.52,
+   "e": 10.86,
+   "line": 2
+  },
+  {
+   "w": "back,",
+   "s": 10.86,
+   "e": 11.32,
+   "line": 2
+  },
+  {
+   "w": "and",
+   "s": 11.6,
+   "e": 11.72,
+   "line": 2
+  },
+  {
+   "w": "Rome",
+   "s": 11.72,
+   "e": 12.06,
+   "line": 2
+  },
+  {
+   "w": "swallows",
+   "s": 12.06,
+   "e": 12.66,
+   "line": 2
+  },
+  {
+   "w": "more",
+   "s": 12.66,
+   "e": 12.88,
+   "line": 2
+  },
+  {
+   "w": "than",
+   "s": 12.88,
+   "e": 13.08,
+   "line": 2
+  },
+  {
+   "w": "40",
+   "s": 13.08,
+   "e": 13.48,
+   "line": 2
+  },
+  {
+   "w": "modern",
+   "s": 13.48,
+   "e": 13.9,
+   "line": 2
+  },
+  {
+   "w": "countries.",
+   "s": 13.9,
+   "e": 14.42,
+   "line": 2
+  },
+  {
+   "w": "London,",
+   "s": 15.04,
+   "e": 15.22,
+   "line": 3
+  },
+  {
+   "w": "Paris,",
+   "s": 15.58,
+   "e": 15.94,
+   "line": 3
+  },
+  {
+   "w": "Madrid,",
+   "s": 16.34,
+   "e": 16.72,
+   "line": 3
+  },
+  {
+   "w": "Istanbul,",
+   "s": 17.46,
+   "e": 17.51,
+   "line": 3
+  },
+  {
+   "w": "Cairo",
+   "s": 18.12,
+   "e": 18.26,
+   "line": 3
+  },
+  {
+   "w": "and",
+   "s": 18.26,
+   "e": 18.78,
+   "line": 3
+  },
+  {
+   "w": "Jerusalem",
+   "s": 18.78,
+   "e": 19.24,
+   "line": 3
+  },
+  {
+   "w": "are",
+   "s": 19.24,
+   "e": 19.74,
+   "line": 3
+  },
+  {
+   "w": "all",
+   "s": 19.74,
+   "e": 20.1,
+   "line": 3
+  },
+  {
+   "w": "Roman",
+   "s": 20.1,
+   "e": 20.46,
+   "line": 3
+  },
+  {
+   "w": "again.",
+   "s": 20.46,
+   "e": 20.8,
+   "line": 3
+  },
+  {
+   "w": "That's",
+   "s": 21.3,
+   "e": 21.58,
+   "line": 4
+  },
+  {
+   "w": "over",
+   "s": 21.58,
+   "e": 21.8,
+   "line": 4
+  },
+  {
+   "w": "half",
+   "s": 21.8,
+   "e": 22.06,
+   "line": 4
+  },
+  {
+   "w": "a",
+   "s": 22.06,
+   "e": 22.26,
+   "line": 4
+  },
+  {
+   "w": "billion",
+   "s": 22.26,
+   "e": 22.52,
+   "line": 4
+  },
+  {
+   "w": "people.",
+   "s": 22.52,
+   "e": 22.96,
+   "line": 4
+  },
+  {
+   "w": "More",
+   "s": 23.32,
+   "e": 23.56,
+   "line": 4
+  },
+  {
+   "w": "than",
+   "s": 23.56,
+   "e": 23.76,
+   "line": 4
+  },
+  {
+   "w": "the",
+   "s": 23.76,
+   "e": 23.92,
+   "line": 4
+  },
+  {
+   "w": "entire",
+   "s": 23.92,
+   "e": 24.38,
+   "line": 4
+  },
+  {
+   "w": "European",
+   "s": 24.38,
+   "e": 24.9,
+   "line": 4
+  },
+  {
+   "w": "Union.",
+   "s": 24.9,
+   "e": 25.36,
+   "line": 4
+  },
+  {
+   "w": "Its",
+   "s": 25.86,
+   "e": 26.08,
+   "line": 5
+  },
+  {
+   "w": "economy:",
+   "s": 26.08,
+   "e": 26.5,
+   "line": 5
+  },
+  {
+   "w": "about",
+   "s": 26.9,
+   "e": 27.1,
+   "line": 5
+  },
+  {
+   "w": "16",
+   "s": 27.1,
+   "e": 27.64,
+   "line": 5
+  },
+  {
+   "w": "trillion",
+   "s": 27.64,
+   "e": 28.16,
+   "line": 5
+  },
+  {
+   "w": "dollars.",
+   "s": 28.16,
+   "e": 28.7,
+   "line": 5
+  },
+  {
+   "w": "Third",
+   "s": 29.22,
+   "e": 29.32,
+   "line": 5
+  },
+  {
+   "w": "biggest",
+   "s": 29.32,
+   "e": 29.64,
+   "line": 5
+  },
+  {
+   "w": "on",
+   "s": 29.64,
+   "e": 29.92,
+   "line": 5
+  },
+  {
+   "w": "Earth,",
+   "s": 29.92,
+   "e": 30.14,
+   "line": 5
+  },
+  {
+   "w": "behind",
+   "s": 30.4,
+   "e": 30.66,
+   "line": 5
+  },
+  {
+   "w": "only",
+   "s": 30.66,
+   "e": 31.06,
+   "line": 5
+  },
+  {
+   "w": "the",
+   "s": 31.06,
+   "e": 31.26,
+   "line": 5
+  },
+  {
+   "w": "US",
+   "s": 31.26,
+   "e": 31.54,
+   "line": 5
+  },
+  {
+   "w": "and",
+   "s": 31.54,
+   "e": 31.98,
+   "line": 5
+  },
+  {
+   "w": "China.",
+   "s": 31.98,
+   "e": 32.26,
+   "line": 5
+  },
+  {
+   "w": "And",
+   "s": 32.84,
+   "e": 33.04,
+   "line": 6
+  },
+  {
+   "w": "it's",
+   "s": 33.04,
+   "e": 33.32,
+   "line": 6
+  },
+  {
+   "w": "a",
+   "s": 33.32,
+   "e": 33.44,
+   "line": 6
+  },
+  {
+   "w": "nuclear",
+   "s": 33.44,
+   "e": 33.8,
+   "line": 6
+  },
+  {
+   "w": "power,",
+   "s": 33.8,
+   "e": 34.28,
+   "line": 6
+  },
+  {
+   "w": "with",
+   "s": 34.46,
+   "e": 34.68,
+   "line": 6
+  },
+  {
+   "w": "France",
+   "s": 34.68,
+   "e": 35.04,
+   "line": 6
+  },
+  {
+   "w": "and",
+   "s": 35.04,
+   "e": 35.34,
+   "line": 6
+  },
+  {
+   "w": "Britain's",
+   "s": 35.34,
+   "e": 35.76,
+   "line": 6
+  },
+  {
+   "w": "warheads.",
+   "s": 35.76,
+   "e": 36.08,
+   "line": 6
+  },
+  {
+   "w": "But",
+   "s": 36.84,
+   "e": 36.92,
+   "line": 7
+  },
+  {
+   "w": "there's",
+   "s": 36.92,
+   "e": 37.14,
+   "line": 7
+  },
+  {
+   "w": "a",
+   "s": 37.14,
+   "e": 37.24,
+   "line": 7
+  },
+  {
+   "w": "problem.",
+   "s": 37.24,
+   "e": 37.56,
+   "line": 7
+  },
+  {
+   "w": "Who's",
+   "s": 38.02,
+   "e": 38.22,
+   "line": 7
+  },
+  {
+   "w": "in",
+   "s": 38.22,
+   "e": 38.36,
+   "line": 7
+  },
+  {
+   "w": "charge?",
+   "s": 38.36,
+   "e": 38.66,
+   "line": 7
+  },
+  {
+   "w": "Rome,",
+   "s": 39.2,
+   "e": 39.44,
+   "line": 7
+  },
+  {
+   "w": "or",
+   "s": 39.76,
+   "e": 39.81,
+   "line": 7
+  },
+  {
+   "w": "the",
+   "s": 39.8,
+   "e": 39.92,
+   "line": 7
+  },
+  {
+   "w": "old",
+   "s": 39.92,
+   "e": 40.16,
+   "line": 7
+  },
+  {
+   "w": "eastern",
+   "s": 40.16,
+   "e": 40.42,
+   "line": 7
+  },
+  {
+   "w": "capital,",
+   "s": 40.42,
+   "e": 40.96,
+   "line": 7
+  },
+  {
+   "w": "Istanbul?",
+   "s": 41.26,
+   "e": 41.48,
+   "line": 7
+  },
+  {
+   "w": "Paris",
+   "s": 42.22,
+   "e": 42.52,
+   "line": 7
+  },
+  {
+   "w": "wants",
+   "s": 42.52,
+   "e": 42.78,
+   "line": 7
+  },
+  {
+   "w": "a",
+   "s": 42.78,
+   "e": 42.98,
+   "line": 7
+  },
+  {
+   "w": "say.",
+   "s": 42.98,
+   "e": 43.24,
+   "line": 7
+  },
+  {
+   "w": "So",
+   "s": 43.68,
+   "e": 43.76,
+   "line": 7
+  },
+  {
+   "w": "does",
+   "s": 43.76,
+   "e": 43.94,
+   "line": 7
+  },
+  {
+   "w": "London.",
+   "s": 43.94,
+   "e": 44.24,
+   "line": 7
+  },
+  {
+   "w": "Within",
+   "s": 44.88,
+   "e": 45.02,
+   "line": 8
+  },
+  {
+   "w": "a",
+   "s": 45.02,
+   "e": 45.22,
+   "line": 8
+  },
+  {
+   "w": "year,",
+   "s": 45.22,
+   "e": 45.48,
+   "line": 8
+  },
+  {
+   "w": "the",
+   "s": 45.74,
+   "e": 45.8,
+   "line": 8
+  },
+  {
+   "w": "empire",
+   "s": 45.8,
+   "e": 46.16,
+   "line": 8
+  },
+  {
+   "w": "splits",
+   "s": 46.16,
+   "e": 46.58,
+   "line": 8
+  },
+  {
+   "w": "in",
+   "s": 46.58,
+   "e": 46.8,
+   "line": 8
+  },
+  {
+   "w": "two...",
+   "s": 46.8,
+   "e": 47.72,
+   "line": 8
+  },
+  {
+   "w": "exactly",
+   "s": 47.72,
+   "e": 47.84,
+   "line": 8
+  },
+  {
+   "w": "like",
+   "s": 47.84,
+   "e": 48.22,
+   "line": 8
+  },
+  {
+   "w": "last",
+   "s": 48.22,
+   "e": 48.48,
+   "line": 8
+  },
+  {
+   "w": "time.",
+   "s": 48.48,
+   "e": 48.84,
+   "line": 8
+  }
+ ],
+ "lines": [
+  {
+   "i": 0,
+   "text": "What if the Roman Empire came back today?",
+   "s": 0.0,
+   "e": 2.26
+  },
+  {
+   "i": 1,
+   "text": "At its peak in 117 AD, Rome ruled 5 million square kilometers, from Britain to Egypt.",
+   "s": 2.88,
+   "e": 9.54
+  },
+  {
+   "i": 2,
+   "text": "Bring those borders back, and Rome swallows more than 40 modern countries.",
+   "s": 10.1,
+   "e": 14.42
+  },
+  {
+   "i": 3,
+   "text": "London, Paris, Madrid, Istanbul, Cairo and Jerusalem are all Roman again.",
+   "s": 15.04,
+   "e": 20.8
+  },
+  {
+   "i": 4,
+   "text": "That's over half a billion people. More than the entire European Union.",
+   "s": 21.3,
+   "e": 25.36
+  },
+  {
+   "i": 5,
+   "text": "Its economy: about 16 trillion dollars. Third biggest on Earth, behind only the US and China.",
+   "s": 25.86,
+   "e": 32.26
+  },
+  {
+   "i": 6,
+   "text": "And it's a nuclear power, with France and Britain's warheads.",
+   "s": 32.84,
+   "e": 36.08
+  },
+  {
+   "i": 7,
+   "text": "But there's a problem. Who's in charge? Rome, or the old eastern capital, Istanbul? Paris wants a say. So does London.",
+   "s": 36.84,
+   "e": 44.24
+  },
+  {
+   "i": 8,
+   "text": "Within a year, the empire splits in two... exactly like last time.",
+   "s": 44.88,
+   "e": 48.84
+  }
+ ],
+ "heard": "What if the Roman Empire came back today? At its peak in 117 AD, Rome ruled 5 million square kilometers, from Britain to Egypt. Bring those borders back, and Rome swallows more than 40 modern countries. London, Paris, Madrid, Istanbul, Cairo and Jerusalem are all Roman again. That's over half a billion people. More than the entire European Union. Its economy, about 16 trillion dollars. Third biggest on Earth, behind only the US and China. And it's a nuclear power, with France and Britain's warheads. But there's a problem. Who's in charge? Rome, or the old eastern capital, Istanbul? Paris wants a say. So does London. Within a year, the empire splits in two... exactly like last time."
+}

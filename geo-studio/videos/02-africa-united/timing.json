@@ -1,0 +1,1113 @@
+{
+ "duration": 68.583729,
+ "tempo": 1.18,
+ "words": [
+  {
+   "w": "What",
+   "s": 0.0,
+   "e": 0.26,
+   "line": 0
+  },
+  {
+   "w": "if",
+   "s": 0.26,
+   "e": 0.42,
+   "line": 0
+  },
+  {
+   "w": "Africa",
+   "s": 0.42,
+   "e": 0.94,
+   "line": 0
+  },
+  {
+   "w": "united",
+   "s": 0.94,
+   "e": 1.52,
+   "line": 0
+  },
+  {
+   "w": "and",
+   "s": 1.52,
+   "e": 1.98,
+   "line": 0
+  },
+  {
+   "w": "tried",
+   "s": 1.98,
+   "e": 2.28,
+   "line": 0
+  },
+  {
+   "w": "taking",
+   "s": 2.28,
+   "e": 2.6,
+   "line": 0
+  },
+  {
+   "w": "over",
+   "s": 2.6,
+   "e": 2.88,
+   "line": 0
+  },
+  {
+   "w": "the",
+   "s": 2.88,
+   "e": 3.0,
+   "line": 0
+  },
+  {
+   "w": "world?",
+   "s": 3.0,
+   "e": 3.36,
+   "line": 0
+  },
+  {
+   "w": "54",
+   "s": 4.46,
+   "e": 4.52,
+   "line": 1
+  },
+  {
+   "w": "countries.",
+   "s": 4.52,
+   "e": 5.12,
+   "line": 1
+  },
+  {
+   "w": "One",
+   "s": 5.6,
+   "e": 5.8,
+   "line": 1
+  },
+  {
+   "w": "flag.",
+   "s": 5.8,
+   "e": 6.32,
+   "line": 1
+  },
+  {
+   "w": "Overnight,",
+   "s": 6.96,
+   "e": 7.32,
+   "line": 1
+  },
+  {
+   "w": "the",
+   "s": 7.66,
+   "e": 7.71,
+   "line": 1
+  },
+  {
+   "w": "United",
+   "s": 7.68,
+   "e": 8.04,
+   "line": 1
+  },
+  {
+   "w": "States",
+   "s": 8.04,
+   "e": 8.48,
+   "line": 1
+  },
+  {
+   "w": "of",
+   "s": 8.48,
+   "e": 8.7,
+   "line": 1
+  },
+  {
+   "w": "Africa",
+   "s": 8.7,
+   "e": 9.12,
+   "line": 1
+  },
+  {
+   "w": "is",
+   "s": 9.12,
+   "e": 9.48,
+   "line": 1
+  },
+  {
+   "w": "born.",
+   "s": 9.48,
+   "e": 9.78,
+   "line": 1
+  },
+  {
+   "w": "It's",
+   "s": 10.32,
+   "e": 10.58,
+   "line": 2
+  },
+  {
+   "w": "bigger",
+   "s": 10.58,
+   "e": 10.72,
+   "line": 2
+  },
+  {
+   "w": "than",
+   "s": 10.72,
+   "e": 10.98,
+   "line": 2
+  },
+  {
+   "w": "the",
+   "s": 10.98,
+   "e": 11.12,
+   "line": 2
+  },
+  {
+   "w": "US,",
+   "s": 11.12,
+   "e": 11.44,
+   "line": 2
+  },
+  {
+   "w": "China",
+   "s": 11.86,
+   "e": 12.04,
+   "line": 2
+  },
+  {
+   "w": "and",
+   "s": 12.04,
+   "e": 12.42,
+   "line": 2
+  },
+  {
+   "w": "India",
+   "s": 12.42,
+   "e": 12.88,
+   "line": 2
+  },
+  {
+   "w": "combined,",
+   "s": 12.88,
+   "e": 13.4,
+   "line": 2
+  },
+  {
+   "w": "with",
+   "s": 13.78,
+   "e": 13.92,
+   "line": 2
+  },
+  {
+   "w": "1.5",
+   "s": 13.92,
+   "e": 15.08,
+   "line": 2
+  },
+  {
+   "w": "billion",
+   "s": 15.08,
+   "e": 15.4,
+   "line": 2
+  },
+  {
+   "w": "people.",
+   "s": 15.4,
+   "e": 15.96,
+   "line": 2
+  },
+  {
+   "w": "Its",
+   "s": 16.44,
+   "e": 16.66,
+   "line": 3
+  },
+  {
+   "w": "army?",
+   "s": 16.66,
+   "e": 16.98,
+   "line": 3
+  },
+  {
+   "w": "Roughly",
+   "s": 17.5,
+   "e": 17.82,
+   "line": 3
+  },
+  {
+   "w": "2",
+   "s": 17.82,
+   "e": 18.08,
+   "line": 3
+  },
+  {
+   "w": "million",
+   "s": 18.08,
+   "e": 18.5,
+   "line": 3
+  },
+  {
+   "w": "soldiers.",
+   "s": 18.5,
+   "e": 18.98,
+   "line": 3
+  },
+  {
+   "w": "And",
+   "s": 19.48,
+   "e": 19.72,
+   "line": 4
+  },
+  {
+   "w": "it",
+   "s": 19.72,
+   "e": 19.86,
+   "line": 4
+  },
+  {
+   "w": "controls",
+   "s": 19.86,
+   "e": 20.26,
+   "line": 4
+  },
+  {
+   "w": "the",
+   "s": 20.26,
+   "e": 20.52,
+   "line": 4
+  },
+  {
+   "w": "world's",
+   "s": 20.52,
+   "e": 20.92,
+   "line": 4
+  },
+  {
+   "w": "supply",
+   "s": 20.92,
+   "e": 21.2,
+   "line": 4
+  },
+  {
+   "w": "chain.",
+   "s": 21.2,
+   "e": 21.62,
+   "line": 4
+  },
+  {
+   "w": "About",
+   "s": 22.04,
+   "e": 22.24,
+   "line": 4
+  },
+  {
+   "w": "70%",
+   "s": 22.24,
+   "e": 23.02,
+   "line": 4
+  },
+  {
+   "w": "of",
+   "s": 23.02,
+   "e": 23.26,
+   "line": 4
+  },
+  {
+   "w": "the",
+   "s": 23.26,
+   "e": 23.46,
+   "line": 4
+  },
+  {
+   "w": "cobalt",
+   "s": 23.46,
+   "e": 23.8,
+   "line": 4
+  },
+  {
+   "w": "in",
+   "s": 23.8,
+   "e": 24.02,
+   "line": 4
+  },
+  {
+   "w": "your",
+   "s": 24.02,
+   "e": 24.2,
+   "line": 4
+  },
+  {
+   "w": "phone",
+   "s": 24.2,
+   "e": 24.46,
+   "line": 4
+  },
+  {
+   "w": "battery",
+   "s": 24.46,
+   "e": 24.82,
+   "line": 4
+  },
+  {
+   "w": "is",
+   "s": 24.82,
+   "e": 25.08,
+   "line": 4
+  },
+  {
+   "w": "mined",
+   "s": 25.08,
+   "e": 25.44,
+   "line": 4
+  },
+  {
+   "w": "in",
+   "s": 25.44,
+   "e": 25.68,
+   "line": 4
+  },
+  {
+   "w": "Africa.",
+   "s": 25.68,
+   "e": 26.0,
+   "line": 4
+  },
+  {
+   "w": "First",
+   "s": 26.52,
+   "e": 26.86,
+   "line": 5
+  },
+  {
+   "w": "move:",
+   "s": 26.86,
+   "e": 27.3,
+   "line": 5
+  },
+  {
+   "w": "close",
+   "s": 27.74,
+   "e": 27.9,
+   "line": 5
+  },
+  {
+   "w": "the",
+   "s": 27.9,
+   "e": 28.16,
+   "line": 5
+  },
+  {
+   "w": "Suez",
+   "s": 28.16,
+   "e": 28.54,
+   "line": 5
+  },
+  {
+   "w": "Canal.",
+   "s": 28.54,
+   "e": 28.92,
+   "line": 5
+  },
+  {
+   "w": "Now",
+   "s": 29.7,
+   "e": 29.75,
+   "line": 5
+  },
+  {
+   "w": "ships",
+   "s": 29.74,
+   "e": 30.06,
+   "line": 5
+  },
+  {
+   "w": "between",
+   "s": 30.06,
+   "e": 30.5,
+   "line": 5
+  },
+  {
+   "w": "Europe",
+   "s": 30.5,
+   "e": 30.8,
+   "line": 5
+  },
+  {
+   "w": "and",
+   "s": 30.8,
+   "e": 31.0,
+   "line": 5
+  },
+  {
+   "w": "Asia",
+   "s": 31.0,
+   "e": 31.3,
+   "line": 5
+  },
+  {
+   "w": "have",
+   "s": 31.3,
+   "e": 31.56,
+   "line": 5
+  },
+  {
+   "w": "to",
+   "s": 31.56,
+   "e": 31.74,
+   "line": 5
+  },
+  {
+   "w": "sail",
+   "s": 31.74,
+   "e": 32.0,
+   "line": 5
+  },
+  {
+   "w": "all",
+   "s": 32.0,
+   "e": 32.42,
+   "line": 5
+  },
+  {
+   "w": "the",
+   "s": 32.42,
+   "e": 32.58,
+   "line": 5
+  },
+  {
+   "w": "way",
+   "s": 32.58,
+   "e": 32.74,
+   "line": 5
+  },
+  {
+   "w": "around...",
+   "s": 32.74,
+   "e": 33.1,
+   "line": 5
+  },
+  {
+   "w": "Africa.",
+   "s": 33.9,
+   "e": 33.95,
+   "line": 5
+  },
+  {
+   "w": "Then",
+   "s": 34.48,
+   "e": 34.68,
+   "line": 6
+  },
+  {
+   "w": "it",
+   "s": 34.68,
+   "e": 34.86,
+   "line": 6
+  },
+  {
+   "w": "crosses",
+   "s": 34.86,
+   "e": 35.08,
+   "line": 6
+  },
+  {
+   "w": "the",
+   "s": 35.08,
+   "e": 35.42,
+   "line": 6
+  },
+  {
+   "w": "14",
+   "s": 35.42,
+   "e": 35.92,
+   "line": 6
+  },
+  {
+   "w": "kilometer",
+   "s": 35.92,
+   "e": 36.4,
+   "line": 6
+  },
+  {
+   "w": "Strait",
+   "s": 36.4,
+   "e": 36.82,
+   "line": 6
+  },
+  {
+   "w": "of",
+   "s": 36.82,
+   "e": 37.08,
+   "line": 6
+  },
+  {
+   "w": "Gibraltar",
+   "s": 37.08,
+   "e": 37.46,
+   "line": 6
+  },
+  {
+   "w": "into",
+   "s": 37.46,
+   "e": 37.94,
+   "line": 6
+  },
+  {
+   "w": "Spain,",
+   "s": 37.94,
+   "e": 38.3,
+   "line": 6
+  },
+  {
+   "w": "and",
+   "s": 38.66,
+   "e": 38.74,
+   "line": 6
+  },
+  {
+   "w": "jumps",
+   "s": 38.74,
+   "e": 38.98,
+   "line": 6
+  },
+  {
+   "w": "from",
+   "s": 38.98,
+   "e": 39.26,
+   "line": 6
+  },
+  {
+   "w": "Tunisia",
+   "s": 39.26,
+   "e": 39.72,
+   "line": 6
+  },
+  {
+   "w": "to",
+   "s": 39.72,
+   "e": 40.18,
+   "line": 6
+  },
+  {
+   "w": "Sicily.",
+   "s": 40.18,
+   "e": 40.58,
+   "line": 6
+  },
+  {
+   "w": "Across",
+   "s": 41.04,
+   "e": 41.36,
+   "line": 7
+  },
+  {
+   "w": "the",
+   "s": 41.36,
+   "e": 41.62,
+   "line": 7
+  },
+  {
+   "w": "Red",
+   "s": 41.62,
+   "e": 41.8,
+   "line": 7
+  },
+  {
+   "w": "Sea,",
+   "s": 41.8,
+   "e": 42.14,
+   "line": 7
+  },
+  {
+   "w": "Arabia",
+   "s": 42.6,
+   "e": 42.78,
+   "line": 7
+  },
+  {
+   "w": "is",
+   "s": 42.78,
+   "e": 43.12,
+   "line": 7
+  },
+  {
+   "w": "only",
+   "s": 43.12,
+   "e": 43.48,
+   "line": 7
+  },
+  {
+   "w": "26",
+   "s": 43.48,
+   "e": 44.12,
+   "line": 7
+  },
+  {
+   "w": "kilometers",
+   "s": 44.12,
+   "e": 44.52,
+   "line": 7
+  },
+  {
+   "w": "away.",
+   "s": 44.52,
+   "e": 45.02,
+   "line": 7
+  },
+  {
+   "w": "But",
+   "s": 45.52,
+   "e": 45.64,
+   "line": 8
+  },
+  {
+   "w": "here's",
+   "s": 45.64,
+   "e": 45.94,
+   "line": 8
+  },
+  {
+   "w": "the",
+   "s": 45.94,
+   "e": 46.06,
+   "line": 8
+  },
+  {
+   "w": "problem.",
+   "s": 46.06,
+   "e": 46.4,
+   "line": 8
+  },
+  {
+   "w": "All",
+   "s": 46.82,
+   "e": 47.08,
+   "line": 8
+  },
+  {
+   "w": "of",
+   "s": 47.08,
+   "e": 47.24,
+   "line": 8
+  },
+  {
+   "w": "Africa",
+   "s": 47.24,
+   "e": 47.68,
+   "line": 8
+  },
+  {
+   "w": "spends",
+   "s": 47.68,
+   "e": 48.06,
+   "line": 8
+  },
+  {
+   "w": "about",
+   "s": 48.06,
+   "e": 48.38,
+   "line": 8
+  },
+  {
+   "w": "50",
+   "s": 48.38,
+   "e": 48.88,
+   "line": 8
+  },
+  {
+   "w": "billion",
+   "s": 48.88,
+   "e": 49.32,
+   "line": 8
+  },
+  {
+   "w": "dollars",
+   "s": 49.32,
+   "e": 49.7,
+   "line": 8
+  },
+  {
+   "w": "a",
+   "s": 49.7,
+   "e": 49.94,
+   "line": 8
+  },
+  {
+   "w": "year",
+   "s": 49.94,
+   "e": 50.18,
+   "line": 8
+  },
+  {
+   "w": "on",
+   "s": 50.18,
+   "e": 50.48,
+   "line": 8
+  },
+  {
+   "w": "its",
+   "s": 50.48,
+   "e": 50.64,
+   "line": 8
+  },
+  {
+   "w": "militaries.",
+   "s": 50.64,
+   "e": 51.24,
+   "line": 8
+  },
+  {
+   "w": "The",
+   "s": 51.24,
+   "e": 51.86,
+   "line": 8
+  },
+  {
+   "w": "US",
+   "s": 51.86,
+   "e": 52.2,
+   "line": 8
+  },
+  {
+   "w": "spends",
+   "s": 52.2,
+   "e": 52.72,
+   "line": 8
+  },
+  {
+   "w": "that",
+   "s": 52.72,
+   "e": 53.08,
+   "line": 8
+  },
+  {
+   "w": "in",
+   "s": 53.08,
+   "e": 53.3,
+   "line": 8
+  },
+  {
+   "w": "under",
+   "s": 53.3,
+   "e": 53.54,
+   "line": 8
+  },
+  {
+   "w": "three",
+   "s": 53.54,
+   "e": 53.88,
+   "line": 8
+  },
+  {
+   "w": "weeks.",
+   "s": 53.88,
+   "e": 54.34,
+   "line": 8
+  },
+  {
+   "w": "Against",
+   "s": 55.08,
+   "e": 55.2,
+   "line": 9
+  },
+  {
+   "w": "NATO",
+   "s": 55.2,
+   "e": 55.64,
+   "line": 9
+  },
+  {
+   "w": "air",
+   "s": 55.64,
+   "e": 55.92,
+   "line": 9
+  },
+  {
+   "w": "power,",
+   "s": 55.92,
+   "e": 56.22,
+   "line": 9
+  },
+  {
+   "w": "the",
+   "s": 56.5,
+   "e": 56.55,
+   "line": 9
+  },
+  {
+   "w": "invasion",
+   "s": 56.54,
+   "e": 56.9,
+   "line": 9
+  },
+  {
+   "w": "stalls",
+   "s": 56.9,
+   "e": 57.42,
+   "line": 9
+  },
+  {
+   "w": "on",
+   "s": 57.42,
+   "e": 57.76,
+   "line": 9
+  },
+  {
+   "w": "the",
+   "s": 57.76,
+   "e": 57.84,
+   "line": 9
+  },
+  {
+   "w": "beaches.",
+   "s": 57.84,
+   "e": 58.12,
+   "line": 9
+  },
+  {
+   "w": "But",
+   "s": 58.76,
+   "e": 58.82,
+   "line": 10
+  },
+  {
+   "w": "Africa",
+   "s": 58.82,
+   "e": 59.26,
+   "line": 10
+  },
+  {
+   "w": "doesn't",
+   "s": 59.26,
+   "e": 59.78,
+   "line": 10
+  },
+  {
+   "w": "need",
+   "s": 59.78,
+   "e": 60.02,
+   "line": 10
+  },
+  {
+   "w": "a",
+   "s": 60.02,
+   "e": 60.18,
+   "line": 10
+  },
+  {
+   "w": "war.",
+   "s": 60.18,
+   "e": 60.5,
+   "line": 10
+  },
+  {
+   "w": "By",
+   "s": 61.08,
+   "e": 61.16,
+   "line": 10
+  },
+  {
+   "w": "2100,",
+   "s": 61.16,
+   "e": 61.86,
+   "line": 10
+  },
+  {
+   "w": "more",
+   "s": 62.5,
+   "e": 62.56,
+   "line": 10
+  },
+  {
+   "w": "than",
+   "s": 62.56,
+   "e": 62.76,
+   "line": 10
+  },
+  {
+   "w": "one",
+   "s": 62.76,
+   "e": 63.02,
+   "line": 10
+  },
+  {
+   "w": "in",
+   "s": 63.02,
+   "e": 63.32,
+   "line": 10
+  },
+  {
+   "w": "three",
+   "s": 63.32,
+   "e": 63.62,
+   "line": 10
+  },
+  {
+   "w": "humans",
+   "s": 63.62,
+   "e": 64.08,
+   "line": 10
+  },
+  {
+   "w": "will",
+   "s": 64.08,
+   "e": 64.36,
+   "line": 10
+  },
+  {
+   "w": "be",
+   "s": 64.36,
+   "e": 64.5,
+   "line": 10
+  },
+  {
+   "w": "African.",
+   "s": 64.5,
+   "e": 64.82,
+   "line": 10
+  },
+  {
+   "w": "It",
+   "s": 65.4,
+   "e": 65.52,
+   "line": 10
+  },
+  {
+   "w": "doesn't",
+   "s": 65.52,
+   "e": 65.8,
+   "line": 10
+  },
+  {
+   "w": "have",
+   "s": 65.8,
+   "e": 65.94,
+   "line": 10
+  },
+  {
+   "w": "to",
+   "s": 65.94,
+   "e": 66.08,
+   "line": 10
+  },
+  {
+   "w": "take",
+   "s": 66.08,
+   "e": 66.26,
+   "line": 10
+  },
+  {
+   "w": "over",
+   "s": 66.26,
+   "e": 66.46,
+   "line": 10
+  },
+  {
+   "w": "the",
+   "s": 66.46,
+   "e": 66.6,
+   "line": 10
+  },
+  {
+   "w": "world.",
+   "s": 66.6,
+   "e": 66.88,
+   "line": 10
+  },
+  {
+   "w": "It",
+   "s": 67.3,
+   "e": 67.44,
+   "line": 10
+  },
+  {
+   "w": "just",
+   "s": 67.44,
+   "e": 67.62,
+   "line": 10
+  },
+  {
+   "w": "has",
+   "s": 67.62,
+   "e": 67.86,
+   "line": 10
+  },
+  {
+   "w": "to",
+   "s": 67.86,
+   "e": 68.04,
+   "line": 10
+  },
+  {
+   "w": "wait.",
+   "s": 68.04,
+   "e": 68.28,
+   "line": 10
+  }
+ ],
+ "lines": [
+  {
+   "i": 0,
+   "text": "What if Africa united and tried taking over the world?",
+   "s": 0.0,
+   "e": 3.36
+  },
+  {
+   "i": 1,
+   "text": "54 countries. One flag. Overnight, the United States of Africa is born.",
+   "s": 4.46,
+   "e": 9.78
+  },
+  {
+   "i": 2,
+   "text": "It's bigger than the US, China and India combined, with 1.5 billion people.",
+   "s": 10.32,
+   "e": 15.96
+  },
+  {
+   "i": 3,
+   "text": "Its army? Roughly 2 million soldiers.",
+   "s": 16.44,
+   "e": 18.98
+  },
+  {
+   "i": 4,
+   "text": "And it controls the world's supply chain. About 70% of the cobalt in your phone battery is mined in Africa.",
+   "s": 19.48,
+   "e": 26.0
+  },
+  {
+   "i": 5,
+   "text": "First move: close the Suez Canal. Now ships between Europe and Asia have to sail all the way around... Africa.",
+   "s": 26.52,
+   "e": 33.95
+  },
+  {
+   "i": 6,
+   "text": "Then it crosses the 14 kilometer Strait of Gibraltar into Spain, and jumps from Tunisia to Sicily.",
+   "s": 34.48,
+   "e": 40.58
+  },
+  {
+   "i": 7,
+   "text": "Across the Red Sea, Arabia is only 26 kilometers away.",
+   "s": 41.04,
+   "e": 45.02
+  },
+  {
+   "i": 8,
+   "text": "But here's the problem. All of Africa spends about 50 billion dollars a year on its militaries. The US spends that in under three weeks.",
+   "s": 45.52,
+   "e": 54.34
+  },
+  {
+   "i": 9,
+   "text": "Against NATO air power, the invasion stalls on the beaches.",
+   "s": 55.08,
+   "e": 58.12
+  },
+  {
+   "i": 10,
+   "text": "But Africa doesn't need a war. By 2100, more than one in three humans will be African. It doesn't have to take over the world. It just has to wait.",
+   "s": 58.76,
+   "e": 68.28
+  }
+ ],
+ "heard": "What if Africa united and tried taking over the world? 54 countries. One flag. Overnight, the United States of Africa is born. It's bigger than the US, China and India combined, with 1 .5 billion people. Its army? Roughly 2 million soldiers. And it controls the world's supply chain. About 70 % of the cobalt in your phone battery is mined in Africa. First move. Close the Suez Canal. Now ships between Europe and Asia have to sail all the way around. Africa. Then it crosses the 14 kilometers Strait of Gibraltar into Spain, and jumps from Tunisia to Sicily. Across the Red Sea, Arabia is only 26 kilometers away. But here's the problem. All of Africa spends about 50 billion dollars a year on its militaries. The US spends that in under three weeks. Against NATO air power, the invasion stalls on the beaches. But Africa doesn't need a war. By 2100, more than one in three humans will be African. It doesn't have to take over the world. It just has to wait."
+}

@@ -1,0 +1,783 @@
+{
+ "duration": 46.222438,
+ "tempo": 1.15,
+ "words": [
+  {
+   "w": "The",
+   "s": 0.0,
+   "e": 0.18,
+   "line": 0
+  },
+  {
+   "w": "map",
+   "s": 0.18,
+   "e": 0.4,
+   "line": 0
+  },
+  {
+   "w": "you",
+   "s": 0.4,
+   "e": 0.6,
+   "line": 0
+  },
+  {
+   "w": "grew",
+   "s": 0.6,
+   "e": 0.78,
+   "line": 0
+  },
+  {
+   "w": "up",
+   "s": 0.78,
+   "e": 1.0,
+   "line": 0
+  },
+  {
+   "w": "with",
+   "s": 1.0,
+   "e": 1.28,
+   "line": 0
+  },
+  {
+   "w": "has",
+   "s": 1.28,
+   "e": 1.42,
+   "line": 0
+  },
+  {
+   "w": "been",
+   "s": 1.42,
+   "e": 1.64,
+   "line": 0
+  },
+  {
+   "w": "lying",
+   "s": 1.64,
+   "e": 1.94,
+   "line": 0
+  },
+  {
+   "w": "to",
+   "s": 1.94,
+   "e": 2.24,
+   "line": 0
+  },
+  {
+   "w": "you.",
+   "s": 2.24,
+   "e": 2.66,
+   "line": 0
+  },
+  {
+   "w": "Look",
+   "s": 2.98,
+   "e": 3.08,
+   "line": 1
+  },
+  {
+   "w": "at",
+   "s": 3.08,
+   "e": 3.26,
+   "line": 1
+  },
+  {
+   "w": "Greenland.",
+   "s": 3.26,
+   "e": 3.5,
+   "line": 1
+  },
+  {
+   "w": "On",
+   "s": 4.2,
+   "e": 4.32,
+   "line": 1
+  },
+  {
+   "w": "this",
+   "s": 4.32,
+   "e": 4.54,
+   "line": 1
+  },
+  {
+   "w": "map,",
+   "s": 4.54,
+   "e": 4.84,
+   "line": 1
+  },
+  {
+   "w": "it",
+   "s": 5.02,
+   "e": 5.12,
+   "line": 1
+  },
+  {
+   "w": "looks",
+   "s": 5.12,
+   "e": 5.3,
+   "line": 1
+  },
+  {
+   "w": "as",
+   "s": 5.3,
+   "e": 5.5,
+   "line": 1
+  },
+  {
+   "w": "big",
+   "s": 5.5,
+   "e": 5.68,
+   "line": 1
+  },
+  {
+   "w": "as",
+   "s": 5.68,
+   "e": 5.88,
+   "line": 1
+  },
+  {
+   "w": "Africa.",
+   "s": 5.88,
+   "e": 6.32,
+   "line": 1
+  },
+  {
+   "w": "But",
+   "s": 6.8,
+   "e": 6.96,
+   "line": 2
+  },
+  {
+   "w": "watch",
+   "s": 6.96,
+   "e": 7.18,
+   "line": 2
+  },
+  {
+   "w": "what",
+   "s": 7.18,
+   "e": 7.42,
+   "line": 2
+  },
+  {
+   "w": "happens",
+   "s": 7.42,
+   "e": 7.72,
+   "line": 2
+  },
+  {
+   "w": "when",
+   "s": 7.72,
+   "e": 7.98,
+   "line": 2
+  },
+  {
+   "w": "we",
+   "s": 7.98,
+   "e": 8.2,
+   "line": 2
+  },
+  {
+   "w": "slide",
+   "s": 8.2,
+   "e": 8.44,
+   "line": 2
+  },
+  {
+   "w": "it",
+   "s": 8.44,
+   "e": 8.62,
+   "line": 2
+  },
+  {
+   "w": "down",
+   "s": 8.62,
+   "e": 8.88,
+   "line": 2
+  },
+  {
+   "w": "to",
+   "s": 8.88,
+   "e": 9.08,
+   "line": 2
+  },
+  {
+   "w": "the",
+   "s": 9.08,
+   "e": 9.22,
+   "line": 2
+  },
+  {
+   "w": "equator.",
+   "s": 9.22,
+   "e": 9.66,
+   "line": 2
+  },
+  {
+   "w": "Greenland",
+   "s": 10.34,
+   "e": 10.7,
+   "line": 3
+  },
+  {
+   "w": "shrinks.",
+   "s": 10.7,
+   "e": 11.34,
+   "line": 3
+  },
+  {
+   "w": "Africa",
+   "s": 11.9,
+   "e": 12.28,
+   "line": 3
+  },
+  {
+   "w": "is",
+   "s": 12.28,
+   "e": 12.6,
+   "line": 3
+  },
+  {
+   "w": "actually",
+   "s": 12.6,
+   "e": 13.0,
+   "line": 3
+  },
+  {
+   "w": "14",
+   "s": 13.0,
+   "e": 13.56,
+   "line": 3
+  },
+  {
+   "w": "times",
+   "s": 13.56,
+   "e": 13.96,
+   "line": 3
+  },
+  {
+   "w": "bigger.",
+   "s": 13.96,
+   "e": 14.48,
+   "line": 3
+  },
+  {
+   "w": "This",
+   "s": 15.0,
+   "e": 15.28,
+   "line": 4
+  },
+  {
+   "w": "is",
+   "s": 15.28,
+   "e": 15.54,
+   "line": 4
+  },
+  {
+   "w": "the",
+   "s": 15.54,
+   "e": 15.72,
+   "line": 4
+  },
+  {
+   "w": "Mercator",
+   "s": 15.72,
+   "e": 16.12,
+   "line": 4
+  },
+  {
+   "w": "projection,",
+   "s": 16.12,
+   "e": 16.58,
+   "line": 4
+  },
+  {
+   "w": "made",
+   "s": 16.92,
+   "e": 17.2,
+   "line": 4
+  },
+  {
+   "w": "in",
+   "s": 17.2,
+   "e": 17.42,
+   "line": 4
+  },
+  {
+   "w": "1569",
+   "s": 17.42,
+   "e": 18.42,
+   "line": 4
+  },
+  {
+   "w": "for",
+   "s": 18.42,
+   "e": 18.78,
+   "line": 4
+  },
+  {
+   "w": "sailors.",
+   "s": 18.78,
+   "e": 19.12,
+   "line": 4
+  },
+  {
+   "w": "It",
+   "s": 19.72,
+   "e": 19.9,
+   "line": 4
+  },
+  {
+   "w": "keeps",
+   "s": 19.9,
+   "e": 20.18,
+   "line": 4
+  },
+  {
+   "w": "directions",
+   "s": 20.18,
+   "e": 20.7,
+   "line": 4
+  },
+  {
+   "w": "right,",
+   "s": 20.7,
+   "e": 21.08,
+   "line": 4
+  },
+  {
+   "w": "but",
+   "s": 21.32,
+   "e": 21.44,
+   "line": 4
+  },
+  {
+   "w": "stretches",
+   "s": 21.44,
+   "e": 21.82,
+   "line": 4
+  },
+  {
+   "w": "everything",
+   "s": 21.82,
+   "e": 22.42,
+   "line": 4
+  },
+  {
+   "w": "near",
+   "s": 22.42,
+   "e": 22.7,
+   "line": 4
+  },
+  {
+   "w": "the",
+   "s": 22.7,
+   "e": 22.9,
+   "line": 4
+  },
+  {
+   "w": "poles.",
+   "s": 22.9,
+   "e": 23.18,
+   "line": 4
+  },
+  {
+   "w": "Russia",
+   "s": 23.82,
+   "e": 24.06,
+   "line": 5
+  },
+  {
+   "w": "looks",
+   "s": 24.06,
+   "e": 24.38,
+   "line": 5
+  },
+  {
+   "w": "gigantic.",
+   "s": 24.38,
+   "e": 25.0,
+   "line": 5
+  },
+  {
+   "w": "Slide",
+   "s": 25.64,
+   "e": 26.02,
+   "line": 5
+  },
+  {
+   "w": "it",
+   "s": 26.02,
+   "e": 26.2,
+   "line": 5
+  },
+  {
+   "w": "down...",
+   "s": 26.2,
+   "e": 27.14,
+   "line": 5
+  },
+  {
+   "w": "still",
+   "s": 27.14,
+   "e": 27.19,
+   "line": 5
+  },
+  {
+   "w": "huge,",
+   "s": 27.16,
+   "e": 27.54,
+   "line": 5
+  },
+  {
+   "w": "but",
+   "s": 27.9,
+   "e": 27.98,
+   "line": 5
+  },
+  {
+   "w": "now",
+   "s": 27.98,
+   "e": 28.22,
+   "line": 5
+  },
+  {
+   "w": "it's",
+   "s": 28.22,
+   "e": 28.46,
+   "line": 5
+  },
+  {
+   "w": "smaller",
+   "s": 28.46,
+   "e": 28.68,
+   "line": 5
+  },
+  {
+   "w": "than",
+   "s": 28.68,
+   "e": 28.92,
+   "line": 5
+  },
+  {
+   "w": "Africa.",
+   "s": 28.92,
+   "e": 29.3,
+   "line": 5
+  },
+  {
+   "w": "Canada",
+   "s": 30.1,
+   "e": 30.22,
+   "line": 6
+  },
+  {
+   "w": "looks",
+   "s": 30.22,
+   "e": 30.58,
+   "line": 6
+  },
+  {
+   "w": "four",
+   "s": 30.58,
+   "e": 30.9,
+   "line": 6
+  },
+  {
+   "w": "times",
+   "s": 30.9,
+   "e": 31.28,
+   "line": 6
+  },
+  {
+   "w": "bigger",
+   "s": 31.28,
+   "e": 31.56,
+   "line": 6
+  },
+  {
+   "w": "than",
+   "s": 31.56,
+   "e": 31.86,
+   "line": 6
+  },
+  {
+   "w": "Brazil.",
+   "s": 31.86,
+   "e": 32.22,
+   "line": 6
+  },
+  {
+   "w": "In",
+   "s": 32.74,
+   "e": 32.84,
+   "line": 6
+  },
+  {
+   "w": "reality?",
+   "s": 32.84,
+   "e": 33.32,
+   "line": 6
+  },
+  {
+   "w": "Only",
+   "s": 33.8,
+   "e": 33.94,
+   "line": 6
+  },
+  {
+   "w": "about",
+   "s": 33.94,
+   "e": 34.26,
+   "line": 6
+  },
+  {
+   "w": "17%",
+   "s": 34.26,
+   "e": 35.26,
+   "line": 6
+  },
+  {
+   "w": "bigger.",
+   "s": 35.26,
+   "e": 35.62,
+   "line": 6
+  },
+  {
+   "w": "And",
+   "s": 36.16,
+   "e": 36.26,
+   "line": 7
+  },
+  {
+   "w": "Africa?",
+   "s": 36.26,
+   "e": 36.58,
+   "line": 7
+  },
+  {
+   "w": "You",
+   "s": 37.12,
+   "e": 37.28,
+   "line": 7
+  },
+  {
+   "w": "can",
+   "s": 37.28,
+   "e": 37.46,
+   "line": 7
+  },
+  {
+   "w": "fit",
+   "s": 37.46,
+   "e": 37.66,
+   "line": 7
+  },
+  {
+   "w": "the",
+   "s": 37.66,
+   "e": 37.84,
+   "line": 7
+  },
+  {
+   "w": "US,",
+   "s": 37.84,
+   "e": 38.16,
+   "line": 7
+  },
+  {
+   "w": "China,",
+   "s": 38.64,
+   "e": 38.78,
+   "line": 7
+  },
+  {
+   "w": "India,",
+   "s": 39.2,
+   "e": 39.48,
+   "line": 7
+  },
+  {
+   "w": "and",
+   "s": 39.82,
+   "e": 39.92,
+   "line": 7
+  },
+  {
+   "w": "most",
+   "s": 39.92,
+   "e": 40.16,
+   "line": 7
+  },
+  {
+   "w": "of",
+   "s": 40.16,
+   "e": 40.36,
+   "line": 7
+  },
+  {
+   "w": "Europe",
+   "s": 40.36,
+   "e": 40.64,
+   "line": 7
+  },
+  {
+   "w": "inside",
+   "s": 40.64,
+   "e": 41.1,
+   "line": 7
+  },
+  {
+   "w": "it.",
+   "s": 41.1,
+   "e": 41.52,
+   "line": 7
+  },
+  {
+   "w": "So",
+   "s": 41.8,
+   "e": 41.96,
+   "line": 8
+  },
+  {
+   "w": "next",
+   "s": 41.96,
+   "e": 42.16,
+   "line": 8
+  },
+  {
+   "w": "time",
+   "s": 42.16,
+   "e": 42.44,
+   "line": 8
+  },
+  {
+   "w": "you",
+   "s": 42.44,
+   "e": 42.6,
+   "line": 8
+  },
+  {
+   "w": "look",
+   "s": 42.6,
+   "e": 42.76,
+   "line": 8
+  },
+  {
+   "w": "at",
+   "s": 42.76,
+   "e": 42.9,
+   "line": 8
+  },
+  {
+   "w": "a",
+   "s": 42.9,
+   "e": 43.02,
+   "line": 8
+  },
+  {
+   "w": "world",
+   "s": 43.02,
+   "e": 43.22,
+   "line": 8
+  },
+  {
+   "w": "map,",
+   "s": 43.22,
+   "e": 43.58,
+   "line": 8
+  },
+  {
+   "w": "remember:",
+   "s": 44.1,
+   "e": 44.68,
+   "line": 8
+  },
+  {
+   "w": "the",
+   "s": 44.68,
+   "e": 44.73,
+   "line": 8
+  },
+  {
+   "w": "sizes",
+   "s": 44.68,
+   "e": 45.0,
+   "line": 8
+  },
+  {
+   "w": "are",
+   "s": 45.0,
+   "e": 45.44,
+   "line": 8
+  },
+  {
+   "w": "a",
+   "s": 45.44,
+   "e": 45.56,
+   "line": 8
+  },
+  {
+   "w": "lie.",
+   "s": 45.56,
+   "e": 45.82,
+   "line": 8
+  }
+ ],
+ "lines": [
+  {
+   "i": 0,
+   "text": "The map you grew up with has been lying to you.",
+   "s": 0.0,
+   "e": 2.66
+  },
+  {
+   "i": 1,
+   "text": "Look at Greenland. On this map, it looks as big as Africa.",
+   "s": 2.98,
+   "e": 6.32
+  },
+  {
+   "i": 2,
+   "text": "But watch what happens when we slide it down to the equator.",
+   "s": 6.8,
+   "e": 9.66
+  },
+  {
+   "i": 3,
+   "text": "Greenland shrinks. Africa is actually 14 times bigger.",
+   "s": 10.34,
+   "e": 14.48
+  },
+  {
+   "i": 4,
+   "text": "This is the Mercator projection, made in 1569 for sailors. It keeps directions right, but stretches everything near the poles.",
+   "s": 15.0,
+   "e": 23.18
+  },
+  {
+   "i": 5,
+   "text": "Russia looks gigantic. Slide it down... still huge, but now it's smaller than Africa.",
+   "s": 23.82,
+   "e": 29.3
+  },
+  {
+   "i": 6,
+   "text": "Canada looks four times bigger than Brazil. In reality? Only about 17% bigger.",
+   "s": 30.1,
+   "e": 35.62
+  },
+  {
+   "i": 7,
+   "text": "And Africa? You can fit the US, China, India, and most of Europe inside it.",
+   "s": 36.16,
+   "e": 41.52
+  },
+  {
+   "i": 8,
+   "text": "So next time you look at a world map, remember: the sizes are a lie.",
+   "s": 41.8,
+   "e": 45.82
+  }
+ ],
+ "heard": "The map you grew up with has been lying to you. Look at Greenland. On this map, it looks as big as Africa. But watch what happens when we slide it down to the equator. Greenland shrinks. Africa is actually 14 times bigger. This is the Mercator projection, made in 1569 for sailors. It keeps directions right, but stretches everything near the poles. Russia looks gigantic. Slide it down... still huge, but now it's smaller than Africa. Canada looks four times bigger than Brazil. In reality? Only about 17 % bigger. And Africa? You can fit the US, China, India, and most of Europe inside it. So next time you look at a world map, remember... the sizes are a lie."
+}

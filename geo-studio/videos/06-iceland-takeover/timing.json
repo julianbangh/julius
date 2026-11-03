@@ -1,0 +1,1137 @@
+{
+ "duration": 71.723771,
+ "tempo": 1.18,
+ "words": [
+  {
+   "w": "What",
+   "s": 0.0,
+   "e": 0.22,
+   "line": 0
+  },
+  {
+   "w": "if",
+   "s": 0.22,
+   "e": 0.5,
+   "line": 0
+  },
+  {
+   "w": "Iceland",
+   "s": 0.5,
+   "e": 1.0,
+   "line": 0
+  },
+  {
+   "w": "tried",
+   "s": 1.0,
+   "e": 1.48,
+   "line": 0
+  },
+  {
+   "w": "to",
+   "s": 1.48,
+   "e": 1.72,
+   "line": 0
+  },
+  {
+   "w": "take",
+   "s": 1.72,
+   "e": 1.96,
+   "line": 0
+  },
+  {
+   "w": "over",
+   "s": 1.96,
+   "e": 2.2,
+   "line": 0
+  },
+  {
+   "w": "the",
+   "s": 2.2,
+   "e": 2.36,
+   "line": 0
+  },
+  {
+   "w": "world?",
+   "s": 2.36,
+   "e": 2.72,
+   "line": 0
+  },
+  {
+   "w": "Realistically.",
+   "s": 3.28,
+   "e": 3.82,
+   "line": 0
+  },
+  {
+   "w": "Iceland",
+   "s": 4.82,
+   "e": 4.87,
+   "line": 1
+  },
+  {
+   "w": "has",
+   "s": 4.82,
+   "e": 5.14,
+   "line": 1
+  },
+  {
+   "w": "390,000",
+   "s": 5.14,
+   "e": 6.64,
+   "line": 1
+  },
+  {
+   "w": "people,",
+   "s": 6.64,
+   "e": 6.94,
+   "line": 1
+  },
+  {
+   "w": "and",
+   "s": 7.2,
+   "e": 7.4,
+   "line": 1
+  },
+  {
+   "w": "no",
+   "s": 7.4,
+   "e": 7.78,
+   "line": 1
+  },
+  {
+   "w": "army.",
+   "s": 7.78,
+   "e": 8.12,
+   "line": 1
+  },
+  {
+   "w": "None.",
+   "s": 8.68,
+   "e": 8.88,
+   "line": 1
+  },
+  {
+   "w": "Its",
+   "s": 9.44,
+   "e": 9.6,
+   "line": 2
+  },
+  {
+   "w": "whole",
+   "s": 9.6,
+   "e": 9.9,
+   "line": 2
+  },
+  {
+   "w": "military",
+   "s": 9.9,
+   "e": 10.28,
+   "line": 2
+  },
+  {
+   "w": "is",
+   "s": 10.28,
+   "e": 10.74,
+   "line": 2
+  },
+  {
+   "w": "a",
+   "s": 10.74,
+   "e": 10.88,
+   "line": 2
+  },
+  {
+   "w": "coast",
+   "s": 10.88,
+   "e": 11.08,
+   "line": 2
+  },
+  {
+   "w": "guard:",
+   "s": 11.08,
+   "e": 11.38,
+   "line": 2
+  },
+  {
+   "w": "about",
+   "s": 11.8,
+   "e": 12.04,
+   "line": 2
+  },
+  {
+   "w": "200",
+   "s": 12.04,
+   "e": 12.4,
+   "line": 2
+  },
+  {
+   "w": "people,",
+   "s": 12.4,
+   "e": 12.88,
+   "line": 2
+  },
+  {
+   "w": "two",
+   "s": 13.2,
+   "e": 13.3,
+   "line": 2
+  },
+  {
+   "w": "patrol",
+   "s": 13.3,
+   "e": 13.64,
+   "line": 2
+  },
+  {
+   "w": "ships,",
+   "s": 13.64,
+   "e": 14.0,
+   "line": 2
+  },
+  {
+   "w": "one",
+   "s": 14.32,
+   "e": 14.5,
+   "line": 2
+  },
+  {
+   "w": "plane,",
+   "s": 14.5,
+   "e": 14.86,
+   "line": 2
+  },
+  {
+   "w": "and",
+   "s": 15.08,
+   "e": 15.2,
+   "line": 2
+  },
+  {
+   "w": "a",
+   "s": 15.2,
+   "e": 15.32,
+   "line": 2
+  },
+  {
+   "w": "few",
+   "s": 15.32,
+   "e": 15.5,
+   "line": 2
+  },
+  {
+   "w": "helicopters.",
+   "s": 15.5,
+   "e": 15.94,
+   "line": 2
+  },
+  {
+   "w": "So",
+   "s": 16.64,
+   "e": 16.82,
+   "line": 3
+  },
+  {
+   "w": "the",
+   "s": 16.82,
+   "e": 16.96,
+   "line": 3
+  },
+  {
+   "w": "first",
+   "s": 16.96,
+   "e": 17.22,
+   "line": 3
+  },
+  {
+   "w": "target",
+   "s": 17.22,
+   "e": 17.56,
+   "line": 3
+  },
+  {
+   "w": "is",
+   "s": 17.56,
+   "e": 17.88,
+   "line": 3
+  },
+  {
+   "w": "the",
+   "s": 17.88,
+   "e": 18.06,
+   "line": 3
+  },
+  {
+   "w": "closest:",
+   "s": 18.06,
+   "e": 18.46,
+   "line": 3
+  },
+  {
+   "w": "the",
+   "s": 18.9,
+   "e": 19.1,
+   "line": 3
+  },
+  {
+   "w": "Faroe",
+   "s": 19.1,
+   "e": 19.48,
+   "line": 3
+  },
+  {
+   "w": "Islands,",
+   "s": 19.48,
+   "e": 19.88,
+   "line": 3
+  },
+  {
+   "w": "about",
+   "s": 20.18,
+   "e": 20.38,
+   "line": 3
+  },
+  {
+   "w": "450",
+   "s": 20.38,
+   "e": 21.18,
+   "line": 3
+  },
+  {
+   "w": "kilometers",
+   "s": 21.18,
+   "e": 21.72,
+   "line": 3
+  },
+  {
+   "w": "away.",
+   "s": 21.72,
+   "e": 22.24,
+   "line": 3
+  },
+  {
+   "w": "The",
+   "s": 22.74,
+   "e": 22.98,
+   "line": 4
+  },
+  {
+   "w": "fleet",
+   "s": 22.98,
+   "e": 23.2,
+   "line": 4
+  },
+  {
+   "w": "sails",
+   "s": 23.2,
+   "e": 23.6,
+   "line": 4
+  },
+  {
+   "w": "overnight.",
+   "s": 23.6,
+   "e": 24.08,
+   "line": 4
+  },
+  {
+   "w": "The",
+   "s": 24.68,
+   "e": 24.88,
+   "line": 4
+  },
+  {
+   "w": "Faroes",
+   "s": 24.88,
+   "e": 25.22,
+   "line": 4
+  },
+  {
+   "w": "have",
+   "s": 25.22,
+   "e": 25.48,
+   "line": 4
+  },
+  {
+   "w": "no",
+   "s": 25.48,
+   "e": 25.72,
+   "line": 4
+  },
+  {
+   "w": "army",
+   "s": 25.72,
+   "e": 26.04,
+   "line": 4
+  },
+  {
+   "w": "either,",
+   "s": 26.04,
+   "e": 26.4,
+   "line": 4
+  },
+  {
+   "w": "and",
+   "s": 26.4,
+   "e": 26.86,
+   "line": 4
+  },
+  {
+   "w": "Iceland",
+   "s": 26.86,
+   "e": 27.3,
+   "line": 4
+  },
+  {
+   "w": "plants",
+   "s": 27.3,
+   "e": 27.68,
+   "line": 4
+  },
+  {
+   "w": "its",
+   "s": 27.68,
+   "e": 27.92,
+   "line": 4
+  },
+  {
+   "w": "flag",
+   "s": 27.92,
+   "e": 28.24,
+   "line": 4
+  },
+  {
+   "w": "in",
+   "s": 28.24,
+   "e": 28.56,
+   "line": 4
+  },
+  {
+   "w": "Tórshavn.",
+   "s": 28.56,
+   "e": 29.2,
+   "line": 4
+  },
+  {
+   "w": "Empire",
+   "s": 30.04,
+   "e": 30.09,
+   "line": 5
+  },
+  {
+   "w": "size:",
+   "s": 30.04,
+   "e": 30.42,
+   "line": 5
+  },
+  {
+   "w": "two",
+   "s": 30.84,
+   "e": 31.0,
+   "line": 5
+  },
+  {
+   "w": "countries.",
+   "s": 31.0,
+   "e": 31.48,
+   "line": 5
+  },
+  {
+   "w": "But",
+   "s": 31.98,
+   "e": 32.08,
+   "line": 6
+  },
+  {
+   "w": "the",
+   "s": 32.08,
+   "e": 32.26,
+   "line": 6
+  },
+  {
+   "w": "Faroes",
+   "s": 32.26,
+   "e": 32.66,
+   "line": 6
+  },
+  {
+   "w": "belong",
+   "s": 32.66,
+   "e": 33.06,
+   "line": 6
+  },
+  {
+   "w": "to",
+   "s": 33.06,
+   "e": 33.32,
+   "line": 6
+  },
+  {
+   "w": "Denmark.",
+   "s": 33.32,
+   "e": 33.7,
+   "line": 6
+  },
+  {
+   "w": "By",
+   "s": 34.38,
+   "e": 34.48,
+   "line": 6
+  },
+  {
+   "w": "morning,",
+   "s": 34.48,
+   "e": 34.88,
+   "line": 6
+  },
+  {
+   "w": "Danish",
+   "s": 35.18,
+   "e": 35.38,
+   "line": 6
+  },
+  {
+   "w": "warships",
+   "s": 35.38,
+   "e": 35.86,
+   "line": 6
+  },
+  {
+   "w": "are",
+   "s": 35.86,
+   "e": 36.14,
+   "line": 6
+  },
+  {
+   "w": "on",
+   "s": 36.14,
+   "e": 36.26,
+   "line": 6
+  },
+  {
+   "w": "the",
+   "s": 36.26,
+   "e": 36.38,
+   "line": 6
+  },
+  {
+   "w": "way,",
+   "s": 36.38,
+   "e": 36.66,
+   "line": 6
+  },
+  {
+   "w": "and",
+   "s": 36.92,
+   "e": 37.06,
+   "line": 6
+  },
+  {
+   "w": "Iceland's",
+   "s": 37.06,
+   "e": 37.7,
+   "line": 6
+  },
+  {
+   "w": "two",
+   "s": 37.7,
+   "e": 37.88,
+   "line": 6
+  },
+  {
+   "w": "ships",
+   "s": 37.88,
+   "e": 38.2,
+   "line": 6
+  },
+  {
+   "w": "are",
+   "s": 38.2,
+   "e": 38.48,
+   "line": 6
+  },
+  {
+   "w": "badly",
+   "s": 38.48,
+   "e": 38.98,
+   "line": 6
+  },
+  {
+   "w": "outgunned.",
+   "s": 38.98,
+   "e": 39.82,
+   "line": 6
+  },
+  {
+   "w": "Then",
+   "s": 40.2,
+   "e": 40.44,
+   "line": 7
+  },
+  {
+   "w": "there's",
+   "s": 40.44,
+   "e": 40.78,
+   "line": 7
+  },
+  {
+   "w": "the",
+   "s": 40.78,
+   "e": 40.9,
+   "line": 7
+  },
+  {
+   "w": "American",
+   "s": 40.9,
+   "e": 41.28,
+   "line": 7
+  },
+  {
+   "w": "problem.",
+   "s": 41.28,
+   "e": 41.74,
+   "line": 7
+  },
+  {
+   "w": "Since",
+   "s": 42.34,
+   "e": 42.52,
+   "line": 7
+  },
+  {
+   "w": "1951,",
+   "s": 42.52,
+   "e": 43.34,
+   "line": 7
+  },
+  {
+   "w": "the",
+   "s": 43.94,
+   "e": 44.04,
+   "line": 7
+  },
+  {
+   "w": "US",
+   "s": 44.04,
+   "e": 44.34,
+   "line": 7
+  },
+  {
+   "w": "has",
+   "s": 44.34,
+   "e": 44.64,
+   "line": 7
+  },
+  {
+   "w": "defended",
+   "s": 44.64,
+   "e": 45.04,
+   "line": 7
+  },
+  {
+   "w": "Iceland,",
+   "s": 45.04,
+   "e": 45.5,
+   "line": 7
+  },
+  {
+   "w": "with",
+   "s": 45.78,
+   "e": 45.98,
+   "line": 7
+  },
+  {
+   "w": "jets",
+   "s": 45.98,
+   "e": 46.26,
+   "line": 7
+  },
+  {
+   "w": "and",
+   "s": 46.26,
+   "e": 46.66,
+   "line": 7
+  },
+  {
+   "w": "sub",
+   "s": 46.66,
+   "e": 46.94,
+   "line": 7
+  },
+  {
+   "w": "hunters",
+   "s": 46.94,
+   "e": 47.2,
+   "line": 7
+  },
+  {
+   "w": "at",
+   "s": 47.2,
+   "e": 47.5,
+   "line": 7
+  },
+  {
+   "w": "Keflavík.",
+   "s": 47.5,
+   "e": 48.1,
+   "line": 7
+  },
+  {
+   "w": "One",
+   "s": 48.6,
+   "e": 48.94,
+   "line": 8
+  },
+  {
+   "w": "phone",
+   "s": 48.94,
+   "e": 49.24,
+   "line": 8
+  },
+  {
+   "w": "call",
+   "s": 49.24,
+   "e": 49.42,
+   "line": 8
+  },
+  {
+   "w": "from",
+   "s": 49.42,
+   "e": 49.68,
+   "line": 8
+  },
+  {
+   "w": "Washington,",
+   "s": 49.68,
+   "e": 50.14,
+   "line": 8
+  },
+  {
+   "w": "and",
+   "s": 50.44,
+   "e": 50.54,
+   "line": 8
+  },
+  {
+   "w": "the",
+   "s": 50.54,
+   "e": 50.66,
+   "line": 8
+  },
+  {
+   "w": "war",
+   "s": 50.66,
+   "e": 50.92,
+   "line": 8
+  },
+  {
+   "w": "is",
+   "s": 50.92,
+   "e": 51.14,
+   "line": 8
+  },
+  {
+   "w": "over",
+   "s": 51.14,
+   "e": 51.44,
+   "line": 8
+  },
+  {
+   "w": "in",
+   "s": 51.44,
+   "e": 51.72,
+   "line": 8
+  },
+  {
+   "w": "a",
+   "s": 51.72,
+   "e": 51.86,
+   "line": 8
+  },
+  {
+   "w": "day.",
+   "s": 51.86,
+   "e": 52.1,
+   "line": 8
+  },
+  {
+   "w": "But",
+   "s": 52.1,
+   "e": 52.74,
+   "line": 9
+  },
+  {
+   "w": "here's",
+   "s": 52.74,
+   "e": 53.12,
+   "line": 9
+  },
+  {
+   "w": "the",
+   "s": 53.12,
+   "e": 53.26,
+   "line": 9
+  },
+  {
+   "w": "crazy",
+   "s": 53.26,
+   "e": 53.54,
+   "line": 9
+  },
+  {
+   "w": "part.",
+   "s": 53.54,
+   "e": 53.96,
+   "line": 9
+  },
+  {
+   "w": "Iceland",
+   "s": 54.74,
+   "e": 54.84,
+   "line": 9
+  },
+  {
+   "w": "has",
+   "s": 54.84,
+   "e": 55.1,
+   "line": 9
+  },
+  {
+   "w": "beaten",
+   "s": 55.1,
+   "e": 55.36,
+   "line": 9
+  },
+  {
+   "w": "a",
+   "s": 55.36,
+   "e": 55.68,
+   "line": 9
+  },
+  {
+   "w": "much",
+   "s": 55.68,
+   "e": 55.9,
+   "line": 9
+  },
+  {
+   "w": "bigger",
+   "s": 55.9,
+   "e": 56.28,
+   "line": 9
+  },
+  {
+   "w": "navy",
+   "s": 56.28,
+   "e": 56.58,
+   "line": 9
+  },
+  {
+   "w": "before.",
+   "s": 56.58,
+   "e": 57.1,
+   "line": 9
+  },
+  {
+   "w": "Three",
+   "s": 57.7,
+   "e": 57.9,
+   "line": 9
+  },
+  {
+   "w": "times.",
+   "s": 57.9,
+   "e": 58.28,
+   "line": 9
+  },
+  {
+   "w": "In",
+   "s": 58.94,
+   "e": 59.0,
+   "line": 10
+  },
+  {
+   "w": "the",
+   "s": 59.0,
+   "e": 59.16,
+   "line": 10
+  },
+  {
+   "w": "Cod",
+   "s": 59.16,
+   "e": 59.42,
+   "line": 10
+  },
+  {
+   "w": "Wars,",
+   "s": 59.42,
+   "e": 59.76,
+   "line": 10
+  },
+  {
+   "w": "Iceland",
+   "s": 60.14,
+   "e": 60.32,
+   "line": 10
+  },
+  {
+   "w": "took",
+   "s": 60.32,
+   "e": 60.58,
+   "line": 10
+  },
+  {
+   "w": "on",
+   "s": 60.58,
+   "e": 60.84,
+   "line": 10
+  },
+  {
+   "w": "Britain's",
+   "s": 60.84,
+   "e": 61.34,
+   "line": 10
+  },
+  {
+   "w": "Royal",
+   "s": 61.34,
+   "e": 61.5,
+   "line": 10
+  },
+  {
+   "w": "Navy,",
+   "s": 61.5,
+   "e": 61.94,
+   "line": 10
+  },
+  {
+   "w": "armed",
+   "s": 62.22,
+   "e": 62.46,
+   "line": 10
+  },
+  {
+   "w": "with",
+   "s": 62.46,
+   "e": 62.72,
+   "line": 10
+  },
+  {
+   "w": "net",
+   "s": 62.72,
+   "e": 62.98,
+   "line": 10
+  },
+  {
+   "w": "cutters",
+   "s": 62.98,
+   "e": 63.38,
+   "line": 10
+  },
+  {
+   "w": "and",
+   "s": 63.38,
+   "e": 63.64,
+   "line": 10
+  },
+  {
+   "w": "a",
+   "s": 63.64,
+   "e": 63.76,
+   "line": 10
+  },
+  {
+   "w": "threat",
+   "s": 63.76,
+   "e": 63.98,
+   "line": 10
+  },
+  {
+   "w": "to",
+   "s": 63.98,
+   "e": 64.22,
+   "line": 10
+  },
+  {
+   "w": "close",
+   "s": 64.22,
+   "e": 64.56,
+   "line": 10
+  },
+  {
+   "w": "that",
+   "s": 64.56,
+   "e": 64.82,
+   "line": 10
+  },
+  {
+   "w": "American",
+   "s": 64.82,
+   "e": 65.22,
+   "line": 10
+  },
+  {
+   "w": "base.",
+   "s": 65.22,
+   "e": 65.54,
+   "line": 10
+  },
+  {
+   "w": "Britain",
+   "s": 66.2,
+   "e": 66.38,
+   "line": 10
+  },
+  {
+   "w": "gave",
+   "s": 66.38,
+   "e": 66.68,
+   "line": 10
+  },
+  {
+   "w": "in",
+   "s": 66.68,
+   "e": 66.98,
+   "line": 10
+  },
+  {
+   "w": "every",
+   "s": 66.98,
+   "e": 67.38,
+   "line": 10
+  },
+  {
+   "w": "time.",
+   "s": 67.38,
+   "e": 67.78,
+   "line": 10
+  },
+  {
+   "w": "Iceland",
+   "s": 68.42,
+   "e": 68.7,
+   "line": 11
+  },
+  {
+   "w": "can't",
+   "s": 68.7,
+   "e": 69.2,
+   "line": 11
+  },
+  {
+   "w": "conquer",
+   "s": 69.2,
+   "e": 69.5,
+   "line": 11
+  },
+  {
+   "w": "the",
+   "s": 69.5,
+   "e": 69.66,
+   "line": 11
+  },
+  {
+   "w": "world.",
+   "s": 69.66,
+   "e": 69.94,
+   "line": 11
+  },
+  {
+   "w": "But",
+   "s": 70.34,
+   "e": 70.52,
+   "line": 11
+  },
+  {
+   "w": "it",
+   "s": 70.52,
+   "e": 70.68,
+   "line": 11
+  },
+  {
+   "w": "doesn't",
+   "s": 70.68,
+   "e": 71.08,
+   "line": 11
+  },
+  {
+   "w": "lose.",
+   "s": 71.08,
+   "e": 71.28,
+   "line": 11
+  }
+ ],
+ "lines": [
+  {
+   "i": 0,
+   "text": "What if Iceland tried to take over the world? Realistically.",
+   "s": 0.0,
+   "e": 3.82
+  },
+  {
+   "i": 1,
+   "text": "Iceland has 390,000 people, and no army. None.",
+   "s": 4.82,
+   "e": 8.88
+  },
+  {
+   "i": 2,
+   "text": "Its whole military is a coast guard: about 200 people, two patrol ships, one plane, and a few helicopters.",
+   "s": 9.44,
+   "e": 15.94
+  },
+  {
+   "i": 3,
+   "text": "So the first target is the closest: the Faroe Islands, about 450 kilometers away.",
+   "s": 16.64,
+   "e": 22.24
+  },
+  {
+   "i": 4,
+   "text": "The fleet sails overnight. The Faroes have no army either, and Iceland plants its flag in Tórshavn.",
+   "s": 22.74,
+   "e": 29.2
+  },
+  {
+   "i": 5,
+   "text": "Empire size: two countries.",
+   "s": 30.04,
+   "e": 31.48
+  },
+  {
+   "i": 6,
+   "text": "But the Faroes belong to Denmark. By morning, Danish warships are on the way, and Iceland's two ships are badly outgunned.",
+   "s": 31.98,
+   "e": 39.82
+  },
+  {
+   "i": 7,
+   "text": "Then there's the American problem. Since 1951, the US has defended Iceland, with jets and sub hunters at Keflavík.",
+   "s": 40.2,
+   "e": 48.1
+  },
+  {
+   "i": 8,
+   "text": "One phone call from Washington, and the war is over in a day.",
+   "s": 48.6,
+   "e": 52.1
+  },
+  {
+   "i": 9,
+   "text": "But here's the crazy part. Iceland has beaten a much bigger navy before. Three times.",
+   "s": 52.1,
+   "e": 58.28
+  },
+  {
+   "i": 10,
+   "text": "In the Cod Wars, Iceland took on Britain's Royal Navy, armed with net cutters and a threat to close that American base. Britain gave in every time.",
+   "s": 58.94,
+   "e": 67.78
+  },
+  {
+   "i": 11,
+   "text": "Iceland can't conquer the world. But it doesn't lose.",
+   "s": 68.42,
+   "e": 71.28
+  }
+ ],
+ "heard": "What if Iceland tried to take over the world? Realistically. Iceland has 390 ,000 people, and no army. None. Its whole military is a coast guard. About 200 people, two patrol ships, one plane, and a few helicopters. So the first target is the closest. The Faroe Islands, about 450 kilometers away. The fleet sails overnight. The Faroes have no army either, and Iceland plants its flag in Tórshavn. Empire size, two countries. But the Faroes belong to Denmark. By morning, Danish warships are on the way, and Iceland's two ships are badly outgunned. Then there's the American problem. Since 1951, the US has defended Iceland, with jets and sub hunters at Keflavík. One phone call from Washington, and the war is over in a day. But here's the crazy part. Iceland has beaten a much bigger navy before. Three times. In the Cod Wars, Iceland took on Britain's Royal Navy, armed with net cutters and a threat to close that American base. Britain gave in every time. Iceland can't conquer the world, but it doesn't lose."
+}
