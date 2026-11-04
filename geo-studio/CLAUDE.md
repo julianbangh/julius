@@ -30,10 +30,11 @@ engine/
   puppet.mjs    photo-head cutout with hinged jaw + drawn body, desk and big red button
   weapons.mjs   cartoon weapon illustrations (grenade ... Tsar Bomba)
   ui.mjs        karaoke captions, headline, labels, flags (flagcdn), stat cards, line chart, grading
+  overlays.mjs  statPill (number over live footage), countUp, softCuts (fade from black between scenes)
   kit.mjs       high-level scene helpers for storyboards (camAt/fitCam, baseMap, hl, conquer,
                 globeShot, flags, bigText, tag, drawMoved, loadEnvelope ...)
   render.mjs    CLI: stills, parallel chunk render -> ffmpeg, concat, audio mix
-  audio.mjs     voice + ducked music + timed SFX, loudnorm -14 LUFS
+  audio.mjs     voice + ducked music + timed SFX (storyboard `sfxGain` master, default 0.55), loudnorm -14 LUFS
   align.py      tempo + pause trim, faster-whisper word timings matched back to script.txt
 scripts/        setup.sh, make_sfx.py (procedural SFX), cut_portrait.py (GrabCut cutout parts),
                 queue.sh (sequential renders), sheet.py (contact sheets of stills)
@@ -64,6 +65,10 @@ node engine/render.mjs <slug> --mix                # re-mix audio only
   (`camAt` applies `fitCam` automatically).
 - Ground3D: yaw = compass bearing of screen-up; 3D positions are km (east, north, up) relative to
   the camera target (`G.kmOf(lon, lat)`); `G.camKm()` is the camera position.
+- Ground3D paints near (1:1), mid (1/4) and far canvases, filling them from the rows nearest the
+  camera, so low pitches stay sharp up front. Seen side-on, mushroom clouds need pitch 13–35°.
+- Wide shots (zoom < 14) use `s2`. USGS is a per-state patchwork when zoomed out, and NYS stops at
+  the state line, so fade them in only for close-ups.
 - Ground3D frames cost about 0.6–0.9 s each; flat-map frames 0.1–0.3 s. A 70 s 3D video takes
   about 10 minutes on 3 workers.
 - Only public or openly licensed imagery: no Google/Esri tiles. Show `g.creditText`.

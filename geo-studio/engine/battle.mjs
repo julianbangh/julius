@@ -166,15 +166,26 @@ export function splash3D(ctx, G, e, n, tau, { r = 0.05, seed = 1 } = {}) {
 }
 
 /** 3D ballistic missile from A to B (km coords) with smoke trail. p: 0..1 flight progress. */
-export function missile3D(ctx, G, A, B, p, { apex = 0.6, size = 0.02, a = 1, seed = 1 } = {}) {
+export function missile3D(ctx, G, A, B, p, { apex = 0.6, size = 0.02, a = 1, seed = 1, trail = 18, trailStep = 0.018 } = {}) {
   if (p <= 0 || p > 1 || a <= 0) return null;
   sprites();
   const at = (t) => [lerp(A[0], B[0], t), lerp(A[1], B[1], t), Math.sin(Math.PI * t) * apex + lerp(A[2] || 0, B[2] || 0, t)];
-  for (let i = 18; i >= 1; i--) {
-    const t = p - i * 0.018; if (t <= 0) continue;
+  // continuous smoke ribbon under the puffs
+  const rib = [];
+  for (let i = trail; i >= 0; i--) { const t = p - i * trailStep; if (t <= 0) continue; const [e, n, u] = at(t); const q = G.project(e, n, u); if (q) rib.push({ q, age: i / trail }); }
+  ctx.save(); ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  for (let i = 1; i < rib.length; i++) {
+    const r0 = rib[i - 1], r1 = rib[i];
+    ctx.globalAlpha = a * (1 - r1.age) * 0.55; ctx.strokeStyle = r1.age < 0.15 ? '#fff6e6' : '#d9d4cc';
+    ctx.lineWidth = Math.max(2, size * (0.8 + r1.age * 3) * r1.q.s);
+    ctx.beginPath(); ctx.moveTo(r0.q.x, r0.q.y); ctx.lineTo(r1.q.x, r1.q.y); ctx.stroke();
+  }
+  ctx.restore();
+  for (let i = trail; i >= 1; i--) {
+    const t = p - i * trailStep; if (t <= 0) continue;
     const [e, n, u] = at(t); const q = G.project(e, n, u); if (!q) continue;
-    const age = i / 18;
-    puff(ctx, 'smoke', i + seed, q.x, q.y, size * (1 + age * 4) * q.s, a * (1 - age) * 0.55);
+    const age = i / trail;
+    puff(ctx, 'smoke', i + seed, q.x, q.y, Math.max(2, size * (1 + age * 4) * q.s), a * (1 - age) * 0.6);
   }
   const [e, n, u] = at(p); const q = G.project(e, n, u); if (!q) return null;
   ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = a;
@@ -413,20 +424,22 @@ function waveTexture() {
   x.fillStyle = '#0b4166'; x.fillRect(0, 0, S, S);
   for (let i = 0; i < 70; i++) { const g = x.createRadialGradient(r() * S, r() * S, 0, r() * S, r() * S, 60 + r() * 120); g.addColorStop(0, `rgba(${r() > 0.5 ? '20,90,130' : '4,30,55'},0.35)`); g.addColorStop(1, 'rgba(0,0,0,0)'); x.fillStyle = g; x.fillRect(0, 0, S, S); }
   x.lineCap = 'round';
-  for (let i = 0; i < 1400; i++) {
-    const px = r() * S, py = r() * S, len = 4 + r() * 16, a = 0.04 + r() * 0.16;
+  for (let i = 0; i < 1100; i++) {
+    const px = r() * S, py = r() * S, len = 4 + r() * 14, a = 0.03 + r() * 0.09;
     x.strokeStyle = `rgba(200,235,255,${a})`; x.lineWidth = 1 + r() * 1.6;
     for (const ox of [-S, 0, S]) for (const oy of [-S, 0, S]) { x.beginPath(); x.moveTo(px + ox, py + oy); x.quadraticCurveTo(px + ox + len / 2, py + oy - 2, px + ox + len, py + oy); x.stroke(); }
   }
   WAVES = c; return c;
 }
 /** Paint an open-ocean surface (waves drifting with time) over the ground canvas. Call first in decals. */
-export function oceanDecal(c, h, T, { tile = 1.7, alpha = 1 } = {}) {
+export function oceanDecal(c, h, T, { tile = 3.2, alpha = 1, shift = [0, 0] } = {}) {
   const tex = waveTexture();
   const s = (tile * h.km) / tex.width;
   c.save(); c.globalAlpha = alpha;
   c.fillStyle = '#0a3a5c'; c.fillRect(-1e5, -1e5, 2e5, 2e5);
   const pat = c.createPattern(tex, 'repeat');
+  // shift = camera target's km offset from a fixed world point, so the water stays put when the camera tracks a fleet
+  c.translate(-shift[0] * h.km, shift[1] * h.km);
   c.scale(s, s); c.translate((T * 18) % tex.width, (T * 7) % tex.width);
   c.fillStyle = pat; c.fillRect(-1e5 / s, -1e5 / s, 2e5 / s, 2e5 / s);
   c.restore();

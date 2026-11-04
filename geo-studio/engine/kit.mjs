@@ -93,6 +93,7 @@ export function tag(g, str, x, y, { a = 1, bg = '#1f6feb', color = '#fff', size 
 }
 
 export { text, headline, label, drawFlag };
+export { statPill, countUp, softCuts } from './overlays.mjs';
 
 // ---------- voice loudness envelope (for lip-flap) ----------
 import { execFileSync } from 'node:child_process';

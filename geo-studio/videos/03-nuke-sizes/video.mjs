@@ -7,7 +7,6 @@ import { label } from '../../engine/ui.mjs';
 
 const CP = [-73.9654, 40.7812];
 const G = new Ground3D();
-const LAYERS = ['bluemarble', 'usgs', 'nys'];
 // line, art, name, yield, radius km, kind, sync word, ring colour, ring label
 const WEAPONS = [
   { line: 1, art: 'grenade', name: 'Hand grenade', y: '180 g of explosive', r: 0.005, kind: 'conv', word: 'kill', col: '#ffffff', lab: '5 m' },
@@ -28,6 +27,7 @@ let det = [], blasts = [];
 
 export default {
   music: { file: 'dark_nuclear.mp3', gain: 0.2 },
+  sfxGain: 0.5,
   async setup(g) {
     await initGlobe();
     det = WEAPONS.map((w) => Math.max(g.L(w.line) + 0.9, g.wt(w.line, w.word) - 0.25));
@@ -39,7 +39,7 @@ export default {
     WEAPONS.forEach((w, i) => {
       out.push({ t: g.L(w.line) - 0.1, file: 'pop.wav', gain: 0.6 });
       out.push({ t: det[i] - 0.9, file: 'whistle.wav', gain: 0.35, dur: 0.9 });
-      out.push({ t: det[i], file: w.kind === 'conv' ? (w.r < 0.05 ? 'boom_small.wav' : 'boom.wav') : 'nuke.wav', gain: w.kind === 'conv' ? 0.8 : Math.min(1, 0.6 + w.r / 30) });
+      out.push({ t: det[i], file: w.kind === 'conv' ? (w.r < 0.05 ? 'boom_small.wav' : 'boom.wav') : 'nuke.wav', gain: w.kind === 'conv' ? 0.6 : Math.min(0.75, 0.45 + w.r / 40) });
     });
     out.push({ t: det[8] + 0.4, file: 'rumble.wav', gain: 0.8 }, { t: g.L(10), file: 'impact.wav', gain: 0.9 });
     return out;
@@ -63,12 +63,21 @@ export default {
     keys.push([burns - 0.4, { z: zooms[8], pitch: 62 }], [burns + 1.6, { z: zoomFor(47 * 2.5, W, CP[1]), pitch: 66 }], [70, { z: zoomFor(47 * 2.8, W, CP[1]), pitch: 68 }]);
     keys.sort((a, b) => a[0] - b[0]);
     const cv = track(T, keys, ease.inOutCubic);
+    // look at each mushroom cloud from the side: drop the camera low while it rises, then lift back up
+    let dip = 0;
+    WEAPONS.forEach((w, i) => { if (w.kind !== 'nuke' || w.r < 1) return; const t = T - det[i]; const nextGap = i < WEAPONS.length - 1 ? det[i + 1] - det[i] : 99;
+      const hold = Math.min(3.0, nextGap - 2.6); dip = Math.max(dip, ease.inOutCubic(clamp((t - 0.15) / 0.9)) * (1 - ease.inOutCubic(clamp((t - hold) / 1.0)))); });
+    cv.pitch = lerp(cv.pitch, 33, dip);
+    cv.z -= 0.85 * dip; // pull back so the whole cloud fits under the card
     const yaw = 29 + 26 * ease.inOutQuad(clamp((T - 5) / 64));
     // shake from the latest blast
     let shk = 0;
-    det.forEach((d, i) => { const tt = T - d; if (tt > 0.05 && tt < 3) shk = Math.max(shk, (WEAPONS[i].kind === 'nuke' ? 30 : 12) * Math.exp(-tt * 2.4)); });
+    det.forEach((d, i) => { const tt = T - d; if (tt > 0.05 && tt < 3) shk = Math.max(shk, (WEAPONS[i].kind === 'nuke' ? 9 : 4) * Math.exp(-tt * 2.6)); });
     const [sx, sy] = shake(T, shk);
-    G.setup({ lon: CP[0], lat: CP[1], zoom: cv.z, pitch: cv.pitch, yaw, layers: cv.z < 8.6 ? LAYERS : ['usgs', 'nys'], groundFill: '#3a4644', cy: 1020, shakeX: sx, shakeY: sy, hazeMax: 0.45, skyTop: '#1d3557', skyMid: '#7fa6c9', horizonHaze: '#c8d3df' });
+    // close-ups: NYS 30 cm + USGS aerials; wide shots: seamless Sentinel-2 (USGS is a per-state patchwork when zoomed out)
+    const nearA = clamp((cv.z - 13.9) / 0.5);
+    const layers = nearA >= 1 ? ['usgs', 'nys'] : ['bluemarble', { src: 's2', comp: 'lighten' }, ...(nearA > 0 ? [{ src: 'usgs', alpha: nearA }, { src: 'nys', alpha: nearA }] : [])];
+    G.setup({ lon: CP[0], lat: CP[1], zoom: cv.z, pitch: cv.pitch, yaw, layers, groundFill: '#3a4644', cy: lerp(1020, 1300, dip), shakeX: sx, shakeY: sy, hazeMax: 0.45, skyTop: '#1d3557', skyMid: '#7fa6c9', horizonHaze: '#c8d3df' });
     await G.draw(ctx, (c, h) => {
       // persistent striped circles (drawn under live blasts)
       WEAPONS.forEach((w, i) => {
@@ -115,7 +124,7 @@ export default {
     });
     // flash
     const core = G.project(0, 0, 0);
-    flash(ctx, fl * 0.95, core?.x ?? W / 2, core?.y ?? H / 2);
+    flash(ctx, fl * 0.6, core?.x ?? W / 2, core?.y ?? H / 2);
     // ---------------- weapon card
     WEAPONS.forEach((w, i) => {
       const next = i < WEAPONS.length - 1 ? L(WEAPONS[i + 1].line) - 0.2 : L(10) - 0.1;
@@ -139,6 +148,6 @@ export default {
       ctx.save(); ctx.globalAlpha = a * 0.35; ctx.fillStyle = '#3a0a00'; ctx.fillRect(0, 0, W, H); ctx.restore();
       bigText(g, 'ONE BOMB.', 330, a, { size: 160, color: '#fff', sub: 'THE WHOLE CITY GONE', subColor: '#ff8a5a' });
     }
-    g.creditText = 'Imagery: NYS ITS Geospatial Services · USGS · NASA  |  Radii: 5 psi blast, approx.';
+    g.creditText = 'Imagery: NYS ITS · USGS · Sentinel-2 by EOX (CC BY 4.0) · NASA  |  5 psi radii, approx.';
   },
 };

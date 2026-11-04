@@ -30,12 +30,13 @@ export async function mixAudio({ g, mod, video, out }) {
     idx++;
   } else filters.push('[key]anullsink');
   const sfx = mod.sfx ? mod.sfx(g) : [];
+  const master = mod.sfxGain ?? 0.55; // SFX sit under voice + music
   for (const s of sfx) {
     if (s.t < 0 || s.t > dur) continue;
     inputs.push('-i', resolveAudio(g.vdir, s.file));
     const ms = Math.round(s.t * 1000);
     const tr = s.dur ? `,atrim=0:${s.dur},afade=t=out:st=${Math.max(0, s.dur - 0.25)}:d=0.25` : '';
-    filters.push(`[${idx}:a]aresample=48000,aformat=channel_layouts=stereo${tr},volume=${s.gain ?? 1},adelay=${ms}|${ms}[s${idx}]`);
+    filters.push(`[${idx}:a]aresample=48000,aformat=channel_layouts=stereo${tr},volume=${((s.gain ?? 1) * master).toFixed(3)},adelay=${ms}|${ms}[s${idx}]`);
     mixIn.push(`[s${idx}]`);
     idx++;
   }

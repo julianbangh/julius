@@ -69,6 +69,7 @@ export class Ground3D {
   constructor() {
     this.f = 1500;
     this.near = createCanvas(2400, 3000);
+    this.mid = createCanvas(2000, 2400);
     this.far = createCanvas(1700, 1700);
     this.out = null;
   }
@@ -97,18 +98,29 @@ export class Ground3D {
     this.rows = rows;
     let hy = 0; while (hy < H && !rows[hy]) hy++;
     this.horizonY = hy;
-    const N = this.near;
-    this.nearHW = N.width / 2 - 3;
-    this.nearGX = N.width / 2;
-    this.nearGY = Math.min(N.height - 4, fMax + 4) ;
-    if (N.height - 4 + fMin < 0) this.nearGY = N.height - 4 + Math.max(fMin, -N.height) ;
-    this.nearGY = Math.max(-fMin + 4, Math.min(this.nearGY, N.height - 4));
-    this.nearMinF = this.nearGY - (N.height - 3); this.nearMaxF = this.nearGY - 3;
+    // Three ground canvases: near (1 canvas px per world px), mid (1/4) and far (whatever fits).
+    // Each takes the rows closest to the camera first: those are the most magnified ones.
+    const half = Math.max(v.cx, W - v.cx);
+    const fit = (cv, k, test) => {
+      const hw = cv.width / 2 - 3; let lo = Infinity, hi = -Infinity;
+      for (const r of rows) if (r && test(r) && r.t * half * k <= hw) { lo = Math.min(lo, r.F * k); hi = Math.max(hi, r.F * k); }
+      if (lo === Infinity) return null;
+      const gy = Math.max(4, Math.min(hi + 4, cv.height - 4 + lo));
+      return { hw, gx: cv.width / 2, gy, minF: (gy - (cv.height - 3)) / k, maxF: (gy - 3) / k };
+    };
+    const inside = (r, L, k) => L && r.F <= L.maxF && r.F >= L.minF && r.t * half * k <= L.hw;
+    const NL = fit(this.near, 1, () => true);
+    this.nearGX = NL.gx; this.nearGY = NL.gy;
+    for (const r of rows) if (r) r.near = inside(r, NL, 1);
+    this.midK = 0.25;
+    const ML = fit(this.mid, this.midK, (r) => !r.near);
+    if (ML) { this.midGX = ML.gx; this.midGY = ML.gy; }
+    for (const r of rows) if (r) r.mid = !r.near && inside(r, ML, this.midK);
+    this.needMid = rows.some((r) => r && r.mid);
     const ext = Math.max(2 * hw, fMax - fMin) + 24;
     this.farK = Math.min(1, (this.far.width - 8) / ext);
     this.farGX = this.far.width / 2; this.farGY = 6 + fMax * this.farK;
-    for (const r of rows) if (r) r.near = r.F <= this.nearMaxF && r.F >= this.nearMinF && -r.x0 <= this.nearHW && r.t * (W - v.cx) <= this.nearHW;
-    this.needFar = rows.some((r) => r && !r.near);
+    this.needFar = rows.some((r) => r && !r.near && !r.mid);
   }
   toLocal(lon, lat) { const [x, y] = lonLatToWorld(lon, lat, this.v.zoom); return [x - this.wx, -(y - this.wy)]; }
   /** east/north -> (right, forward) in the view frame; yaw = compass bearing of screen-up (matches _paint) */
@@ -175,6 +187,8 @@ export class Ground3D {
     const near = await this._paint(this.near, 1, this.nearGX, this.nearGY, decals);
     const nearH = Ground3D._half(near);
     this._grade(near); this._grade(nearH);
+    const mid = this.needMid ? await this._paint(this.mid, this.midK, this.midGX, this.midGY, decals) : null;
+    if (mid) this._grade(mid);
     const far = this.needFar ? await this._paint(this.far, this.farK, this.farGX, this.farGY, decals) : null;
     if (far) this._grade(far);
     if (!this.out) this.out = ctx.createImageData(W, H);
@@ -199,9 +213,10 @@ export class Ground3D {
       if (r.near) {
         if (r.t >= 1.9) { src = nearH; gx = this.nearGX / 2; gy = (this.nearGY - r.F) / 2; t = r.t / 2; }
         else { src = near; gx = this.nearGX; gy = this.nearGY - r.F; t = r.t; }
-      } else { src = far; gx = this.farGX; gy = this.farGY - r.F * this.farK; t = r.t * this.farK; }
+      } else if (r.mid) { src = mid; gx = this.midGX; gy = this.midGY - r.F * this.midK; t = r.t * this.midK; }
+      else { src = far; gx = this.farGX; gy = this.farGY - r.F * this.farK; t = r.t * this.farK; }
       const d = src.d, sw = src.w, sh = src.h;
-      const x0 = gx + r.x0 * (src === nearH ? 0.5 : r.near ? 1 : this.farK);
+      const x0 = gx + r.x0 * (src === nearH ? 0.5 : r.near ? 1 : r.mid ? this.midK : this.farK);
       if (t < 1) {
         // bilinear (magnified rows)
         const fy = gy - 0.5; let iy = Math.floor(fy); const ay = fy - iy; if (iy < 0) iy = 0; if (iy > sh - 2) iy = sh - 2;

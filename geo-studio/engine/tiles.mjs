@@ -44,7 +44,7 @@ export const SOURCES = {
   },
   nys: {
     url: arcExport('https://orthos.its.ny.gov/arcgis/rest/services/wms/Latest/MapServer', 'map', 1024, 'png'),
-    res: 4, maxZ: 17, minZ: 9, credit: 'NYS ITS Geospatial Services orthoimagery',
+    res: 4, maxZ: 17, minZ: 10, credit: 'NYS ITS Geospatial Services orthoimagery',
     bounds: [-79.8, 40.49, -71.8, 45.02],
   },
 };
