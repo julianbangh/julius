@@ -230,6 +230,62 @@ def cash(d=1.2):
     return norm(bell * 0.5 + drawer, 0.7)
 
 
+def jet(d=2.6):
+    tt = t(d)
+    n = rng.standard_normal(len(tt))
+    roar = bp_fast(n, 250, 5000)
+    shape = np.exp(-((tt - d * 0.45) ** 2) / (2 * (d * 0.16) ** 2))
+    whine = np.sin(2 * np.pi * np.cumsum(2200 - 900 * (tt / d)) / SR) * 0.08
+    x = norm(roar) * shape + whine * shape
+    pan = np.clip(tt / d, 0, 1)
+    x = norm(x, 0.85)
+    return np.stack([x * (1 - pan * 0.7), x * (0.3 + pan * 0.7)], 1)
+
+
+def gunfire(d=1.2, rate=14):
+    x = np.zeros(int(SR * d))
+    for i in range(int(d * rate)):
+        st = int(i / rate * SR + rng.integers(0, 400))
+        sh = boom(0.25, 4.0)[:, 0][: len(x) - st] * (0.6 + 0.4 * rng.random())
+        x[st : st + len(sh)] += sh
+    return stereo(norm(x, 0.8), 0.4, 3)
+
+
+def sonar(d=2.5):
+    tt = t(d)
+    x = np.sin(2 * np.pi * 1350 * tt) * np.exp(-tt / 0.25) + 0.4 * np.sin(2 * np.pi * 1350 * (tt - 0.9)) * np.exp(-np.maximum(0, tt - 0.9) / 0.3) * (tt > 0.9)
+    return stereo(norm(reverb(x, 2.0, 0.5), 0.6), 0.6, 18)
+
+
+def glitch(d=1.0):
+    x = np.zeros(int(SR * d))
+    pos = 0
+    while pos < len(x):
+        L = int(SR * (0.02 + 0.08 * rng.random()))
+        kind = rng.integers(0, 3)
+        tt = np.arange(L) / SR
+        if kind == 0: seg = np.sign(np.sin(2 * np.pi * rng.integers(80, 2000) * tt)) * 0.5
+        elif kind == 1: seg = rng.standard_normal(L) * 0.6
+        else: seg = np.round(np.sin(2 * np.pi * rng.integers(200, 900) * tt) * 4) / 4
+        x[pos : pos + L] = seg[: len(x) - pos] * (rng.random() > 0.25)
+        pos += L
+    return stereo(norm(x, 0.55), 0.8, 7)
+
+
+def torpedo(d=1.8):
+    tt = t(d)
+    x = lp_fast(rng.standard_normal(len(tt)), 600) * np.minimum(1, tt / 0.1) * np.exp(-tt / 1.2)
+    bub = bp_fast(rng.standard_normal(len(tt)), 800, 3000) * (0.5 + 0.5 * np.sin(2 * np.pi * 9 * tt)) * 0.2
+    return stereo(norm(x + bub, 0.7), 0.5, 9)
+
+
+def ko(d=3.5):
+    tt = t(d)
+    x = sum(np.sin(2 * np.pi * f * tt) * np.exp(-tt / dd) for f, dd in [(98, 2.2), (196, 1.6), (294, 1.1), (392, 0.8)])
+    im = impact(d)[:, 0]; x[: len(im)] += im[: len(x)] * 0.8
+    return stereo(norm(reverb(x, 2.5, 0.35), 0.95), 0.5, 12)
+
+
 if __name__ == "__main__":
     save("nuke", nuke())
     save("boom", boom())
@@ -249,3 +305,9 @@ if __name__ == "__main__":
     save("rumble", rumble())
     save("horn", ship_horn())
     save("cash", cash())
+    save("jet", jet())
+    save("gunfire", gunfire())
+    save("sonar", sonar())
+    save("glitch", glitch())
+    save("torpedo", torpedo())
+    save("ko", ko())

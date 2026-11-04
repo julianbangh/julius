@@ -21,6 +21,11 @@ engine/
                 blastDecals (flash, fireball, shock ring, stem, rolling cap, collar, base surge,
                 cloud shadow), stripedCircle, blast2D, arrow, missile, unitIcon, trail, pulse,
                 flash, shake, bloom
+  battle.mjs    war kit: low-poly 3D units (tank, apc, launcher, destroyer, carrier, landing, jet,
+                sub) with shadows on Ground3D; wakes, craters, ocean, smoke columns, boom3D,
+                missile3D, tracer3D, contrails; flat-map frontLine2D / sharedBorder / swarm2D /
+                salvo2D / sub2D; game UI (versusCard, chapterSlam, healthBars, killFeed, punch,
+                glitch, speedLines, mark)
   terrain.mjs   drawSeaDrop: exposes seafloor for a sea-level drop using Terrarium elevation tiles
   puppet.mjs    photo-head cutout with hinged jaw + drawn body, desk and big red button
   weapons.mjs   cartoon weapon illustrations (grenade ... Tsar Bomba)
@@ -57,6 +62,8 @@ node engine/render.mjs <slug> --mix                # re-mix audio only
 - Sync to speech with `g.L(i)` (line start), `g.Le(i)` (line end) and `g.wt(i, 'word')` (word start).
 - Flat maps: keep `zoom >= 2.95` so the vertical frame never shows empty space above the Arctic
   (`camAt` applies `fitCam` automatically).
+- Ground3D: yaw = compass bearing of screen-up; 3D positions are km (east, north, up) relative to
+  the camera target (`G.kmOf(lon, lat)`); `G.camKm()` is the camera position.
 - Ground3D frames cost about 0.6–0.9 s each; flat-map frames 0.1–0.3 s. A 70 s 3D video takes
   about 10 minutes on 3 workers.
 - Only public or openly licensed imagery: no Google/Esri tiles. Show `g.creditText`.

@@ -50,7 +50,7 @@ export function sprites() {
   SPRITES.glow = glow;
   return SPRITES;
 }
-function puff(ctx, kind, i, x, y, r, a, comp) {
+export function puff(ctx, kind, i, x, y, r, a, comp) {
   if (a <= 0.003 || r < 0.6 || x < -r || y < -r || x > W + r || y > H + r) return;
   const s = SPRITES[kind][i % 6];
   ctx.globalAlpha = Math.min(1, a);
@@ -111,7 +111,8 @@ export class Ground3D {
     this.needFar = rows.some((r) => r && !r.near);
   }
   toLocal(lon, lat) { const [x, y] = lonLatToWorld(lon, lat, this.v.zoom); return [x - this.wx, -(y - this.wy)]; }
-  _view(e, n) { return [e * this.pc + n * this.ps, n * this.pc - e * this.ps]; }
+  /** east/north -> (right, forward) in the view frame; yaw = compass bearing of screen-up (matches _paint) */
+  _view(e, n) { return [e * this.pc - n * this.ps, e * this.ps + n * this.pc]; }
   /** project a 3D point in km (east, north, up) relative to target -> screen {x, y, s (px per km), depth} */
   project(e, n, u) {
     const k = this.pxPerKm;
@@ -122,6 +123,10 @@ export class Ground3D {
     if (depth <= 1) return null;
     return { x: this.v.cx + (this.f * X) / depth, y: this.v.cy - (this.f * (py * this.sa + pz * this.ca)) / depth, s: (this.f / depth) * k, depth };
   }
+  /** camera position in km (east, north, up) relative to the target */
+  camKm() { const k = this.pxPerKm, d = this.D; return [(-d * this.ca * this.ps) / k, (-d * this.ca * this.pc) / k, (d * this.sa) / k]; }
+  /** km (east, north) of a lon/lat relative to the target */
+  kmOf(lon, lat) { const [e, n] = this.toLocal(lon, lat); return [e / this.pxPerKm, n / this.pxPerKm]; }
   projectLonLat(lon, lat, u = 0) { const [e, n] = this.toLocal(lon, lat); return this.project(e / this.pxPerKm, n / this.pxPerKm, u); }
   async _paint(cv, k, gx, gy, decals) {
     const c = cv.getContext('2d');
@@ -235,6 +240,7 @@ export function makeBlast(spec) {
   const s = { kind: 'nuke', seed: 1, ...spec };
   const R5 = s.r5;
   const nuke = s.kind === 'nuke';
+  const L = s.lite ? 0.38 : 1; // lite = fewer particles for battle-scale explosions
   s.fire = s.fire ?? R5 * 0.28;
   s.capH = s.height ?? (nuke ? R5 * 2.6 : R5 * 0.9);
   s.capR = s.capR ?? (nuke ? R5 * 0.6 : R5 * 0.45);
@@ -243,10 +249,10 @@ export function makeBlast(spec) {
   s.dome = Array.from({ length: nuke ? 46 : 0 }, (_, i) => ({ a: r() * Math.PI * 2, d: Math.sqrt(r()), sz: 0.6 + 0.5 * r(), v: i + 3 }));
   s.stem = Array.from({ length: nuke ? 90 : 0 }, (_, i) => ({ u: r(), a: r() * Math.PI * 2, d: r(), sz: 0.7 + 0.6 * r(), v: i }));
   s.collar = Array.from({ length: nuke ? 34 : 0 }, (_, i) => ({ a: (i / 34) * Math.PI * 2 + r() * 0.2, sz: 0.7 + 0.5 * r(), v: i }));
-  s.base = Array.from({ length: nuke ? 130 : 46 }, (_, i) => ({ a: (i / (nuke ? 130 : 46)) * Math.PI * 2 + r() * 0.3, d: 0.75 + 0.35 * r(), sz: 0.8 + 0.6 * r(), h: r(), v: i }));
-  s.fb = Array.from({ length: 26 }, (_, i) => ({ a: r() * Math.PI * 2, b: (r() - 0.5) * Math.PI, d: r() ** 0.6, sz: 0.4 + 0.5 * r(), v: i }));
-  s.sparks = Array.from({ length: nuke ? 70 : 60 }, () => ({ a: r() * Math.PI * 2, el: 0.2 + 1.1 * r(), v: 0.6 + 0.9 * r(), life: 0.6 + 0.9 * r() }));
-  s.smoke = Array.from({ length: nuke ? 0 : 34 }, (_, i) => ({ a: r() * Math.PI * 2, d: r() ** 0.7, sz: 0.6 + 0.7 * r(), rise: 0.5 + r(), v: i }));
+  s.base = Array.from({ length: Math.round((nuke ? 130 : 46) * L) }, (_, i) => ({ a: (i / Math.round((nuke ? 130 : 46) * L)) * Math.PI * 2 + r() * 0.3, d: 0.75 + 0.35 * r(), sz: 0.8 + 0.6 * r(), h: r(), v: i }));
+  s.fb = Array.from({ length: Math.round(26 * (s.lite ? 0.5 : 1)) }, (_, i) => ({ a: r() * Math.PI * 2, b: (r() - 0.5) * Math.PI, d: r() ** 0.6, sz: 0.4 + 0.5 * r(), v: i }));
+  s.sparks = Array.from({ length: Math.round((nuke ? 70 : 60) * L) }, () => ({ a: r() * Math.PI * 2, el: 0.2 + 1.1 * r(), v: 0.6 + 0.9 * r(), life: 0.6 + 0.9 * r() }));
+  s.smoke = Array.from({ length: Math.round((nuke ? 0 : 34) * L) }, (_, i) => ({ a: r() * Math.PI * 2, d: r() ** 0.7, sz: 0.6 + 0.7 * r(), rise: 0.5 + r(), v: i }));
   return s;
 }
 

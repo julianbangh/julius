@@ -1,0 +1,1041 @@
+{
+ "duration": 61.111333,
+ "tempo": 1.12,
+ "words": [
+  {
+   "w": "What",
+   "s": 0.0,
+   "e": 0.24,
+   "line": 0
+  },
+  {
+   "w": "if",
+   "s": 0.24,
+   "e": 0.38,
+   "line": 0
+  },
+  {
+   "w": "the",
+   "s": 0.38,
+   "e": 0.5,
+   "line": 0
+  },
+  {
+   "w": "USA",
+   "s": 0.5,
+   "e": 0.76,
+   "line": 0
+  },
+  {
+   "w": "and",
+   "s": 0.76,
+   "e": 1.16,
+   "line": 0
+  },
+  {
+   "w": "China",
+   "s": 1.16,
+   "e": 1.44,
+   "line": 0
+  },
+  {
+   "w": "went",
+   "s": 1.44,
+   "e": 1.7,
+   "line": 0
+  },
+  {
+   "w": "to",
+   "s": 1.7,
+   "e": 1.88,
+   "line": 0
+  },
+  {
+   "w": "all-out",
+   "s": 1.88,
+   "e": 2.18,
+   "line": 0
+  },
+  {
+   "w": "war?",
+   "s": 2.18,
+   "e": 2.48,
+   "line": 0
+  },
+  {
+   "w": "On",
+   "s": 3.12,
+   "e": 3.24,
+   "line": 1
+  },
+  {
+   "w": "paper,",
+   "s": 3.24,
+   "e": 3.48,
+   "line": 1
+  },
+  {
+   "w": "China",
+   "s": 4.04,
+   "e": 4.16,
+   "line": 1
+  },
+  {
+   "w": "wins",
+   "s": 4.16,
+   "e": 4.34,
+   "line": 1
+  },
+  {
+   "w": "the",
+   "s": 4.34,
+   "e": 4.52,
+   "line": 1
+  },
+  {
+   "w": "numbers.",
+   "s": 4.52,
+   "e": 4.82,
+   "line": 1
+  },
+  {
+   "w": "2",
+   "s": 5.42,
+   "e": 5.58,
+   "line": 1
+  },
+  {
+   "w": "million",
+   "s": 5.58,
+   "e": 5.76,
+   "line": 1
+  },
+  {
+   "w": "soldiers,",
+   "s": 5.76,
+   "e": 6.22,
+   "line": 1
+  },
+  {
+   "w": "and",
+   "s": 6.5,
+   "e": 6.6,
+   "line": 1
+  },
+  {
+   "w": "the",
+   "s": 6.6,
+   "e": 6.72,
+   "line": 1
+  },
+  {
+   "w": "biggest",
+   "s": 6.72,
+   "e": 6.96,
+   "line": 1
+  },
+  {
+   "w": "navy",
+   "s": 6.96,
+   "e": 7.18,
+   "line": 1
+  },
+  {
+   "w": "on",
+   "s": 7.18,
+   "e": 7.44,
+   "line": 1
+  },
+  {
+   "w": "Earth,",
+   "s": 7.44,
+   "e": 7.62,
+   "line": 1
+  },
+  {
+   "w": "with",
+   "s": 7.68,
+   "e": 7.92,
+   "line": 1
+  },
+  {
+   "w": "over",
+   "s": 7.92,
+   "e": 8.16,
+   "line": 1
+  },
+  {
+   "w": "370",
+   "s": 8.16,
+   "e": 8.78,
+   "line": 1
+  },
+  {
+   "w": "ships.",
+   "s": 8.78,
+   "e": 9.34,
+   "line": 1
+  },
+  {
+   "w": "But",
+   "s": 9.98,
+   "e": 10.08,
+   "line": 2
+  },
+  {
+   "w": "America",
+   "s": 10.08,
+   "e": 10.46,
+   "line": 2
+  },
+  {
+   "w": "has",
+   "s": 10.46,
+   "e": 10.8,
+   "line": 2
+  },
+  {
+   "w": "11",
+   "s": 10.8,
+   "e": 11.14,
+   "line": 2
+  },
+  {
+   "w": "aircraft",
+   "s": 11.14,
+   "e": 11.58,
+   "line": 2
+  },
+  {
+   "w": "carriers,",
+   "s": 11.58,
+   "e": 12.02,
+   "line": 2
+  },
+  {
+   "w": "the",
+   "s": 12.4,
+   "e": 12.5,
+   "line": 2
+  },
+  {
+   "w": "world's",
+   "s": 12.5,
+   "e": 12.88,
+   "line": 2
+  },
+  {
+   "w": "most",
+   "s": 12.88,
+   "e": 13.04,
+   "line": 2
+  },
+  {
+   "w": "powerful",
+   "s": 13.04,
+   "e": 13.44,
+   "line": 2
+  },
+  {
+   "w": "air",
+   "s": 13.44,
+   "e": 13.68,
+   "line": 2
+  },
+  {
+   "w": "force,",
+   "s": 13.68,
+   "e": 13.92,
+   "line": 2
+  },
+  {
+   "w": "and",
+   "s": 14.26,
+   "e": 14.38,
+   "line": 2
+  },
+  {
+   "w": "spends",
+   "s": 14.38,
+   "e": 14.6,
+   "line": 2
+  },
+  {
+   "w": "three",
+   "s": 14.6,
+   "e": 14.9,
+   "line": 2
+  },
+  {
+   "w": "times",
+   "s": 14.9,
+   "e": 15.16,
+   "line": 2
+  },
+  {
+   "w": "more",
+   "s": 15.16,
+   "e": 15.44,
+   "line": 2
+  },
+  {
+   "w": "on",
+   "s": 15.44,
+   "e": 15.66,
+   "line": 2
+  },
+  {
+   "w": "its",
+   "s": 15.66,
+   "e": 15.78,
+   "line": 2
+  },
+  {
+   "w": "military.",
+   "s": 15.78,
+   "e": 16.18,
+   "line": 2
+  },
+  {
+   "w": "It",
+   "s": 16.8,
+   "e": 16.96,
+   "line": 3
+  },
+  {
+   "w": "starts",
+   "s": 16.96,
+   "e": 17.18,
+   "line": 3
+  },
+  {
+   "w": "over",
+   "s": 17.18,
+   "e": 17.48,
+   "line": 3
+  },
+  {
+   "w": "Taiwan.",
+   "s": 17.48,
+   "e": 17.86,
+   "line": 3
+  },
+  {
+   "w": "China",
+   "s": 18.66,
+   "e": 18.84,
+   "line": 3
+  },
+  {
+   "w": "fires",
+   "s": 18.84,
+   "e": 19.18,
+   "line": 3
+  },
+  {
+   "w": "thousands",
+   "s": 19.18,
+   "e": 19.5,
+   "line": 3
+  },
+  {
+   "w": "of",
+   "s": 19.5,
+   "e": 19.82,
+   "line": 3
+  },
+  {
+   "w": "missiles",
+   "s": 19.82,
+   "e": 20.08,
+   "line": 3
+  },
+  {
+   "w": "across",
+   "s": 20.08,
+   "e": 20.42,
+   "line": 3
+  },
+  {
+   "w": "a",
+   "s": 20.42,
+   "e": 20.64,
+   "line": 3
+  },
+  {
+   "w": "strait",
+   "s": 20.64,
+   "e": 20.96,
+   "line": 3
+  },
+  {
+   "w": "just",
+   "s": 20.96,
+   "e": 21.26,
+   "line": 3
+  },
+  {
+   "w": "130",
+   "s": 21.26,
+   "e": 21.92,
+   "line": 3
+  },
+  {
+   "w": "kilometers",
+   "s": 21.92,
+   "e": 22.32,
+   "line": 3
+  },
+  {
+   "w": "wide.",
+   "s": 22.32,
+   "e": 22.78,
+   "line": 3
+  },
+  {
+   "w": "Then",
+   "s": 23.4,
+   "e": 23.56,
+   "line": 4
+  },
+  {
+   "w": "the",
+   "s": 23.56,
+   "e": 23.72,
+   "line": 4
+  },
+  {
+   "w": "landings:",
+   "s": 23.72,
+   "e": 24.2,
+   "line": 4
+  },
+  {
+   "w": "the",
+   "s": 24.72,
+   "e": 24.86,
+   "line": 4
+  },
+  {
+   "w": "biggest",
+   "s": 24.86,
+   "e": 25.14,
+   "line": 4
+  },
+  {
+   "w": "amphibious",
+   "s": 25.14,
+   "e": 25.68,
+   "line": 4
+  },
+  {
+   "w": "invasion",
+   "s": 25.68,
+   "e": 25.98,
+   "line": 4
+  },
+  {
+   "w": "since",
+   "s": 25.98,
+   "e": 26.38,
+   "line": 4
+  },
+  {
+   "w": "D-Day.",
+   "s": 26.38,
+   "e": 26.8,
+   "line": 4
+  },
+  {
+   "w": "The",
+   "s": 27.38,
+   "e": 27.56,
+   "line": 5
+  },
+  {
+   "w": "US",
+   "s": 27.56,
+   "e": 27.76,
+   "line": 5
+  },
+  {
+   "w": "Navy",
+   "s": 27.76,
+   "e": 28.08,
+   "line": 5
+  },
+  {
+   "w": "races",
+   "s": 28.08,
+   "e": 28.44,
+   "line": 5
+  },
+  {
+   "w": "in",
+   "s": 28.44,
+   "e": 28.64,
+   "line": 5
+  },
+  {
+   "w": "from",
+   "s": 28.64,
+   "e": 28.82,
+   "line": 5
+  },
+  {
+   "w": "Japan",
+   "s": 28.82,
+   "e": 29.16,
+   "line": 5
+  },
+  {
+   "w": "and",
+   "s": 29.16,
+   "e": 29.36,
+   "line": 5
+  },
+  {
+   "w": "Guam.",
+   "s": 29.36,
+   "e": 29.64,
+   "line": 5
+  },
+  {
+   "w": "Hundreds",
+   "s": 30.52,
+   "e": 30.57,
+   "line": 5
+  },
+  {
+   "w": "of",
+   "s": 30.52,
+   "e": 30.74,
+   "line": 5
+  },
+  {
+   "w": "jets",
+   "s": 30.74,
+   "e": 30.98,
+   "line": 5
+  },
+  {
+   "w": "fill",
+   "s": 30.98,
+   "e": 31.2,
+   "line": 5
+  },
+  {
+   "w": "the",
+   "s": 31.2,
+   "e": 31.36,
+   "line": 5
+  },
+  {
+   "w": "sky.",
+   "s": 31.36,
+   "e": 31.62,
+   "line": 5
+  },
+  {
+   "w": "But",
+   "s": 32.24,
+   "e": 32.36,
+   "line": 6
+  },
+  {
+   "w": "China's",
+   "s": 32.36,
+   "e": 32.84,
+   "line": 6
+  },
+  {
+   "w": "carrier-killer",
+   "s": 32.84,
+   "e": 33.48,
+   "line": 6
+  },
+  {
+   "w": "missiles",
+   "s": 33.48,
+   "e": 33.84,
+   "line": 6
+  },
+  {
+   "w": "can",
+   "s": 33.84,
+   "e": 34.14,
+   "line": 6
+  },
+  {
+   "w": "hit",
+   "s": 34.14,
+   "e": 34.32,
+   "line": 6
+  },
+  {
+   "w": "ships",
+   "s": 34.32,
+   "e": 34.62,
+   "line": 6
+  },
+  {
+   "w": "4,000",
+   "s": 34.62,
+   "e": 35.36,
+   "line": 6
+  },
+  {
+   "w": "kilometers",
+   "s": 35.36,
+   "e": 35.7,
+   "line": 6
+  },
+  {
+   "w": "away.",
+   "s": 35.7,
+   "e": 36.12,
+   "line": 6
+  },
+  {
+   "w": "Under",
+   "s": 36.76,
+   "e": 36.94,
+   "line": 7
+  },
+  {
+   "w": "the",
+   "s": 36.94,
+   "e": 37.1,
+   "line": 7
+  },
+  {
+   "w": "sea,",
+   "s": 37.1,
+   "e": 37.34,
+   "line": 7
+  },
+  {
+   "w": "American",
+   "s": 37.76,
+   "e": 38.08,
+   "line": 7
+  },
+  {
+   "w": "submarines",
+   "s": 38.08,
+   "e": 38.48,
+   "line": 7
+  },
+  {
+   "w": "start",
+   "s": 38.48,
+   "e": 38.78,
+   "line": 7
+  },
+  {
+   "w": "sinking",
+   "s": 38.78,
+   "e": 39.1,
+   "line": 7
+  },
+  {
+   "w": "the",
+   "s": 39.1,
+   "e": 39.32,
+   "line": 7
+  },
+  {
+   "w": "invasion",
+   "s": 39.32,
+   "e": 39.66,
+   "line": 7
+  },
+  {
+   "w": "fleet.",
+   "s": 39.66,
+   "e": 40.0,
+   "line": 7
+  },
+  {
+   "w": "Satellites",
+   "s": 40.7,
+   "e": 41.0,
+   "line": 8
+  },
+  {
+   "w": "get",
+   "s": 41.0,
+   "e": 41.2,
+   "line": 8
+  },
+  {
+   "w": "blinded.",
+   "s": 41.2,
+   "e": 41.62,
+   "line": 8
+  },
+  {
+   "w": "Cyberattacks",
+   "s": 42.54,
+   "e": 42.84,
+   "line": 8
+  },
+  {
+   "w": "hit",
+   "s": 42.84,
+   "e": 43.1,
+   "line": 8
+  },
+  {
+   "w": "power",
+   "s": 43.1,
+   "e": 43.38,
+   "line": 8
+  },
+  {
+   "w": "grids",
+   "s": 43.38,
+   "e": 43.64,
+   "line": 8
+  },
+  {
+   "w": "on",
+   "s": 43.64,
+   "e": 43.84,
+   "line": 8
+  },
+  {
+   "w": "both",
+   "s": 43.84,
+   "e": 44.04,
+   "line": 8
+  },
+  {
+   "w": "sides.",
+   "s": 44.04,
+   "e": 44.42,
+   "line": 8
+  },
+  {
+   "w": "When",
+   "s": 45.04,
+   "e": 45.16,
+   "line": 9
+  },
+  {
+   "w": "experts",
+   "s": 45.16,
+   "e": 45.58,
+   "line": 9
+  },
+  {
+   "w": "war-gamed",
+   "s": 45.58,
+   "e": 46.04,
+   "line": 9
+  },
+  {
+   "w": "this",
+   "s": 46.04,
+   "e": 46.26,
+   "line": 9
+  },
+  {
+   "w": "24",
+   "s": 46.26,
+   "e": 46.62,
+   "line": 9
+  },
+  {
+   "w": "times,",
+   "s": 46.62,
+   "e": 47.18,
+   "line": 9
+  },
+  {
+   "w": "the",
+   "s": 47.44,
+   "e": 47.56,
+   "line": 9
+  },
+  {
+   "w": "invasion",
+   "s": 47.56,
+   "e": 47.96,
+   "line": 9
+  },
+  {
+   "w": "usually",
+   "s": 47.96,
+   "e": 48.32,
+   "line": 9
+  },
+  {
+   "w": "failed.",
+   "s": 48.32,
+   "e": 48.66,
+   "line": 9
+  },
+  {
+   "w": "But",
+   "s": 49.16,
+   "e": 49.38,
+   "line": 9
+  },
+  {
+   "w": "America",
+   "s": 49.38,
+   "e": 49.68,
+   "line": 9
+  },
+  {
+   "w": "lost",
+   "s": 49.68,
+   "e": 50.04,
+   "line": 9
+  },
+  {
+   "w": "two",
+   "s": 50.04,
+   "e": 50.34,
+   "line": 9
+  },
+  {
+   "w": "aircraft",
+   "s": 50.34,
+   "e": 50.74,
+   "line": 9
+  },
+  {
+   "w": "carriers",
+   "s": 50.74,
+   "e": 51.16,
+   "line": 9
+  },
+  {
+   "w": "and",
+   "s": 51.16,
+   "e": 51.52,
+   "line": 9
+  },
+  {
+   "w": "thousands",
+   "s": 51.52,
+   "e": 51.84,
+   "line": 9
+  },
+  {
+   "w": "of",
+   "s": 51.84,
+   "e": 52.06,
+   "line": 9
+  },
+  {
+   "w": "troops",
+   "s": 52.06,
+   "e": 52.32,
+   "line": 9
+  },
+  {
+   "w": "in",
+   "s": 52.32,
+   "e": 52.54,
+   "line": 9
+  },
+  {
+   "w": "just",
+   "s": 52.54,
+   "e": 52.74,
+   "line": 9
+  },
+  {
+   "w": "three",
+   "s": 52.74,
+   "e": 52.98,
+   "line": 9
+  },
+  {
+   "w": "weeks.",
+   "s": 52.98,
+   "e": 53.26,
+   "line": 9
+  },
+  {
+   "w": "And",
+   "s": 53.26,
+   "e": 54.02,
+   "line": 10
+  },
+  {
+   "w": "the",
+   "s": 54.02,
+   "e": 54.16,
+   "line": 10
+  },
+  {
+   "w": "scariest",
+   "s": 54.16,
+   "e": 54.6,
+   "line": 10
+  },
+  {
+   "w": "part?",
+   "s": 54.6,
+   "e": 54.86,
+   "line": 10
+  },
+  {
+   "w": "Together,",
+   "s": 55.4,
+   "e": 55.74,
+   "line": 10
+  },
+  {
+   "w": "they",
+   "s": 56.26,
+   "e": 56.32,
+   "line": 10
+  },
+  {
+   "w": "have",
+   "s": 56.32,
+   "e": 56.52,
+   "line": 10
+  },
+  {
+   "w": "over",
+   "s": 56.52,
+   "e": 56.78,
+   "line": 10
+  },
+  {
+   "w": "4,000",
+   "s": 56.78,
+   "e": 57.52,
+   "line": 10
+  },
+  {
+   "w": "nuclear",
+   "s": 57.52,
+   "e": 57.84,
+   "line": 10
+  },
+  {
+   "w": "warheads.",
+   "s": 57.84,
+   "e": 58.3,
+   "line": 10
+  },
+  {
+   "w": "So",
+   "s": 59.04,
+   "e": 59.2,
+   "line": 11
+  },
+  {
+   "w": "who",
+   "s": 59.2,
+   "e": 59.32,
+   "line": 11
+  },
+  {
+   "w": "wins?",
+   "s": 59.32,
+   "e": 59.58,
+   "line": 11
+  },
+  {
+   "w": "Probably",
+   "s": 60.3,
+   "e": 60.56,
+   "line": 11
+  },
+  {
+   "w": "no",
+   "s": 60.56,
+   "e": 60.84,
+   "line": 11
+  },
+  {
+   "w": "one.",
+   "s": 60.84,
+   "e": 61.0,
+   "line": 11
+  }
+ ],
+ "lines": [
+  {
+   "i": 0,
+   "text": "What if the USA and China went to all-out war?",
+   "s": 0.0,
+   "e": 2.48
+  },
+  {
+   "i": 1,
+   "text": "On paper, China wins the numbers. 2 million soldiers, and the biggest navy on Earth, with over 370 ships.",
+   "s": 3.12,
+   "e": 9.34
+  },
+  {
+   "i": 2,
+   "text": "But America has 11 aircraft carriers, the world's most powerful air force, and spends three times more on its military.",
+   "s": 9.98,
+   "e": 16.18
+  },
+  {
+   "i": 3,
+   "text": "It starts over Taiwan. China fires thousands of missiles across a strait just 130 kilometers wide.",
+   "s": 16.8,
+   "e": 22.78
+  },
+  {
+   "i": 4,
+   "text": "Then the landings: the biggest amphibious invasion since D-Day.",
+   "s": 23.4,
+   "e": 26.8
+  },
+  {
+   "i": 5,
+   "text": "The US Navy races in from Japan and Guam. Hundreds of jets fill the sky.",
+   "s": 27.38,
+   "e": 31.62
+  },
+  {
+   "i": 6,
+   "text": "But China's carrier-killer missiles can hit ships 4,000 kilometers away.",
+   "s": 32.24,
+   "e": 36.12
+  },
+  {
+   "i": 7,
+   "text": "Under the sea, American submarines start sinking the invasion fleet.",
+   "s": 36.76,
+   "e": 40.0
+  },
+  {
+   "i": 8,
+   "text": "Satellites get blinded. Cyberattacks hit power grids on both sides.",
+   "s": 40.7,
+   "e": 44.42
+  },
+  {
+   "i": 9,
+   "text": "When experts war-gamed this 24 times, the invasion usually failed. But America lost two aircraft carriers and thousands of troops in just three weeks.",
+   "s": 45.04,
+   "e": 53.26
+  },
+  {
+   "i": 10,
+   "text": "And the scariest part? Together, they have over 4,000 nuclear warheads.",
+   "s": 53.26,
+   "e": 58.3
+  },
+  {
+   "i": 11,
+   "text": "So who wins? Probably no one.",
+   "s": 59.04,
+   "e": 61.0
+  }
+ ],
+ "heard": "What if the USA and China went to all -out war? On paper, China wins the numbers. 2 million soldiers, and the biggest navy on Earth, with over 370 ships. But America has 11 aircraft carriers, the world's most powerful air force, and spends three times more on its military. It starts over Taiwan. China fires thousands of missiles across a strait just 130 kilometers wide. Then the landings. The biggest amphibious invasion since D -Day. The US Navy races in from Japan and Guam. Hundreds of jets fill the sky. But China's carrier -killer missiles can hit ships 4 ,000 kilometers away. Under the sea, American submarines start sinking the invasion fleet. Satellites get blinded. Cyberattacks hit power grids on both sides. When experts war -gamed this 24 times, the invasion usually failed. But America lost two aircraft carriers and thousands of troops in just three weeks. And the scariest part? Together, they have over 4 ,000 nuclear warheads. So who wins? Probably no one."
+}
