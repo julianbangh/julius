@@ -1,6 +1,6 @@
 // 11 — What if the USA and China went to all-out war? (fiction; numbers: DoD, SIPRI 2026, CSIS 2023 wargame)
 // War from the first frame: every line plays over combat footage; numbers are small overlays.
-import { W, H, clamp, ease, env, prog, lerp, camAt, baseMap, hl, text, label, zoomFor, Camera } from '../../engine/kit.mjs';
+import { W, H, clamp, ease, env, prog, lerp, camAt, baseMap, hl, text, label, zoomFor, Camera, statPill, countUp, softCuts } from '../../engine/kit.mjs';
 import { Ground3D, bloomBegin, bloomEnd, flash, shake, unitIcon, trail, blast2D, makeBlast, drawBlast3D, blastDecals, puff, sprites } from '../../engine/fx.mjs';
 import { oceanDecal, sunGlint, mark, drawUnits3D, wakeDecals, craterDecals, smokeColumn, boom3D, boomDecal, missile3D, tracer3D, contrail3D, swarm2D, salvo2D, sub2D, glitch } from '../../engine/battle.mjs';
 import { drawImagery } from '../../engine/tiles.mjs';
@@ -24,20 +24,7 @@ const fwd = (yaw) => [Math.sin(yaw * deg), Math.cos(yaw * deg)];
 const right = (yaw) => [Math.cos(yaw * deg), -Math.sin(yaw * deg)];
 const headingOf = (yaw) => Math.atan2(Math.cos(yaw * deg), Math.sin(yaw * deg));
 
-/** clean number overlay */
-function statPill(ctx, value, sub, y, a, color = '#ffffff') {
-  if (a <= 0) return;
-  const k = 0.94 + 0.06 * ease.outCubic(a);
-  ctx.save(); ctx.globalAlpha = a; ctx.translate(W / 2, y); ctx.scale(k, k);
-  ctx.font = '104px Anton'; const w = Math.max(ctx.measureText(value).width + 110, 520);
-  ctx.fillStyle = 'rgba(6,10,20,0.58)'; ctx.beginPath(); ctx.roundRect(-w / 2, -86, w, 172, 26); ctx.fill();
-  ctx.restore();
-  ctx.save(); ctx.globalAlpha = a; ctx.translate(W / 2, y); ctx.scale(k, k);
-  text(ctx, value, 0, -16, { font: 'Anton', size: 104, color, shadow: 16 });
-  text(ctx, sub, 0, 54, { font: 'MontBlack', size: 30, color: '#d7dfef' });
-  ctx.restore();
-}
-const count = (T, t0, t1, v) => v * ease.outCubic(clamp((T - t0) / (t1 - t0)));
+const count = countUp;
 
 export default {
   music: { file: 'war_hype.mp3', gain: 0.2 },
@@ -74,9 +61,7 @@ export default {
     else if (T < cuts[9]) await cyber(g, T);
     else if (T < cuts[10]) await aftermath(g, T);
     else await nukes(g, T);
-    // soft cuts: quick fade up from black
-    for (const c of cuts.slice(1)) if (T > c && T < c + 0.16) { ctx.fillStyle = `rgba(0,0,0,${0.7 * (1 - (T - c) / 0.16)})`; ctx.fillRect(0, 0, W, H); }
-    if (T < 0.25) { ctx.fillStyle = `rgba(0,0,0,${1 - T / 0.25})`; ctx.fillRect(0, 0, W, H); }
+    softCuts(g, T, cuts);
   },
 };
 
